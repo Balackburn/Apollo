@@ -622,7 +622,7 @@
   <main>
     <header class="app__header container">
       <div class="app__logo-wrapper">
-        <img id="app-logo" alt="Apollo for Reddit" class="app__logo" src="./images/image_0.png" />
+        <img class="app__logo" alt="App logo" />
       </div>
       <div class="app__infos">
         <h1 class="app__name">Apollo for Reddit</h1>
@@ -792,7 +792,7 @@
     updateDownloadLink();
   </script>
   <script>
-    const TOTAL_ICONS = 156;
+ const TOTAL_ICONS = 156;
 let randomIndex;
 
 function getRandomIcon() {
@@ -801,12 +801,15 @@ function getRandomIcon() {
 }
 
 function updateIcon() {
-  const logoElement = document.getElementById('app-logo');
-  logoElement.src = getRandomIcon();
+  const logoElements = document.getElementsByClassName('app__logo');
+  
+  for (let i = 0; i < logoElements.length; i++) {
+    logoElements[i].src = getRandomIcon();
+  }
 }
 
 function startAnimation() {
-  setInterval(updateIcon, 400); // Change the icon every 1000 milliseconds (1 second)
+  setInterval(updateIcon, 400); // Change the icon every 400 milliseconds
 }
 
 window.addEventListener('load', () => {
