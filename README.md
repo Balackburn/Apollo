@@ -1,4 +1,4 @@
-# Apollo Source
+# Apollo Altstore Source
 Apollo (with ApolloPatcher from @ichitaso) source for Altstore
 
 I've called this repo only "Apollo", for a better presentation on my Github Page site.
