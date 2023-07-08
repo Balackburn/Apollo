@@ -13,18 +13,18 @@
       "versionDescription": "\u2022 Add: Randomize User\u2022Agent\r\n\u2022 Fix Imgur loading issue\r\n\r\nThe Imgur client ID is tentatively created by me, but may stop if there are too many requests.\r\n\r\nHow to create\r\n\r\nIf you do not have an Imgur account, please create one:\r\nhttps://imgur.com/\r\n\r\nAfter creating an account, create an app from the following page\r\nhttps://api.imgur.com/oauth2/addclient\r\nAuthorization type: is OK with \"OAuth 2 authorization without a callback URL\r\nFill in the other fields to get a \"Client ID\".\r\n\r\nhttps://imgur.com/account/settings/apps\r\nYou can also check the Client ID from the above link if you are logged in.\r\n\r\nFor sideloading, the IPA is available on the GitHub release page.\r\nApolloSideloadFix.dylib\" and \"ApolloPatcher.dylib\" are already included, so all you need to do is install them from AltStore or other sources.\r\n\r\nIf you want to create your own IPA, please include ApolloSideloadFix.dylib.",
       "downloadURL": "https://github.com/ichitaso/ApolloPatcher/releases/download/v0.0.4/Apollo_1.15.11_mod_0.0.4.ipa",
       "localizedDescription": "Apollo is a Reddit app designed for customizability, smoothness, gestures, and taking advantage of everything iOS has to offer. It offers features like the Jump Bar, fully customizable gestures, a super-charged Media Viewer, and more. The app is created specifically with iOS design guidelines in mind and has been shaped with input from thousands of Redditors over several years. The app offers subscriptions for \"Apollo Ultra\" at $0.99 monthly or $9.99 yearly. Apollo is an unofficial app.",
-      "iconURL": "https://raw.githubusercontent.com/Balackburn/Apollo/images/image_0.png",
+      "iconURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_0.png",
       "tintColor": "#4453f4",
       "size": 110364353,
       "screenshotURLs": [
-          "https://raw.githubusercontent.com/Balackburn/Apollo/images/image_1.png",
-          "https://raw.githubusercontent.com/Balackburn/Apollo/images/image_2.png",
-          "https://raw.githubusercontent.com/Balackburn/Apollo/images/image_3.png",
-          "https://raw.githubusercontent.com/Balackburn/Apollo/images/image_4.png",
-          "https://raw.githubusercontent.com/Balackburn/Apollo/images/image_5.png",
-          "https://raw.githubusercontent.com/Balackburn/Apollo/images/image_6.png",
-          "https://raw.githubusercontent.com/Balackburn/Apollo/images/image_7.png",
-          "https://raw.githubusercontent.com/Balackburn/Apollo/images/image_8.png"
+          "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_1.png",
+          "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_2.png",
+          "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_3.png",
+          "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_4.png",
+          "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_5.png",
+          "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_6.png",
+          "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_7.png",
+          "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_8.png"
         ],
       "appPermissions": {
         "entitlements": [
