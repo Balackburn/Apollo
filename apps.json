@@ -27,5 +27,16 @@
           "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_8.webp"
         ]
     }
-  ]
+  ],
+  "news": [{
+    "title": "Apollo for Reddit is now on Altstore",
+    "identifier": "apollo-1",
+    "caption": "Apollo is back with custom API credentials!",
+    "date": "2023-07-06",
+    "tintColor": "#4453f4",
+    "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/news/news_1.webp",
+    "notify": false,
+    "url": "https://balackburn.github.io/Apollo/"
+}]
+
 }
