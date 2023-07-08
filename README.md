@@ -4,9 +4,9 @@ I've called this repo only "Apollo", for a better presentation on my Github Page
 
 [Add to Altstore/Sidestore](https://tinyurl.com/ApolloAltstore)
 
-[View source online](https://therealfoxster.github.io/altsource-viewer/app.html?source=https://raw.githubusercontent.com/Balackburn/Apollo/main/apps.json&id=com.christianselig.Apollo)
+[View source online](https://therealfoxster.github.io/altsource-viewer/app.html?source=https://balackburn.github.io/Apollo/apps.json&id=com.christianselig.Apollo)
 
-This is an auto-updating Altstore [source](https://raw.githubusercontent.com/Balackburn/Apollo/main/apps.json) for **ApolloPatcher**. It checks daily for new releases and updates the source with the latest version, ensuring you always have access to the most recent updates.
+This is an auto-updating Altstore [source](https://balackburn.github.io/Apollo/apps.json) for **ApolloPatcher**. It checks daily for new releases and updates the source with the latest version, ensuring you always have access to the most recent updates.
 
 # Website 
 
