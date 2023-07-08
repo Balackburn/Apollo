@@ -1,15 +1,13 @@
-# Apollo Altstore Source
-Apollo (with ApolloPatcher from @ichitaso) source for Altstore
+# Auto-Updating Altstore Source for [ApolloPatcher ↗](https://github.com/ichitaso/ApolloPatcher)
 
-I've called this repo only "Apollo", for a better presentation on my Github Page site.
+I've made an auto-updating [Altstore source](https://raw.githubusercontent.com/Balackburn/Apollo/main/apps.json) for [**ApolloPatcher**](https://github.com/ichitaso/ApolloPatcher). It checks daily for new releases and updates the source with the latest version, ensuring you always have access to the most recent updates.
 
-[Add to Altstore/Sidestore]()
+## [Website for ApolloPatcher Altstore Source](https://balackburn.github.io/Apollo/)
 
-[View source online](https://therealfoxster.github.io/altsource-viewer/app.html?source=https://raw.githubusercontent.com/Balackburn/Apollo/main/apps.json&id=com.christianselig.Apollo)
+Additionally, I've created a [website](https://balackburn.github.io/Apollo/) for it (just edited the one I made for YTLitePlus).
 
-# From : 
-https://github.com/ichitaso/ApolloPatcher
+> I hope you'll find it both useful and visually appealing.
 
-# Other informations : 
-This Altstore source automatically update everyday with informations from the latest release of ApolloPatcher.
+## Why?
 
+I really love Apollo and hope it will help some people to keep using it instead of the official app.
