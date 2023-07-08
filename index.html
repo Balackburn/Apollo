@@ -792,38 +792,27 @@
     updateDownloadLink();
   </script>
   <script>
-    function getRandomIcon() {
-      const totalIcons = 156;
-      const iconIndex = Math.floor(Math.random() * totalIcons);
-      return `./apollo_icons/icon_${iconIndex}.png`;
-    }
-  
-    function updateIcon() {
-      const logoElement = document.getElementById('app-logo');
-      logoElement.src = getRandomIcon();
-    }
-  
-    function changeIconWithInterval(times, interval) {
-      let count = 0;
-  
-      function changeIcon() {
-        updateIcon();
-  
-        count++;
-        if (count < times) {
-          setTimeout(changeIcon, interval);
-        }
-      }
-  
-      changeIcon();
-    }
-  
-    window.addEventListener('load', () => {
-      updateIcon();
-      setInterval(() => {
-        changeIconWithInterval(1, 500); // Change the parameters as desired
-      }, 500);
-    });
+    const TOTAL_ICONS = 156;
+let randomIndex;
+
+function getRandomIcon() {
+  randomIndex = Math.floor(Math.random() * TOTAL_ICONS);
+  return `./apollo_icons/icon_${randomIndex}.png`;
+}
+
+function updateIcon() {
+  const logoElement = document.getElementById('app-logo');
+  logoElement.src = getRandomIcon();
+}
+
+function startAnimation() {
+  setInterval(updateIcon, 400); // Change the icon every 1000 milliseconds (1 second)
+}
+
+window.addEventListener('load', () => {
+  updateIcon();
+  startAnimation();
+});
   </script>
 </body>
 
