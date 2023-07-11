@@ -48,7 +48,7 @@ def update_json_file(json_file, fetched_data):
         version_data = {
             "version": version,
             "versionDate": release["published_at"],
-            "versionDescription": remove_tags(release["body"]),
+            "localizedDescription": remove_tags(release["body"]),
             "downloadURL": download_url,
             "size": selected_asset["size"]
         }
