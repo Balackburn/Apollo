@@ -8,12 +8,7 @@ def fetch_latest_release(repo_url):
     headers = {"Accept": "application/vnd.github+json"}
     response = requests.get(api_url, headers=headers)
     releases = response.json()
-    sorted_releases = sorted(releases, key=lambda x: x["published_at"], reverse=True)
-
-    if sorted_releases:
-        return sorted_releases[0]
-    else:
-        raise ValueError("No releases found.")
+    return releases
 
 def find_asset(assets, keyword):
     for asset in assets:
@@ -27,29 +22,38 @@ def remove_tags(text):
     text = re.sub(r'#{1,6}\s?', '', text)  # Remove markdown header tags
     return text
 
+def version_exists(data, download_url):
+    for existing_version in data["versions"]:
+        if existing_version["downloadURL"] == download_url:
+            return True
+    return False
+
 def update_json_file(json_file, fetched_data):
     with open(json_file, "r") as file:
         data = json.load(file)
 
-    app = data["apps"][0]
-    
-    keyword = "1.15.11"
-    selected_asset = find_asset(fetched_data["assets"], keyword)
-    
-    version = re.search(r"(\d+\.\d+\.\d+)", selected_asset["name"]).group(1)
-    app["version"] = version
-    app["versionDate"] = fetched_data["published_at"]
+    for release in fetched_data:
+        keyword = "1.15.11" # Adjust the keyword as needed
+        try:
+            selected_asset = find_asset(release["assets"], keyword)
+        except ValueError:
+            continue
 
-    description = fetched_data["body"]
+        download_url = selected_asset["browser_download_url"]
 
-    description = remove_tags(description)
-    description = re.sub(r'\*{2}', '', description)
-    description = re.sub(r'-', '•', description)
-    description = re.sub(r'`', '"', description)
+        if version_exists(data, download_url):
+            continue
 
-    app["versionDescription"] = description
-    app["downloadURL"] = selected_asset["browser_download_url"]
-    app["size"] = selected_asset["size"]
+        version = re.search(r"(\d+\.\d+\.\d+)", selected_asset["name"]).group(1)
+        version_data = {
+            "version": version,
+            "versionDate": release["published_at"],
+            "versionDescription": remove_tags(release["body"]),
+            "downloadURL": download_url,
+            "size": selected_asset["size"]
+        }
+
+        data["versions"].append(version_data)
 
     with open(json_file, "w") as file:
         json.dump(data, file, indent=2)
