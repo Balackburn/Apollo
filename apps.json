@@ -17,26 +17,27 @@
       "tintColor": "#4453f4",
       "size": 110364353,
       "screenshotURLs": [
-          "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_1.webp",
-          "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_2.webp",
-          "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_3.webp",
-          "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_4.webp",
-          "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_5.webp",
-          "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_6.webp",
-          "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_7.webp",
-          "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_8.webp"
-        ]
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_1.webp",
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_2.webp",
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_3.webp",
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_4.webp",
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_5.webp",
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_6.webp",
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_7.webp",
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_8.webp"
+      ]
     }
   ],
-  "news": [{
-    "title": "Apollo for Reddit is now on Altstore",
-    "identifier": "apollo-1",
-    "caption": "Apollo is back with custom API credentials!",
-    "date": "2023-07-06",
-    "tintColor": "#3F91FE",
-    "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/news/news_1.webp",
-    "notify": false,
-    "url": "https://balackburn.github.io/Apollo/"
-}]
-
+  "news": [
+    {
+      "title": "Apollo for Reddit is now on Altstore",
+      "identifier": "apollo-1",
+      "caption": "Apollo is back with custom API credentials!",
+      "date": "2023-07-06",
+      "tintColor": "#3F91FE",
+      "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/news/news_1.webp",
+      "notify": false,
+      "url": "https://balackburn.github.io/Apollo/"
+    }
+  ]
 }
