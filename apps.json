@@ -42,6 +42,13 @@
       "localizedDescription": "- Added: ApolloSideloadFix\r\nThis allows sideloaded apps to save the login state when exiting.\r\nCredit @level3tjg\r\n- Added: How to Use",
       "downloadURL": "https://github.com/ichitaso/ApolloPatcher/releases/download/v0.0.3/Apollo_1.15.11_mod_0.0.3.ipa",
       "size": 110363629
+    },
+    {
+      "version": "1.15.11",
+      "versionDate": "2023-07-14T04:04:14Z",
+      "localizedDescription": "**- Re Fix Imgur loading issue**  \r\n\r\nThe Imgur client ID is tentatively created by me, but may stop if there are too many requests.\r\n\r\nHow to create\r\n\r\nIf you do not have an Imgur account, please create one:\r\nhttps://imgur.com/\r\n\r\nAfter creating an account, create an app from the following page\r\nhttps://api.imgur.com/oauth2/addclient\r\nAuthorization type: is OK with \"OAuth 2 authorization without a callback URL\r\nFill in the other fields to get a \"Client ID\".\r\n\r\nhttps://imgur.com/account/settings/apps\r\nYou can also check the Client ID from the above link if you are logged in.\r\n\r\nFor sideloading, the IPA is available on the GitHub release page.\r\nApolloSideloadFix.dylib\" and \"ApolloPatcher.dylib\" are already included, so all you need to do is install them from AltStore or other sources.\r\n\r\nIf you want to create your own IPA, please include ApolloSideloadFix.dylib.",
+      "downloadURL": "https://github.com/ichitaso/ApolloPatcher/releases/download/v0.0.5/Apollo_1.15.11_mod_0.0.5.ipa",
+      "size": 110366835
     }
   ],
   "news": [
