@@ -112,7 +112,7 @@ def update_json_file(json_file, fetched_data_all, fetched_data_latest):
         "caption": f"Update of ApolloPatcher just got released!",
         "date": fetched_data_latest["published_at"],
         "tintColor": "#3F91FE",
-        "imageURL": "https://raw.githubusercontent.com/ichitaso/ApolloPatcher/main/images/news/news_1.webp",
+        "imageURL": "https://raw.githubusercontent.com/ichitaso/ApolloPatcher/main/images/news/news_2.webp",
         "notify": True,
         "url": f"https://github.com/ichitaso/ApolloPatcher/releases/tag/{tag}"
     }
