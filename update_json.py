@@ -2,19 +2,30 @@ import json
 import re
 import requests
 
+# Fetch all release information from GitHub
+def fetch_all_releases(repo_url):
+    api_url = f"https://api.github.com/repos/{repo_url}/releases"
+    headers = {"Accept": "application/vnd.github+json"}
+    response = requests.get(api_url, headers=headers)
+    releases = response.json()
+    sorted_releases = sorted(
+        releases, key=lambda x: x["published_at"], reverse=False)
+
+    return sorted_releases
+
 # Fetch the latest release information from GitHub
 def fetch_latest_release(repo_url):
     api_url = f"https://api.github.com/repos/{repo_url}/releases"
     headers = {"Accept": "application/vnd.github+json"}
     response = requests.get(api_url, headers=headers)
     releases = response.json()
-    return releases
+    sorted_releases = sorted(
+        releases, key=lambda x: x["published_at"], reverse=True)
 
-def find_asset(assets, keyword):
-    for asset in assets:
-        if keyword in asset["name"]:
-            return asset
-    raise ValueError(f"No asset found containing the keyword '{keyword}'.")
+    if sorted_releases:
+        return sorted_releases[0]
+
+    raise ValueError("No release found.")
 
 # Update the JSON file with the fetched data
 def remove_tags(text):
@@ -22,38 +33,97 @@ def remove_tags(text):
     text = re.sub(r'#{1,6}\s?', '', text)  # Remove markdown header tags
     return text
 
-def version_exists(data, download_url):
-    for existing_version in data["versions"]:
-        if existing_version["downloadURL"] == download_url:
-            return True
-    return False
-
-def update_json_file(json_file, fetched_data):
+def update_json_file(json_file, fetched_data_all, fetched_data_latest):
     with open(json_file, "r") as file:
         data = json.load(file)
 
-    for release in fetched_data:
-        keyword = "1.15.11" # Adjust the keyword as needed
-        try:
-            selected_asset = find_asset(release["assets"], keyword)
-        except ValueError:
-            continue
+    app = data["apps"][0]
 
-        download_url = selected_asset["browser_download_url"]
+    # Ensure 'versions' key exists in app
+    if "versions" not in app:
+        app["versions"] = []
 
-        if version_exists(data, download_url):
-            continue
+    for release in fetched_data_all:
+        full_version = release["tag_name"].lstrip('v')
+        tag = release["tag_name"]
+        version = re.search(r"(\d+\.\d+\.\d+)", full_version).group(1)
+        versionDate = release["published_at"]
 
-        version = re.search(r"(\d+\.\d+\.\d+)", selected_asset["name"]).group(1)
-        version_data = {
+        description = release["body"]
+        keyword = "ApolloPatcher Release Information"
+        if keyword in description:
+            description = description.split(keyword, 1)[1].strip()
+
+        description = remove_tags(description)
+        description = re.sub(r'\*{2}', '', description)
+        description = re.sub(r'-', '•', description)
+        description = re.sub(r'`', '"', description)
+
+        downloadURL = release["assets"][0]["browser_download_url"]
+        size = release["assets"][0]["size"]
+
+        version_entry = {
             "version": version,
-            "versionDate": release["published_at"],
-            "localizedDescription": remove_tags(release["body"]),
-            "downloadURL": download_url,
-            "size": selected_asset["size"]
+            "date": versionDate,
+            "localizedDescription": description,
+            "downloadURL": downloadURL,
+            "size": size
         }
 
-        data["versions"].append(version_data)
+        # Check if the version entry already exists based on downloadURL
+        version_entry_exists = any(
+            item["downloadURL"] == downloadURL for item in app["versions"])
+
+        # Add the version entry if it doesn't exist
+        if not version_entry_exists:
+            # Insert the version entry at the first position
+            app["versions"].insert(0, version_entry)
+
+    # Now handle the latest release data (from the second script)
+    full_version = fetched_data_latest["tag_name"].lstrip('v')
+    tag = fetched_data_latest["tag_name"]
+    version = re.search(r"(\d+\.\d+\.\d+)", full_version).group(1)
+    app["version"] = f"1.15.11"
+    app["versionDate"] = fetched_data_latest["published_at"]
+
+    description = fetched_data_latest["body"]
+    keyword = "ApolloPatcher Release Information"
+    if keyword in description:
+        description = description.split(keyword, 1)[1].strip()
+
+    description = remove_tags(description)
+    description = re.sub(r'\*{2}', '', description)
+    description = re.sub(r'-', '•', description)
+    description = re.sub(r'`', '"', description)
+
+    app["versionDescription"] = description
+    app["downloadURL"] = fetched_data_latest["assets"][0]["browser_download_url"]
+    app["size"] = fetched_data_latest["assets"][0]["size"]
+
+    # Ensure 'news' key exists in data
+    if "news" not in data:
+        data["news"] = []
+
+    # Add news entry if there's a new release
+    news_identifier = f"release-{full_version}"
+    news_entry = {
+        "title": f"{full_version} - ApolloPatcher",
+        "identifier": news_identifier,
+        "caption": f"Update of ApolloPatcher just got released!",
+        "date": fetched_data_latest["published_at"],
+        "tintColor": "#3F91FE",
+        "imageURL": "https://raw.githubusercontent.com/ichitaso/ApolloPatcher/main/images/news/news_1.webp",
+        "notify": True,
+        "url": f"https://github.com/ichitaso/ApolloPatcher/releases/tag/{tag}"
+    }
+
+    # Check if the news entry already exists
+    news_entry_exists = any(item["identifier"] ==
+                            news_identifier for item in data["news"])
+
+    # Add the news entry if it doesn't exist
+    if not news_entry_exists:
+        data["news"].append(news_entry)
 
     with open(json_file, "w") as file:
         json.dump(data, file, indent=2)
@@ -63,8 +133,9 @@ def main():
     repo_url = "ichitaso/ApolloPatcher"
     json_file = "apps.json"
 
-    fetched_data = fetch_latest_release(repo_url)
-    update_json_file(json_file, fetched_data)
+    fetched_data_all = fetch_all_releases(repo_url)
+    fetched_data_latest = fetch_latest_release(repo_url)
+    update_json_file(json_file, fetched_data_all, fetched_data_latest)
 
 if __name__ == "__main__":
     main()
