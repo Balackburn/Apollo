@@ -113,7 +113,7 @@ def update_json_file(json_file, fetched_data_all, fetched_data_latest):
     # Add news entry if there's a new release
     news_identifier = f"release-{full_version}"
     news_entry = {
-        "title": f"{full_version} - ApolloPatcher",
+        "title": f"{full_version} - Apollo for Reddit",
         "identifier": news_identifier,
         "caption": f"Update of ApolloPatcher just got released!",
         "date": fetched_data_latest["published_at"],
