@@ -33,6 +33,12 @@ def remove_tags(text):
     text = re.sub(r'#{1,6}\s?', '', text)  # Remove markdown header tags
     return text
 
+def get_ipa_url(assets):
+    for asset in assets:
+        if '1.15.11' in asset['name'] and asset['name'].endswith('.ipa'):
+            return asset['browser_download_url']
+    return None
+    
 def update_json_file(json_file, fetched_data_all, fetched_data_latest):
     with open(json_file, "r") as file:
         data = json.load(file)
@@ -59,8 +65,8 @@ def update_json_file(json_file, fetched_data_all, fetched_data_latest):
         description = re.sub(r'-', '•', description)
         description = re.sub(r'`', '"', description)
 
-        downloadURL = release["assets"][0]["browser_download_url"]
-        size = release["assets"][0]["size"]
+        downloadURL = get_ipa_url(release["assets"])
+        size = next((asset["size"] for asset in release["assets"] if asset['browser_download_url'] == downloadURL), None)
 
         version_entry = {
             "version": version,
@@ -97,8 +103,8 @@ def update_json_file(json_file, fetched_data_all, fetched_data_latest):
     description = re.sub(r'`', '"', description)
 
     app["versionDescription"] = description
-    app["downloadURL"] = fetched_data_latest["assets"][0]["browser_download_url"]
-    app["size"] = fetched_data_latest["assets"][0]["size"]
+    app["downloadURL"] = get_ipa_url(fetched_data_latest["assets"])
+    app["size"] = next((asset["size"] for asset in fetched_data_latest["assets"] if asset['browser_download_url'] == app["downloadURL"]), None)
 
     # Ensure 'news' key exists in data
     if "news" not in data:
