@@ -40,13 +40,6 @@
           "localizedDescription": "\u2022 Added: ApolloSideloadFix\r\nThis allows sideloaded apps to save the login state when exiting.\r\nCredit @level3tjg\r\n\u2022 Added: How to Use",
           "downloadURL": "https://github.com/ichitaso/ApolloPatcher/releases/download/v0.0.3/Apollo_1.15.11_mod_0.0.3.ipa",
           "size": 110363629
-        },
-        {
-          "version": "0.0.1",
-          "date": "2023-07-01T17:16:05Z",
-          "localizedDescription": "First release",
-          "downloadURL": null,
-          "size": null
         }
       ]
     }
