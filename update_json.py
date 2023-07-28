@@ -76,12 +76,15 @@ def update_json_file(json_file, fetched_data_all, fetched_data_latest):
             "size": size
         }
 
-        # Check if the version entry already exists based on downloadURL
-        version_entry_exists = any(
-            item["downloadURL"] == downloadURL for item in app["versions"])
+             # Check if the version entry already exists based on version
+        version_entry_exists = [item for item in app["versions"] if item["version"] == version]
 
-        # Add the version entry if it doesn't exist
-        if not version_entry_exists:
+        # If the version entry exists, remove it
+        if version_entry_exists:
+            app["versions"].remove(version_entry_exists[0])
+
+        # Add the new version entry (whether or not it existed before) only if downloadURL is not None
+        if downloadURL is not None:
             # Insert the version entry at the first position
             app["versions"].insert(0, version_entry)
 
