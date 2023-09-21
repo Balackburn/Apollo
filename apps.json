@@ -75,7 +75,7 @@
             "usageDescription": "App needs camera access."  
           },
           {
-            "name": "FacelD",
+            "name": "FaceID",
             "usageDescription": "App uses Face ID."
           },
           {
