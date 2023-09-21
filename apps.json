@@ -41,7 +41,61 @@
           "downloadURL": "https://github.com/ichitaso/ApolloPatcher/releases/download/v0.0.3/Apollo_1.15.11_mod_0.0.3.ipa",
           "size": 110363629
         }
-      ]
+      ],
+      "appPermissions": {
+        "entitlements": [
+          {
+            "name": "com.apple.security.application-groups" 
+          },
+          {
+            "name": "com.apple.developer.associated-domains"
+          },
+          {
+            "name": "com.apple.developer.group-session"
+          },
+          {
+            "name": "com.apple.developer.icloud-container-identifiers"
+          },
+          {
+            "name": "com.apple.developer.ubiquity-kvstore-identifier"
+          },
+          {
+            "name": "keychain-access-groups"
+          },
+          {
+            "name": "aps-environment"
+          },
+          {
+            "name": "com.apple.developer.weatherkit"
+          }
+        ],
+        "privacy": [
+          {
+            "name": "Camera",
+            "usageDescription": "App needs camera access."  
+          },
+          {
+            "name": "FacelD",
+            "usageDescription": "App uses Face ID."
+          },
+          {
+            "name": "LocationWhenInUse",
+            "usageDescription": "App needs location when in use."
+          },
+          {
+            "name": "Motion",
+            "usageDescription": "App uses motion sensors."
+          },
+          {
+            "name": "PhotoLibraryAdd",
+            "usageDescription": "App adds photos."
+          },
+          {
+            "name": "PhotoLibrary",
+            "usageDescription": "App accesses photo library."  
+          }
+        ]
+      }
     }
   ],
   "news": [
