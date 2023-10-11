@@ -5,17 +5,17 @@
     {
       "beta": false,
       "name": "Apollo for Reddit",
-      "bundleIdentifier": "com.ichitaso.Apollo",
-      "developerName": "Christian Selig (& ichitaso)",
+      "bundleIdentifier": "com.christianselig.Apollo",
+      "developerName": "Christian Selig (& iCraze)",
       "subtitle": " The award-winning Reddit app",
       "version": "1.15.11",
-      "versionDate": "2023-07-14T04:04:14Z",
-      "versionDescription": "\u2022 Re Fix Imgur loading issue  \r\n\r\nThe Imgur client ID is tentatively created by me, but may stop if there are too many requests.\r\n\r\nHow to create\r\n\r\nIf you do not have an Imgur account, please create one:\r\nhttps://imgur.com/\r\n\r\nAfter creating an account, create an app from the following page\r\nhttps://api.imgur.com/oauth2/addclient\r\nAuthorization type: is OK with \"OAuth 2 authorization without a callback URL\r\nFill in the other fields to get a \"Client ID\".\r\n\r\nhttps://imgur.com/account/settings/apps\r\nYou can also check the Client ID from the above link if you are logged in.\r\n\r\nFor sideloading, the IPA is available on the GitHub release page.\r\nApolloSideloadFix.dylib\" and \"ApolloPatcher.dylib\" are already included, so all you need to do is install them from AltStore or other sources.\r\n\r\nIf you want to create your own IPA, please include ApolloSideloadFix.dylib.",
-      "downloadURL": "https://github.com/ichitaso/ApolloPatcher/releases/download/v0.0.5/Apollo_1.15.11_mod_0.0.5.ipa",
+      "versionDate": "2023-10-11T22:15:35Z",
+      "versionDescription": "Apollo for Reddit (with Artemis) Release Information\r\n\r\nApollo .IPA Version: \"1.15.11\"  \r\nArtemis .DEB Version: \"1.4\" \r\n\r\nRELEASE 1.15.11\u20221.4: (2023\u202210\u202211)\r\n\u2022 Initial release with Artemis \"1.4\" \r\n\t\u2022 Blocks requests to Statsig\r\n\t\u2022 Fix rare crash added in v1.3.1\r\n\t\u2022 Fix issue with some Imgur albums not loading\r\n\t\u2022 Now also blocks requests to Apollo\u2019s server, rather than just returning fake data\r\n",
+      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.4/Apollo-1.15.11_Artemis-1.4.ipa",
       "localizedDescription": "Apollo is an app for Reddit built for customizability, smoothness, gestures, and taking advantage of everything iOS has to offer. Apollo is a beautiful Reddit app built for fast navigation with an incredibly powerful set of features. Thanks to features like the Jump Bar, fully customizable gestures, and a super-charged Media Viewer, browsing Reddit has never been this amazing. It's created specifically with iOS design guidelines in mind, so it fits right at home on your device, and with input from thousands of Redditors helping sculpt and perfect it over several years before launching: \n\n- Jump Bar, for super-fast hopping between subreddits\n- Super-charged Media Viewer for an amazing experience viewing images, GIFs, videos, albums, and more from a variety of sources.\n- Tabbed interface for easy navigating\n- Incredibly powerful Markdown composer for writing comments and posts\n- Full inline Imgur uploading, both images and albums\n- Large or compact posts depending on your preference\n- Dark mode (can be automatic)\n- Fully customizable gestures\n- Safari View Controller for browsing articles and links\n- Inline previews of media in comments\n- 3D Touch support\n- Beautifully organized Inbox\n- Filtering and blocking\n- Face ID / Touch ID / Passcode lock\n- Moderator features\n- Tons of settings to tweak\n- GIF scrubbing to go backward and forward in time\n- Multiple accounts\n- Powerful search\n- Full Markdown rendering\n- Unobtrusive Volume Indicator\n\nAs well as much, much more and it's constantly evolving. If you have anything you'd specifically like to see, come to the ApolloApp subreddit and we'd love to hear it! Apollo is an unofficial app, and side effects may include an incredible browsing experience.",
       "iconURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_0.webp",
       "tintColor": "#4453f4",
-      "size": 110366835,
+      "size": 108095419,
       "screenshotURLs": [
         "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_1.webp",
         "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_2.webp",
@@ -29,10 +29,10 @@
       "versions": [
         {
           "version": "1.15.11",
-          "date": "2023-07-14T04:04:14Z",
-          "localizedDescription": "\u2022 Re Fix Imgur loading issue  \r\n\r\nThe Imgur client ID is tentatively created by me, but may stop if there are too many requests.\r\n\r\nHow to create\r\n\r\nIf you do not have an Imgur account, please create one:\r\nhttps://imgur.com/\r\n\r\nAfter creating an account, create an app from the following page\r\nhttps://api.imgur.com/oauth2/addclient\r\nAuthorization type: is OK with \"OAuth 2 authorization without a callback URL\r\nFill in the other fields to get a \"Client ID\".\r\n\r\nhttps://imgur.com/account/settings/apps\r\nYou can also check the Client ID from the above link if you are logged in.\r\n\r\nFor sideloading, the IPA is available on the GitHub release page.\r\nApolloSideloadFix.dylib\" and \"ApolloPatcher.dylib\" are already included, so all you need to do is install them from AltStore or other sources.\r\n\r\nIf you want to create your own IPA, please include ApolloSideloadFix.dylib.",
-          "downloadURL": "https://github.com/ichitaso/ApolloPatcher/releases/download/v0.0.5/Apollo_1.15.11_mod_0.0.5.ipa",
-          "size": 110366835
+          "date": "2023-10-11T22:15:35Z",
+          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"  \r\nArtemis .DEB Version: \"1.4\" \r\n\r\nRELEASE 1.15.11\u20221.4: (2023\u202210\u202211)\r\n\u2022 Initial release with Artemis \"1.4\" \r\n\t\u2022 Blocks requests to Statsig\r\n\t\u2022 Fix rare crash added in v1.3.1\r\n\t\u2022 Fix issue with some Imgur albums not loading\r\n\t\u2022 Now also blocks requests to Apollo\u2019s server, rather than just returning fake data",
+          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.4/Apollo-1.15.11_Artemis-1.4.ipa",
+          "size": 108095419
         },
         {
           "version": "0.0.3",
@@ -45,7 +45,7 @@
       "appPermissions": {
         "entitlements": [
           {
-            "name": "com.apple.security.application-groups" 
+            "name": "com.apple.security.application-groups"
           },
           {
             "name": "com.apple.developer.associated-domains"
@@ -72,7 +72,7 @@
         "privacy": [
           {
             "name": "Camera",
-            "usageDescription": "App needs camera access."  
+            "usageDescription": "App needs camera access."
           },
           {
             "name": "FaceID",
@@ -92,7 +92,7 @@
           },
           {
             "name": "PhotoLibrary",
-            "usageDescription": "App accesses photo library."  
+            "usageDescription": "App accesses photo library."
           }
         ]
       }
@@ -118,6 +118,16 @@
       "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/news/news_2.webp",
       "notify": true,
       "url": "https://github.com/ichitaso/ApolloPatcher/releases/tag/v0.0.5"
+    },
+    {
+      "title": "1.15.11-1.4 - Apollo for Reddit",
+      "identifier": "release-1.15.11-1.4",
+      "caption": "Update of Apollo (with Artemis) just got released!",
+      "date": "2023-10-11T22:15:35Z",
+      "tintColor": "#3F91FE",
+      "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/news/news_2.webp",
+      "notify": true,
+      "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11-1.4"
     }
   ]
 }
