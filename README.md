@@ -6,7 +6,7 @@ I've called this repo only "Apollo", for a better presentation on my Github Page
 
 [View source online](https://therealfoxster.github.io/altsource-viewer/app.html?source=https://balackburn.github.io/Apollo/apps.json&id=com.christianselig.Apollo)
 
-This is an auto-updating Altstore [source](https://balackburn.github.io/Apollo/apps.json) for **ApolloPatcher**. It checks daily for new releases and updates the source with the latest version, ensuring you always have access to the most recent updates.
+This is an auto-updating Altstore [source](https://balackburn.github.io/Apollo/apps.json) for **Artemis for Apollo**. It checks daily for new releases and updates the source with the latest version, ensuring you always have access to the most recent updates.
 
 # Website 
 
@@ -19,4 +19,7 @@ I hope you'll find it both useful and visually appealing.
 I really love Apollo and hope it will help some people to keep using it instead of the official app.
 
 # From : 
-https://github.com/ichitaso/ApolloPatcher
+
+https://chariz.com/get/artemis
+
+https://apolloapp.io/
