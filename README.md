@@ -10,7 +10,7 @@ This is an auto-updating Altstore [source](https://balackburn.github.io/Apollo/a
 
 # Website 
 
-Additionally, their is a [website](https://balackburn.github.io/Apollo/) for it (just edited the one I made for YTLitePlus).
+Additionally, there is a [website](https://balackburn.github.io/Apollo/) for it (just edited the one I made for YTLitePlus).
 
 I hope you'll find it both useful and visually appealing.
 
