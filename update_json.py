@@ -35,7 +35,6 @@ def remove_tags(text):
 
 def get_ipa_url(assets):
     for asset in assets:
-        if '1.15.11' in asset['name'] and asset['name'].endswith('.ipa'):
             return asset['browser_download_url']
     return None
     
@@ -56,7 +55,7 @@ def update_json_file(json_file, fetched_data_all, fetched_data_latest):
         versionDate = release["published_at"]
 
         description = release["body"]
-        keyword = "Apollo for Reddit (with Artemis) Release Information"
+        keyword = "Apollo for Reddit (with ImprovedCustomApi) Release Information"
         if keyword in description:
             description = description.split(keyword, 1)[1].strip()
 
@@ -118,7 +117,7 @@ def update_json_file(json_file, fetched_data_all, fetched_data_latest):
     news_entry = {
         "title": f"{full_version} - Apollo for Reddit",
         "identifier": news_identifier,
-        "caption": f"Update of Apollo (with Artemis) just got released!",
+        "caption": f"Update of Apollo (with ImprovedCustomApi) just got released!",
         "date": fetched_data_latest["published_at"],
         "tintColor": "#3F91FE",
         "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/news/news_2.webp",
