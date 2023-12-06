@@ -13,7 +13,7 @@
 <a href="https://balackburn.github.io/Apollo/apps.json"><img src="https://gcdnb.pbrd.co/images/pxhwQTTDPu2j.png" width="200"></a>
 
 # Original Tweak 
-<a href="https://altsource.by.lao.sb/browse/?source=https%3A%2F%2Fraw.githubusercontent.com%2FBalackburn%2FApollo%2Fmain%2Fapps.json"><img src="https://gcdnb.pbrd.co/images/2iBhWuIGPH1y.png" width="200"></a>
+<a href="https://github.com/JeffreyCA/Apollo-ImprovedCustomApi"><img src="https://gcdnb.pbrd.co/images/2iBhWuIGPH1y.png" width="200"></a>
 
 # Website 
 <a href="https://balackburn.github.io/Apollo"><img src="https://gcdnb.pbrd.co/images/5uYGhE2iihNW.png" width="200"></a>
