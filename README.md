@@ -1,16 +1,22 @@
-# Altstore Source for Apollo
+<p align="center">
+  <img src="https://gcdnb.pbrd.co/images/kg9RipitmGD1.png" alt="Apollo for Reddit Banner" />
+</p>
 
-I've called this repo only "Apollo", for a better presentation on my Github Page site.
+[![Platform](http://img.shields.io/badge/platform-iOS/iPadOS/macOS-blue.svg)](https://developer.apple.com/iphone/index.action)
+![Release](https://img.shields.io/github/downloads/Balackburn/Apollo/total)
+![GitHub issues](https://img.shields.io/github/issues-raw/Balackburn/Apollo)
 
-[Add to Altstore/Sidestore](https://tinyurl.com/ApolloAltstore)
+<a href="https://tinyurl.com/ApolloAltstore"><img src="https://balackburn.github.io/Apollo/images/UI/image_1.webp" width="200"></a>
+&nbsp;
+<a href="https://altsource.by.lao.sb/browse/?source=https%3A%2F%2Fraw.githubusercontent.com%2FBalackburn%2FApollo%2Fmain%2Fapps.json"><img src="https://gcdnb.pbrd.co/images/Nfl3CG8rT8Va.png" width="200"></a>
+&nbsp;
+<a href="https://balackburn.github.io/Apollo/apps.json"><img src="https://gcdnb.pbrd.co/images/pxhwQTTDPu2j.png" width="200"></a>
 
-[View source online](https://therealfoxster.github.io/altsource-viewer/app.html?source=https://balackburn.github.io/Apollo/apps.json&id=com.christianselig.Apollo)
-
-This is an auto-updating Altstore [source](https://balackburn.github.io/Apollo/apps.json) for **Artemis for Apollo**. It checks daily for new releases and updates the source with the latest version, ensuring you always have access to the most recent updates.
+# Original Tweak 
+<a href="https://altsource.by.lao.sb/browse/?source=https%3A%2F%2Fraw.githubusercontent.com%2FBalackburn%2FApollo%2Fmain%2Fapps.json"><img src="https://gcdnb.pbrd.co/images/2iBhWuIGPH1y.png" width="200"></a>
 
 # Website 
-
-Additionally, there is a [website](https://balackburn.github.io/Apollo/) for it (just edited the one I made for YTLitePlus).
+<a href="https://balackburn.github.io/Apollo"><img src="https://gcdnb.pbrd.co/images/5uYGhE2iihNW.png" width="200"></a>
 
 I hope you'll find it both useful and visually appealing.
 
@@ -20,6 +26,6 @@ I really love Apollo and hope it will help some people to keep using it instead 
 
 # From : 
 
-https://chariz.com/get/artemis
+https://github.com/JeffreyCA/Apollo-ImprovedCustomApi
 
 https://apolloapp.io/
