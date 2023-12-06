@@ -18,13 +18,7 @@
 # Website 
 <a href="https://balackburn.github.io/Apollo"><img src="https://gcdnb.pbrd.co/images/5uYGhE2iihNW.png" width="200"></a>
 
-I hope you'll find it both useful and visually appealing.
-
-# Why?
-
-I really love Apollo and hope it will help some people to keep using it instead of the official app.
-
-# From : 
+# From 
 
 https://github.com/JeffreyCA/Apollo-ImprovedCustomApi
 
