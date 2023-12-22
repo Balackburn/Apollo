@@ -369,7 +369,6 @@
   h1 {
     margin-bottom: 0px;
     margin-top: 25px;
-    font-size: 30px !important;
   }
 
   .container-desktop {
@@ -390,7 +389,7 @@
     flex-direction: row;
     margin-top: 80px;
     margin-bottom: 80px;
-    align-items: top;
+    align-items: end;
   }
 
   @media (max-width: 768px) {
@@ -703,30 +702,6 @@
               target="_blank">@JeffreyCA</a></strong> is a tweak that allows you to use your own Reddit API credentials
           in Apollo.
         </p>
-        <h2>Key Features</h2>
-        <ul>
-          <li>Jump Bar for super-fast hopping between subreddits</li>
-          <li>Super-charged Media Viewer for an amazing experience viewing images, GIFs, videos, albums, and more</li>
-          <li>Tabbed interface for easy navigation</li>
-          <li>Powerful Markdown composer for writing comments and posts</li>
-          <li>Full inline Imgur uploading, both images and albums</li>
-          <li>Large or compact posts depending on your preference</li>
-          <li>Dark mode (can be automatic)</li>
-          <li>Fully customizable gestures</li>
-          <li>Safari View Controller for browsing articles and links</li>
-          <li>Inline previews of media in comments</li>
-          <li>3D Touch support</li>
-          <li>Beautifully organized Inbox</li>
-          <li>Filtering and blocking</li>
-          <li>Face ID / Touch ID / Passcode lock</li>
-          <li>Moderator features</li>
-          <li>Tons of settings to tweak</li>
-          <li>GIF scrubbing to go backward and forward in time</li>
-          <li>Multiple accounts</li>
-          <li>Powerful search</li>
-          <li>Full Markdown rendering</li>
-          <li>Unobtrusive Volume Indicator</li>
-        </ul>
         </div>
     </section>
   </main>
@@ -769,8 +744,9 @@
         const data = await response.json();
 
         // Filter assets with the ".ipa" file extension
-        const ipaAssets = data.assets.filter((asset) => asset.name.endsWith('.ipa'));
-
+        const ipaAssets = data.assets.filter((asset) => {
+      return asset.name.startsWith('Apollo') && asset.name.endsWith('.ipa');
+    });
         if (ipaAssets.length > 0) {
           // Find the asset with the highest version number
           const highestVersionAsset = ipaAssets.reduce((highest, current) => {
