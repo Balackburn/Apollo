@@ -119,7 +119,7 @@ def update_json_file(json_file, fetched_data_all, fetched_data_latest):
         "identifier": news_identifier,
         "caption": f"Update of Apollo (with ImprovedCustomApi) just got released!",
         "date": fetched_data_latest["published_at"],
-        "tintColor": "#3F91FE",
+        "tintColor": "3F91FE",
         "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/news/news_2.webp",
         "notify": True,
         "url": f"https://github.com/Balackburn/Apollo/releases/tag/{tag}"

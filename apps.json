@@ -14,7 +14,7 @@
       "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.0.9/Apollo-1.15.11_improvedcustomapi-1.0.9.ipa",
       "localizedDescription": "Apollo is an app for Reddit built for customizability, smoothness, gestures, and taking advantage of everything iOS has to offer. Apollo is a beautiful Reddit app built for fast navigation with an incredibly powerful set of features. Thanks to features like the Jump Bar, fully customizable gestures, and a super-charged Media Viewer, browsing Reddit has never been this amazing. It's created specifically with iOS design guidelines in mind, so it fits right at home on your device, and with input from thousands of Redditors helping sculpt and perfect it over several years before launching: \n\n- Jump Bar, for super-fast hopping between subreddits\n- Super-charged Media Viewer for an amazing experience viewing images, GIFs, videos, albums, and more from a variety of sources.\n- Tabbed interface for easy navigating\n- Incredibly powerful Markdown composer for writing comments and posts\n- Full inline Imgur uploading, both images and albums\n- Large or compact posts depending on your preference\n- Dark mode (can be automatic)\n- Fully customizable gestures\n- Safari View Controller for browsing articles and links\n- Inline previews of media in comments\n- 3D Touch support\n- Beautifully organized Inbox\n- Filtering and blocking\n- Face ID / Touch ID / Passcode lock\n- Moderator features\n- Tons of settings to tweak\n- GIF scrubbing to go backward and forward in time\n- Multiple accounts\n- Powerful search\n- Full Markdown rendering\n- Unobtrusive Volume Indicator\n\nAs well as much, much more and it's constantly evolving. If you have anything you'd specifically like to see, come to the ApolloApp subreddit and we'd love to hear it! Apollo is an unofficial app, and side effects may include an incredible browsing experience.",
       "iconURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_0.webp",
-      "tintColor": "#4453f4",
+      "tintColor": "4453f4",
       "size": 108152935,
       "screenshotURLs": [
         "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_1.webp",
@@ -104,7 +104,7 @@
       "identifier": "apollo-1",
       "caption": "Apollo is back with custom API credentials!",
       "date": "2023-07-06",
-      "tintColor": "#3F91FE",
+      "tintColor": "3F91FE",
       "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/news/news_1.webp",
       "notify": false,
       "url": "https://balackburn.github.io/Apollo/"
@@ -114,7 +114,7 @@
       "identifier": "release-0.0.5",
       "caption": "Update of ApolloPatcher just got released!",
       "date": "2023-07-14T04:04:14Z",
-      "tintColor": "#3F91FE",
+      "tintColor": "3F91FE",
       "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/news/news_2.webp",
       "notify": true,
       "url": "https://github.com/ichitaso/ApolloPatcher/releases/tag/v0.0.5"
@@ -124,7 +124,7 @@
       "identifier": "release-1.15.11-1.4",
       "caption": "Update of Apollo (with Artemis) just got released!",
       "date": "2023-10-11T22:15:35Z",
-      "tintColor": "#3F91FE",
+      "tintColor": "3F91FE",
       "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/news/news_2.webp",
       "notify": true,
       "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11-1.4"
@@ -134,7 +134,7 @@
       "identifier": "release-1.15.11-1.0.5",
       "caption": "Update of Apollo (with ImprovedCustomApi) just got released!",
       "date": "2023-12-04T10:09:25Z",
-      "tintColor": "#3F91FE",
+      "tintColor": "3F91FE",
       "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/news/news_2.webp",
       "notify": true,
       "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11-1.0.5"
@@ -144,7 +144,7 @@
       "identifier": "release-1.15.11-1.0.7",
       "caption": "Update of Apollo (with ImprovedCustomApi) just got released!",
       "date": "2023-12-08T12:08:07Z",
-      "tintColor": "#3F91FE",
+      "tintColor": "3F91FE",
       "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/news/news_2.webp",
       "notify": true,
       "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11-1.0.7"
@@ -154,7 +154,7 @@
       "identifier": "release-1.15.11-1.0.8",
       "caption": "Update of Apollo (with ImprovedCustomApi) just got released!",
       "date": "2023-12-16T15:09:37Z",
-      "tintColor": "#3F91FE",
+      "tintColor": "3F91FE",
       "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/news/news_2.webp",
       "notify": true,
       "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11-1.0.8"
@@ -164,7 +164,7 @@
       "identifier": "release-1.15.11-1.0.9",
       "caption": "Update of Apollo (with ImprovedCustomApi) just got released!",
       "date": "2023-12-30T08:52:04Z",
-      "tintColor": "#3F91FE",
+      "tintColor": "3F91FE",
       "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/news/news_2.webp",
       "notify": true,
       "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11-1.0.9"
