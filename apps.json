@@ -9,13 +9,13 @@
       "developerName": "Christian Selig (& JeffreyCA)",
       "subtitle": " The award-winning Reddit app",
       "version": "1.15.11",
-      "versionDate": "2023-12-30T08:52:04Z",
-      "versionDescription": "Apollo for Reddit (with ImprovedCustomApi) Release Information\r\n\r\nApollo .IPA Version: \"1.15.11\"  \r\nImprovedCustomApi .DEB Version: \"1.0.9\" \r\n\r\nRELEASE 1.15.11\u20221.0.9: (2023\u202212\u202230)\r\n\u2022 Updated ImprovedCustomApi from \"1.0.8\" to \"1.0.9\" \r\n   \u2022 Randomize \"trending subreddits\" list so it doesn't show iOS, Clock, Time, IfYouDontMind all the time \u2022 thanks @iCrazeiOS!\r\n      \u2022 Context: There isn't an official Reddit API to get the currently trending subreddits. Apollo has a hardcoded mapping of dates to trending subreddits in this file called trending\u2022subreddits.plist that is bundled inside the .ipa. The last date entry is 2023\u20229\u20229, which is why Apollo has been falling back to the default iOS, Clock, Time, IfYouDontMind subreddits lately.\r\n\r\nKnown issues\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n  \u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser\r\n\r\n",
-      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.0.9/Apollo-1.15.11_improvedcustomapi-1.0.9.ipa",
+      "versionDate": "2024-01-23T12:32:35Z",
+      "versionDescription": "Apollo for Reddit (with ImprovedCustomApi) Release Information\r\n\r\nApollo .IPA Version: \"1.15.11\"  \r\nImprovedCustomApi .DEB Version: \"1.0.10\" \r\n\r\nRELEASE 1.15.11\u20221.0.9: (2024\u202201\u202223)\r\n\u2022 Updated ImprovedCustomApi from \"1.0.9\" to \"1.0.10\" \r\n   \u2022 Add support for /u/ share links (e.g. \"reddit.com/u/username/s/xxxxxx\")\r\n\r\nKnown issues\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n  \u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser\r\n\r\n",
+      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.0.10/Apollo-1.15.11_improvedcustomapi-1.0.10.ipa",
       "localizedDescription": "Apollo is an app for Reddit built for customizability, smoothness, gestures, and taking advantage of everything iOS has to offer. Apollo is a beautiful Reddit app built for fast navigation with an incredibly powerful set of features. Thanks to features like the Jump Bar, fully customizable gestures, and a super-charged Media Viewer, browsing Reddit has never been this amazing. It's created specifically with iOS design guidelines in mind, so it fits right at home on your device, and with input from thousands of Redditors helping sculpt and perfect it over several years before launching: \n\n- Jump Bar, for super-fast hopping between subreddits\n- Super-charged Media Viewer for an amazing experience viewing images, GIFs, videos, albums, and more from a variety of sources.\n- Tabbed interface for easy navigating\n- Incredibly powerful Markdown composer for writing comments and posts\n- Full inline Imgur uploading, both images and albums\n- Large or compact posts depending on your preference\n- Dark mode (can be automatic)\n- Fully customizable gestures\n- Safari View Controller for browsing articles and links\n- Inline previews of media in comments\n- 3D Touch support\n- Beautifully organized Inbox\n- Filtering and blocking\n- Face ID / Touch ID / Passcode lock\n- Moderator features\n- Tons of settings to tweak\n- GIF scrubbing to go backward and forward in time\n- Multiple accounts\n- Powerful search\n- Full Markdown rendering\n- Unobtrusive Volume Indicator\n\nAs well as much, much more and it's constantly evolving. If you have anything you'd specifically like to see, come to the ApolloApp subreddit and we'd love to hear it! Apollo is an unofficial app, and side effects may include an incredible browsing experience.",
       "iconURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_0.webp",
       "tintColor": "4453f4",
-      "size": 108152935,
+      "size": 108157865,
       "screenshotURLs": [
         "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_1.webp",
         "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_2.webp",
@@ -29,10 +29,10 @@
       "versions": [
         {
           "version": "1.15.11",
-          "date": "2023-12-30T08:52:04Z",
-          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"  \r\nImprovedCustomApi .DEB Version: \"1.0.9\" \r\n\r\nRELEASE 1.15.11\u20221.0.9: (2023\u202212\u202230)\r\n\u2022 Updated ImprovedCustomApi from \"1.0.8\" to \"1.0.9\" \r\n   \u2022 Randomize \"trending subreddits\" list so it doesn't show iOS, Clock, Time, IfYouDontMind all the time \u2022 thanks @iCrazeiOS!\r\n      \u2022 Context: There isn't an official Reddit API to get the currently trending subreddits. Apollo has a hardcoded mapping of dates to trending subreddits in this file called trending\u2022subreddits.plist that is bundled inside the .ipa. The last date entry is 2023\u20229\u20229, which is why Apollo has been falling back to the default iOS, Clock, Time, IfYouDontMind subreddits lately.\r\n\r\nKnown issues\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n  \u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.0.9/Apollo-1.15.11_improvedcustomapi-1.0.9.ipa",
-          "size": 108152935
+          "date": "2024-01-23T12:32:35Z",
+          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"  \r\nImprovedCustomApi .DEB Version: \"1.0.10\" \r\n\r\nRELEASE 1.15.11\u20221.0.9: (2024\u202201\u202223)\r\n\u2022 Updated ImprovedCustomApi from \"1.0.9\" to \"1.0.10\" \r\n   \u2022 Add support for /u/ share links (e.g. \"reddit.com/u/username/s/xxxxxx\")\r\n\r\nKnown issues\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n  \u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
+          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.0.10/Apollo-1.15.11_improvedcustomapi-1.0.10.ipa",
+          "size": 108157865
         },
         {
           "version": "0.0.3",
@@ -168,6 +168,16 @@
       "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/news/news_2.webp",
       "notify": true,
       "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11-1.0.9"
+    },
+    {
+      "title": "1.15.11-1.0.10 - Apollo for Reddit",
+      "identifier": "release-1.15.11-1.0.10",
+      "caption": "Update of Apollo (with ImprovedCustomApi) just got released!",
+      "date": "2024-01-23T12:32:35Z",
+      "tintColor": "3F91FE",
+      "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/news/news_2.webp",
+      "notify": true,
+      "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11-1.0.10"
     }
   ]
 }
