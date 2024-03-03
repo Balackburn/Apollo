@@ -4,7 +4,7 @@
   "headerURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/header/altstore_header.png",
   "website": "https://balackburn.github.io/Apollo",
   "subtitle": "Apollo for Reddit unofficial Altstore source.",
-  "description": "This is the unofficial Altstore source for Apollo for Reddit tweaked with ImprovedCustomApi by @JeffreyCA.\n\n For full details, check the GitHub repository:\nhttps://github.com/Balackburn/Apollo",
+  "description": "This is an unofficial Altstore source for Apollo for Reddit tweaked with ImprovedCustomApi by @JeffreyCA.\n\nFor full details, check the GitHub repository:\nhttps://github.com/Balackburn/Apollo",
   "tintColor": "4453f4",
   "apps": [
     {
