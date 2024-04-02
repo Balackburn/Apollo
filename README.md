@@ -6,12 +6,12 @@
 ![Release](https://img.shields.io/github/downloads/Balackburn/Apollo/total)
 ![GitHub issues](https://img.shields.io/github/issues-raw/Balackburn/Apollo)
 
-<a href="https://tinyurl.com/ApolloAltstore"><img src="https://balackburn.github.io/Apollo/images/UI/image_1.webp" width="200"></a>
+<a href="https://tinyurl.com/ApolloAltstore"><img src="https://raw.githubusercontent.com/YTLitePlus/Assets/main/Github/Buttons/Altstore/Altstore.png" width="200"></a>
 &nbsp;
-<a href="https://altsource.by.lao.sb/browse/?source=https%3A%2F%2Fraw.githubusercontent.com%2FBalackburn%2FApollo%2Fmain%2Fapps.json"><img src="https://github.com/Balackburn/Apollo/assets/93828569/ef511b72-c80a-4fcf-abcd-ff9a84b44eba"
+<a href="https://altsource.by.lao.sb/browse/?source=https%3A%2F%2Fraw.githubusercontent.com%2FBalackburn%2FApollo%2Fmain%2Fapps.json"><img src="https://raw.githubusercontent.com/YTLitePlus/Assets/main/Github/Buttons/Altstore/altsource.by.lao.sb.png"
  width="200"></a>
 &nbsp;
-<a href="https://balackburn.github.io/Apollo/apps.json"><img src="https://github.com/Balackburn/Apollo/assets/93828569/6b3e117e-9e64-47e9-b93f-45e54f4155bc" width="200"></a>
+<a href="https://balackburn.github.io/Apollo/apps.json"><img src="https://raw.githubusercontent.com/YTLitePlus/Assets/main/Github/Buttons/Altstore/URL.png" width="200"></a>
 
 # Original Tweak 
 <a href="https://github.com/JeffreyCA/Apollo-ImprovedCustomApi"><img src="https://github.com/Balackburn/Apollo/assets/93828569/f481caff-48ce-4ab0-af99-11445d6a7745" width="200"></a>
