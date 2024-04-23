@@ -1,5 +1,6 @@
 {
   "name": "Apollo for Reddit",
+  "marketplacelD": "com.apollo.source",
   "identifier": "com.apollo.source",
   "headerURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/header/altstore_header.png",
   "website": "https://balackburn.github.io/Apollo",
