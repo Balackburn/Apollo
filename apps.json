@@ -36,6 +36,7 @@
       "versions": [
         {
           "version": "1.15.11",
+          "buildVersion": "85",
           "date": "2024-02-28T12:33:18Z",
           "localizedDescription": "Apollo .IPA Version: \"1.15.11\"  \r\nImprovedCustomApi .DEB Version: \"1.0.11\" \r\n\r\nRELEASE 1.15.11\u20221.0.11: (2024\u202202\u202228)\r\n\u2022 Updated ImprovedCustomApi from \"1.0.10\" to \"1.0.11\" \r\n    \u2022 Fix issue with Imgur uploads consistently failing. Note that multi\u2022image uploads may still fail on the first attempt.\r\n\r\nKnown issues\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n  \u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
           "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.0.11/Apollo-1.15.11_improvedcustomapi-1.0.11.ipa",
@@ -43,6 +44,7 @@
         },
         {
           "version": "0.0.3",
+          "buildVersion": "84",
           "date": "2023-07-03T20:10:00Z",
           "localizedDescription": "\u2022 Added: ApolloSideloadFix\r\nThis allows sideloaded apps to save the login state when exiting.\r\nCredit @level3tjg\r\n\u2022 Added: How to Use",
           "downloadURL": "https://github.com/ichitaso/ApolloPatcher/releases/download/v0.0.3/Apollo_1.15.11_mod_0.0.3.ipa",
