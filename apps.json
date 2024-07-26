@@ -14,14 +14,14 @@
       "developerName": "Christian Selig (& JeffreyCA)",
       "subtitle": " The award-winning Reddit app",
       "version": "1.15.11",
-      "versionDate": "2024-02-28T12:33:18Z",
-      "versionDescription": "Apollo for Reddit (with ImprovedCustomApi) Release Information\r\n\r\nApollo .IPA Version: \"1.15.11\"  \r\nImprovedCustomApi .DEB Version: \"1.0.11\" \r\n\r\nRELEASE 1.15.11\u20221.0.11: (2024\u202202\u202228)\r\n\u2022 Updated ImprovedCustomApi from \"1.0.10\" to \"1.0.11\" \r\n    \u2022 Fix issue with Imgur uploads consistently failing. Note that multi\u2022image uploads may still fail on the first attempt.\r\n\r\nKnown issues\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n  \u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
-      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.0.11/Apollo-1.15.11_improvedcustomapi-1.0.11.ipa",
+      "versionDate": "2024-07-26T18:49:20Z",
+      "versionDescription": "Apollo for Reddit (with ImprovedCustomApi) Release Information\r\n\r\nApollo .IPA Version: \"1.15.11\"  \r\nImprovedCustomApi .DEB Version: \"1.0.12\" \r\n\r\nRELEASE 1.15.11\u20221.0.11: (2024\u202207\u202226)\r\n\u2022 Updated ImprovedCustomApi from \"1.0.11\" to \"1.0.12\" \r\n    \u2022 Use a more generic user agent independent of bundle ID for requests to Reddit\r\n\r\n[Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1](https://useragents.io/explore/platforms/ios/maker/apple\u2022inc\u2022b93/uas/mozilla\u20225\u20220\u2022iphone\u2022cpu\u2022iphone\u2022os\u202217\u20225\u20221\u2022like\u2022mac\u2022os\u2022x\u2022applewebkit\u2022605\u20221\u202215\u2022khtml\u2022like\u2022gecko\u2022version\u202217\u20225\u2022mobile\u202215e148\u2022safari\u2022604\u20221_2f39fc840d9054105730c511db1920b7)\r\n\r\nKnown issues\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n  \u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
+      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.0.12/Apollo-1.15.11_improvedcustomapi-1.0.12.ipa",
       "localizedDescription": "Apollo is an app for Reddit built for customizability, smoothness, gestures, and taking advantage of everything iOS has to offer. Apollo is a beautiful Reddit app built for fast navigation with an incredibly powerful set of features. Thanks to features like the Jump Bar, fully customizable gestures, and a super-charged Media Viewer, browsing Reddit has never been this amazing. It's created specifically with iOS design guidelines in mind, so it fits right at home on your device, and with input from thousands of Redditors helping sculpt and perfect it over several years before launching:\n\n\u2022 Jump Bar, for super-fast hopping between subreddits\n\u2022 Super-charged Media Viewer for an amazing experience viewing images, GIFs, videos, albums, and more from a variety of sources.\n\u2022 Tabbed interface for easy navigating\n\u2022 Incredibly powerful Markdown composer for writing comments and posts\n\u2022 Full inline Imgur uploading, both images and albums\n\u2022 Large or compact posts depending on your preference\n\u2022 Dark mode (can be automatic)\n\u2022 Fully customizable gestures\n\u2022 Safari View Controller for browsing articles and links\n\u2022 Inline previews of media in comments\n\u2022 3D Touch support\n\u2022 Beautifully organized Inbox\n\u2022 Filtering and blocking\n\u2022 Face ID / Touch ID / Passcode lock\n\u2022 Moderator features\n\u2022 Tons of settings to tweak\n\u2022 GIF scrubbing to go backward and forward in time\n\u2022 Multiple accounts\n\u2022 Powerful search\n\u2022 Full Markdown rendering\n\u2022 Unobtrusive Volume Indicator\n\nAs well as much, much more and it's constantly evolving. If you have anything you'd specifically like to see, come to the ApolloApp subreddit and we'd love to hear it! Apollo is an unofficial app, and side effects may include an incredible browsing experience.",
       "iconURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_0.webp",
       "tintColor": "4453f4",
       "category": "social",
-      "size": 108157712,
+      "size": 108152923,
       "screenshotURLs": [
         "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_1.webp",
         "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_2.webp",
@@ -35,10 +35,10 @@
       "versions": [
         {
           "version": "1.15.11",
-          "date": "2024-02-28T12:33:18Z",
-          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"  \r\nImprovedCustomApi .DEB Version: \"1.0.11\" \r\n\r\nRELEASE 1.15.11\u20221.0.11: (2024\u202202\u202228)\r\n\u2022 Updated ImprovedCustomApi from \"1.0.10\" to \"1.0.11\" \r\n    \u2022 Fix issue with Imgur uploads consistently failing. Note that multi\u2022image uploads may still fail on the first attempt.\r\n\r\nKnown issues\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n  \u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.0.11/Apollo-1.15.11_improvedcustomapi-1.0.11.ipa",
-          "size": 108157712
+          "date": "2024-07-26T18:49:20Z",
+          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"  \r\nImprovedCustomApi .DEB Version: \"1.0.12\" \r\n\r\nRELEASE 1.15.11\u20221.0.11: (2024\u202207\u202226)\r\n\u2022 Updated ImprovedCustomApi from \"1.0.11\" to \"1.0.12\" \r\n    \u2022 Use a more generic user agent independent of bundle ID for requests to Reddit\r\n\r\n[Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1](https://useragents.io/explore/platforms/ios/maker/apple\u2022inc\u2022b93/uas/mozilla\u20225\u20220\u2022iphone\u2022cpu\u2022iphone\u2022os\u202217\u20225\u20221\u2022like\u2022mac\u2022os\u2022x\u2022applewebkit\u2022605\u20221\u202215\u2022khtml\u2022like\u2022gecko\u2022version\u202217\u20225\u2022mobile\u202215e148\u2022safari\u2022604\u20221_2f39fc840d9054105730c511db1920b7)\r\n\r\nKnown issues\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n  \u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
+          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.0.12/Apollo-1.15.11_improvedcustomapi-1.0.12.ipa",
+          "size": 108152923
         },
         {
           "version": "0.0.3",
@@ -200,6 +200,17 @@
       "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/news/news_2.webp",
       "notify": true,
       "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11-1.0.11"
+    },
+    {
+      "appID": "com.foo.Apollo",
+      "title": "1.15.11-1.0.12 - Apollo for Reddit",
+      "identifier": "release-1.15.11-1.0.12",
+      "caption": "Update of Apollo (with ImprovedCustomApi) just got released!",
+      "date": "2024-07-26T18:49:20Z",
+      "tintColor": "3F91FE",
+      "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/news/news_2.webp",
+      "notify": true,
+      "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11-1.0.12"
     }
   ]
 }
