@@ -1,0 +1,184 @@
+name: Create new Apollo-ImprovedCustomApi release
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # Run every day at midnight UTC
+  workflow_dispatch:
+    inputs:
+      apollo_ipa_url:
+        description: "URL of Apollo IPA"
+        required: true
+      catbox_upload:
+        description: "Upload to Catbox"
+        type: boolean
+        default: false
+
+jobs:
+  check_and_create_release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget unzip jq
+
+      - name: Install pyzule
+        run: |
+          bash -c "$(curl https://raw.githubusercontent.com/asdfzxcvbn/pyzule/main/install-pyzule.sh)"
+
+      - name: Check for new release
+        id: check_release
+        run: |
+          LATEST_RELEASE=$(curl -s https://api.github.com/repos/JeffreyCA/Apollo-ImprovedCustomApi/releases/latest)
+          LATEST_ICA_VERSION=$(echo $LATEST_RELEASE | jq -r '.tag_name' | sed 's/^v//')
+          CURRENT_RELEASE=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases/latest)
+          CURRENT_VERSION=$(echo $CURRENT_RELEASE | jq -r '.tag_name' | cut -d'-' -f2)
+          if [ "$LATEST_ICA_VERSION" != "$CURRENT_VERSION" ] || [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "NEW_RELEASE=true" >> $GITHUB_OUTPUT
+          else
+            echo "NEW_RELEASE=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Download and extract Apollo IPA
+        if: steps.check_release.outputs.NEW_RELEASE == 'true'
+        run: |
+          APOLLO_IPA_URL=${{ github.event.inputs.apollo_ipa_url }}
+          if [ -z "$APOLLO_IPA_URL" ]; then
+            APOLLO_IPA_URL=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases/latest | jq -r '.assets[0].browser_download_url')
+          fi
+          wget $APOLLO_IPA_URL -O apollo.ipa
+          unzip -p apollo.ipa 'Payload/*.app/Info.plist' > Info.plist
+          APOLLO_VERSION=$(strings Info.plist | grep -A1 CFBundleShortVersionString | tail -1 | sed -e 's/<string>//g' -e 's/<\/string>//g' | xargs)
+          echo "APOLLO_VERSION=$APOLLO_VERSION" >> $GITHUB_ENV
+
+      - name: Get latest ImprovedCustomApi release
+        if: steps.check_release.outputs.NEW_RELEASE == 'true'
+        run: |
+          LATEST_RELEASE=$(curl -s https://api.github.com/repos/JeffreyCA/Apollo-ImprovedCustomApi/releases/latest)
+          DEB_URL=$(echo $LATEST_RELEASE | jq -r '.assets[] | select(.name | endswith(".deb")) | .browser_download_url')
+          ICA_VERSION=$(echo $LATEST_RELEASE | jq -r '.tag_name' | sed 's/^v//')
+          OLD_ICA_VERSION=$(curl -s https://api.github.com/repos/JeffreyCA/Apollo-ImprovedCustomApi/releases | jq -r '.[1].tag_name' | sed 's/^v//')
+          RELEASE_NOTES=$(echo $LATEST_RELEASE | jq -r '.body')
+          wget $DEB_URL -O improvedcustomapi.deb
+          echo "ICA_VERSION=$ICA_VERSION" >> $GITHUB_ENV
+          echo "OLD_ICA_VERSION=$OLD_ICA_VERSION" >> $GITHUB_ENV
+          echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
+          echo "$RELEASE_NOTES" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Inject DEB into IPA using pyzule
+        if: steps.check_release.outputs.NEW_RELEASE == 'true'
+        run: |
+          pyzule -i apollo.ipa -o Apollo-${{ env.APOLLO_VERSION }}_improvedcustomapi-${{ env.ICA_VERSION }}.ipa -f improvedcustomapi.deb
+
+      - name: Create IPA without extensions using pyzule
+        if: steps.check_release.outputs.NEW_RELEASE == 'true'
+        run: |
+          pyzule -i Apollo-${{ env.APOLLO_VERSION }}_improvedcustomapi-${{ env.ICA_VERSION }}.ipa -o NO-EXTENSIONS_Apollo-${{ env.APOLLO_VERSION }}_improvedcustomapi-${{ env.ICA_VERSION }}.ipa -e
+
+      - name: Prepare release notes
+        if: steps.check_release.outputs.NEW_RELEASE == 'true'
+        run: |
+          echo "# Apollo for Reddit (with ImprovedCustomApi) Release Information" > RELEASE_NOTES.md
+          echo "Apollo .IPA Version: \`${{ env.APOLLO_VERSION }}\`" >> RELEASE_NOTES.md
+          echo "ImprovedCustomApi .DEB Version: \`${{ env.ICA_VERSION }}\`" >> RELEASE_NOTES.md
+          echo "
+          **RELEASE \`${{ env.APOLLO_VERSION }}\`-\`${{ env.ICA_VERSION }}\`:** ($(date +'%Y/%m/%d'))" >> RELEASE_NOTES.md
+          echo "- Updated ImprovedCustomApi from \`${{ env.OLD_ICA_VERSION }}\` to \`${{ env.ICA_VERSION }}\`" >> RELEASE_NOTES.md
+          echo "  - ${{ env.RELEASE_NOTES }}" >> RELEASE_NOTES.md
+          echo "# Known issues" >> RELEASE_NOTES.md
+          echo "- Apollo Ultra features may cause app to crash" >> RELEASE_NOTES.md
+          echo "- Imgur multi-image upload" >> RELEASE_NOTES.md
+          echo "- Uploads usually fail on the first attempt but subsequent retries should succeed" >> RELEASE_NOTES.md
+          echo "- Share URLs in private messages and long-tapping them still open in the in-app browser" >> RELEASE_NOTES.md
+
+      - name: Upload Release Assets
+        if: steps.check_release.outputs.NEW_RELEASE == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: Apollo-IPAs
+          path: |
+            ./Apollo-${{ env.APOLLO_VERSION }}_improvedcustomapi-${{ env.ICA_VERSION }}.ipa
+            ./NO-EXTENSIONS_Apollo-${{ env.APOLLO_VERSION }}_improvedcustomapi-${{ env.ICA_VERSION }}.ipa
+          retention-days: 90
+
+      - name: Create Release
+        if: steps.check_release.outputs.NEW_RELEASE == 'true'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ env.APOLLO_VERSION }}-${{ env.ICA_VERSION }}
+          name: Release v${{ env.APOLLO_VERSION }}-${{ env.ICA_VERSION }}
+          body_path: RELEASE_NOTES.md
+          draft: false
+          files: |
+            ./Apollo-${{ env.APOLLO_VERSION }}_improvedcustomapi-${{ env.ICA_VERSION }}.ipa
+            ./NO-EXTENSIONS_Apollo-${{ env.APOLLO_VERSION }}_improvedcustomapi-${{ env.ICA_VERSION }}.ipa
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Artifact to Catbox
+        if: ${{ inputs.catbox_upload && steps.check_release.outputs.NEW_RELEASE == 'true' }}
+        run: |
+          RESPONSE=$(curl -F "reqtype=fileupload" -F "fileToUpload=@Apollo-${{ env.APOLLO_VERSION }}_improvedcustomapi-${{ env.ICA_VERSION }}.ipa" https://catbox.moe/user/api.php)
+          CATBOX_URL=$(echo $RESPONSE | grep -o -E 'https://files.catbox.moe/[^"]*')
+          echo "Uploaded artifact to $CATBOX_URL"
+          CATBOX_FILE=$(echo $CATBOX_URL | sed 's|https://files.catbox.moe/||')
+          echo "CATBOX_FILE=$CATBOX_FILE" >> $GITHUB_ENV
+          echo "CATBOX_URL=$CATBOX_URL" >> $GITHUB_ENV
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests  # Add any other dependencies your script might need
+
+      - name: Update AltStore source
+        if: steps.check_release.outputs.NEW_RELEASE == 'true'
+        run: |
+          python update_json.py
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git add apps.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Updated source with latest release" && git push)
+
+      - name: Job Summary
+        run: |
+          echo "### 📊 Workflow Summary" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.check_release.outputs.NEW_RELEASE }}" == "true" ]; then
+            echo "✅ New release created: v${{ env.APOLLO_VERSION }}-${{ env.ICA_VERSION }}" >> $GITHUB_STEP_SUMMARY
+            echo "✅ AltStore source updated" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "ℹ️ No new release needed. Current version is up to date." >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Job Summary - Artifact Upload
+        if: steps.check_release.outputs.NEW_RELEASE == 'true'
+        run: |
+          REPO_URL="https://github.com/${{ github.repository }}"
+          RELEASES_URL="$REPO_URL/releases/tag/v${{ env.APOLLO_VERSION }}-${{ env.ICA_VERSION }}"
+          echo "### 📦 Artifact Upload" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Artifacts uploaded successfully!" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 [Download artifacts]($RELEASES_URL)" >> $GITHUB_STEP_SUMMARY
+
+      - name: Job Summary - Catbox Upload
+        if: ${{ inputs.catbox_upload && steps.check_release.outputs.NEW_RELEASE == 'true' }}
+        run: |
+          echo "### 🐱 Catbox Upload" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Catbox upload successful!" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 [Download from Catbox]($CATBOX_URL)" >> $GITHUB_STEP_SUMMARY
+
+      - name: Job Summary - Release
+        if: steps.check_release.outputs.NEW_RELEASE == 'true'
+        run: |
+          REPO_URL="https://github.com/${{ github.repository }}"
+          RELEASES_URL="$REPO_URL/releases/tag/v${{ env.APOLLO_VERSION }}-${{ env.ICA_VERSION }}"
+          echo "### 🚀 Release" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Release v${{ env.APOLLO_VERSION }}-${{ env.ICA_VERSION }} created successfully!" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 [View release]($RELEASES_URL)" >> $GITHUB_STEP_SUMMARY
