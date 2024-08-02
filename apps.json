@@ -224,7 +224,7 @@
       "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11-1.1.1"
     },
     {
-      "appID": "com.foo.Apollo",
+      "appID": "com.christianselig.Apollo",
       "title": "1.15.11-1.1.2 - Apollo for Reddit",
       "identifier": "release-1.15.11-1.1.2",
       "caption": "Update of Apollo (with ImprovedCustomApi) just got released!",
