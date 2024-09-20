@@ -7,7 +7,8 @@ on:
     inputs:
       apollo_ipa_url:
         description: "URL of Apollo IPA"
-        required: true
+        required: false
+        default: "https://files.catbox.moe/o2lue0.ipa"
       catbox_upload:
         description: "Upload to Catbox"
         type: boolean
@@ -45,9 +46,9 @@ jobs:
       - name: Download and extract Apollo IPA
         if: steps.check_release.outputs.NEW_RELEASE == 'true'
         run: |
-          APOLLO_IPA_URL=${{ github.event.inputs.apollo_ipa_url }}
+          APOLLO_IPA_URL="${{ github.event.inputs.apollo_ipa_url }}"
           if [ -z "$APOLLO_IPA_URL" ]; then
-            APOLLO_IPA_URL=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases/latest | jq -r '.assets[0].browser_download_url')
+            APOLLO_IPA_URL="https://files.catbox.moe/o2lue0.ipa"
           fi
           wget $APOLLO_IPA_URL -O apollo.ipa
           unzip -p apollo.ipa 'Payload/*.app/Info.plist' > Info.plist
