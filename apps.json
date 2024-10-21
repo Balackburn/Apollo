@@ -13,7 +13,7 @@
       "name": "Apollo for Reddit",
       "bundleIdentifier": "com.christianselig.Apollo",
       "developerName": "Christian Selig (& JeffreyCA)",
-      "subtitle": " The award-winning Reddit app",
+      "subtitle": "The award-winning Reddit app",
       "version": "1.15.11",
       "versionDate": "2024-10-20T01:10:52Z",
       "versionDescription": "Apollo for Reddit (with ImprovedCustomApi) Release Information\nApollo .IPA Version: \"1.15.11\"\nImprovedCustomApi .DEB Version: \"1.1.7\"\n\nRELEASE \"1.15.11\"\u2022\"1.1.7\": (2024/10/20)\n\u2022 Updated ImprovedCustomApi from \"1.1.6\" to \"1.1.7\"\n  \u2022 Improve parsing  and  links\r\nKnown issues\n\u2022 Apollo Ultra features may cause app to crash\n\u2022 Imgur multi\u2022image upload\n\u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser\n",
