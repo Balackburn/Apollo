@@ -39,7 +39,7 @@ jobs:
       run: |
         curl -L "${{ env.APOLLO_IPA_URL }}" -o Apollo.ipa
         # Extract Apollo version from IPA
-        APOLLO_VERSION=$(unzip -p Apollo.ipa 'Payload/*.app/Info.plist' | grep -A1 'CFBundleShortVersionString' | grep string | sed -E 's/<string>(.*)<\/string>/\1/')
+        APOLLO_VERSION=$(unzip -p Apollo.ipa 'Payload/*.app/Info.plist' | grep -A1 'CFBundleShortVersionString' | grep string | sed -E 's/<string>(.*)<\/string>/\1/' | tr -d '[:space:]')
         echo "APOLLO_VERSION=$APOLLO_VERSION" >> $GITHUB_ENV
     
     - name: Check ImprovedCustomApi Latest Release
@@ -47,7 +47,7 @@ jobs:
       run: |
         # Get latest release info
         RELEASE_INFO=$(curl -s https://api.github.com/repos/JeffreyCA/Apollo-ImprovedCustomApi/releases/latest)
-        ICA_VERSION=$(echo "$RELEASE_INFO" | grep -Po '"tag_name": "\K.*?(?=")')
+        ICA_VERSION=$(echo "$RELEASE_INFO" | grep -Po '"tag_name": "\K.*?(?=")' | sed 's/^v//' | tr -d '[:space:]')
         OLD_ICA_VERSION=$(cat current_version.txt 2>/dev/null || echo "0.0.0")
         RELEASE_NOTES=$(echo "$RELEASE_INFO" | grep -Po '"body": "\K.*?(?=")')
         
@@ -97,7 +97,7 @@ jobs:
       if: steps.check_release.outputs.NEW_RELEASE == 'true'
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: v${{ env.APOLLO_VERSION }}-${{ env.ICA_VERSION }}
+        tag_name: v${{ env.APOLLO_VERSION }}_${{ env.ICA_VERSION }}
         name: Apollo v${{ env.APOLLO_VERSION }} with ImprovedCustomApi v${{ env.ICA_VERSION }}
         body_path: RELEASE_NOTES.md
         files: |
@@ -138,7 +138,7 @@ jobs:
       if: steps.check_release.outputs.NEW_RELEASE == 'true'
       run: |
         REPO_URL="https://github.com/${{ github.repository }}"
-        RELEASES_URL="$REPO_URL/releases/tag/v${{ env.APOLLO_VERSION }}-${{ env.ICA_VERSION }}"
+        RELEASES_URL="$REPO_URL/releases/tag/v${{ env.APOLLO_VERSION }}_${{ env.ICA_VERSION }}"
         echo "### 📦 Artifact Upload" >> $GITHUB_STEP_SUMMARY
         echo "✅ Artifacts uploaded successfully!" >> $GITHUB_STEP_SUMMARY
         echo "🔗 [Download artifacts]($RELEASES_URL)" >> $GITHUB_STEP_SUMMARY
