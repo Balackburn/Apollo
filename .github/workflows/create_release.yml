@@ -117,11 +117,11 @@ jobs:
     - name: Update current version
       if: steps.check_release.outputs.NEW_RELEASE == 'true'
       run: |
-        echo "${{ env.ICA_VERSION }}" > current_version.txt
+        python update_json.py
         git config --global user.name 'GitHub Action'
         git config --global user.email 'action@github.com'
-        git add current_version.txt
-        git commit -m "Update current version to ${{ env.ICA_VERSION }}" || true
+        git add .
+        git commit -m "Update version to ${{ env.ICA_VERSION }}" || true
         git push || true
     
     - name: Job Summary
