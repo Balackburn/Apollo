@@ -1,6 +1,9 @@
+import os
+import sys
 import json
 import re
 import requests
+import urllib.parse
 
 # Fetch all release information from GitHub
 def fetch_all_releases(repo_url):
@@ -33,18 +36,21 @@ def remove_tags(text):
     text = re.sub(r'#{1,6}\s?', '', text)  # Remove markdown header tags
     return text
 
-def get_ipa_url(assets, index):
-    if assets is None:
-        return None
-    if len(assets) <= index:
-        return None
-    return assets[index]['browser_download_url']
+def get_ipa_url(assets, prefix):
+    for asset in assets:
+        download_url = asset['browser_download_url']
+        download_url_parts = urllib.parse.urlparse(download_url)
+        download_url_path = urllib.parse.unquote(download_url_parts.path)
+        download_url_filename = os.path.basename(download_url_path)
+        if download_url_filename.startswith(prefix):
+            return download_url
+    return None
+    
+def update_json_file(json_file, ipa_prefix, fetched_data_all, fetched_data_latest):
+    with open(json_file, "r") as file:
+        data = json.load(file)
 
-def update_json_file_app(data, app_index, fetched_data_all, fetched_data_latest):
-    if len(data["apps"]) <= app_index:
-        data["apps"].append({})
-
-    app = data["apps"][app_index]
+    app = data["apps"][0]
 
     # Ensure 'versions' key exists in app
     if "versions" not in app:
@@ -66,7 +72,7 @@ def update_json_file_app(data, app_index, fetched_data_all, fetched_data_latest)
         description = re.sub(r'-', '•', description)
         description = re.sub(r'`', '"', description)
 
-        downloadURL = get_ipa_url(release["assets"], app_index)
+        downloadURL = get_ipa_url(release["assets"], ipa_prefix)
         size = next((asset["size"] for asset in release["assets"] if asset['browser_download_url'] == downloadURL), None)
 
         version_entry = {
@@ -107,23 +113,14 @@ def update_json_file_app(data, app_index, fetched_data_all, fetched_data_latest)
     description = re.sub(r'`', '"', description)
 
     app["versionDescription"] = description
-    app["downloadURL"] = get_ipa_url(fetched_data_latest["assets"], app_index)
+    app["downloadURL"] = get_ipa_url(fetched_data_latest["assets"], ipa_prefix)
     app["size"] = next((asset["size"] for asset in fetched_data_latest["assets"] if asset['browser_download_url'] == app["downloadURL"]), None)
-
-def update_json_file(json_file, fetched_data_all, fetched_data_latest):
-    with open(json_file, "r") as file:
-        data = json.load(file)
-
-    update_json_file_app(data, 0, fetched_data_all, fetched_data_latest)
-    update_json_file_app(data, 1, fetched_data_all, fetched_data_latest)
 
     # Ensure 'news' key exists in data
     if "news" not in data:
         data["news"] = []
 
     # Add news entry if there's a new release
-    full_version = fetched_data_latest["tag_name"].lstrip('v')
-    tag = fetched_data_latest["tag_name"]
     news_identifier = f"release-{full_version}"
     news_entry = {
         "appID": "com.christianselig.Apollo",
@@ -152,10 +149,16 @@ def update_json_file(json_file, fetched_data_all, fetched_data_latest):
 def main():
     repo_url = "Balackburn/Apollo"
     json_file = "apps.json"
+    ipa_prefix = ""
+
+    if len(sys.argv) > 1:
+        json_file = sys.argv[1]
+    if len(sys.argv) > 2:
+        ipa_prefix = sys.argv[2]
 
     fetched_data_all = fetch_all_releases(repo_url)
     fetched_data_latest = fetch_latest_release(repo_url)
-    update_json_file(json_file, fetched_data_all, fetched_data_latest)
+    update_json_file(json_file, ipa_prefix, fetched_data_all, fetched_data_latest)
 
 if __name__ == "__main__":
     main()

@@ -117,7 +117,8 @@ jobs:
     - name: Update current version
       if: steps.check_release.outputs.NEW_RELEASE == 'true'
       run: |
-        python update_json.py
+        python update_json.py apps.json
+        python update_json.py apps_noext.json NO-EXTENSIONS
         git config --global user.name 'GitHub Action'
         git config --global user.email 'action@github.com'
         git add .
