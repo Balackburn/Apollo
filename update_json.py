@@ -33,16 +33,18 @@ def remove_tags(text):
     text = re.sub(r'#{1,6}\s?', '', text)  # Remove markdown header tags
     return text
 
-def get_ipa_url(assets):
-    for asset in assets:
-            return asset['browser_download_url']
-    return None
-    
-def update_json_file(json_file, fetched_data_all, fetched_data_latest):
-    with open(json_file, "r") as file:
-        data = json.load(file)
+def get_ipa_url(assets, index):
+    if assets is None:
+        return None
+    if len(assets) <= index:
+        return None
+    return assets[index]['browser_download_url']
 
-    app = data["apps"][0]
+def update_json_file_app(data, app_index, fetched_data_all, fetched_data_latest):
+    if len(data["apps"]) <= app_index:
+        data["apps"].append({})
+
+    app = data["apps"][app_index]
 
     # Ensure 'versions' key exists in app
     if "versions" not in app:
@@ -64,7 +66,7 @@ def update_json_file(json_file, fetched_data_all, fetched_data_latest):
         description = re.sub(r'-', '•', description)
         description = re.sub(r'`', '"', description)
 
-        downloadURL = get_ipa_url(release["assets"])
+        downloadURL = get_ipa_url(release["assets"], app_index)
         size = next((asset["size"] for asset in release["assets"] if asset['browser_download_url'] == downloadURL), None)
 
         version_entry = {
@@ -105,14 +107,23 @@ def update_json_file(json_file, fetched_data_all, fetched_data_latest):
     description = re.sub(r'`', '"', description)
 
     app["versionDescription"] = description
-    app["downloadURL"] = get_ipa_url(fetched_data_latest["assets"])
+    app["downloadURL"] = get_ipa_url(fetched_data_latest["assets"], app_index)
     app["size"] = next((asset["size"] for asset in fetched_data_latest["assets"] if asset['browser_download_url'] == app["downloadURL"]), None)
+
+def update_json_file(json_file, fetched_data_all, fetched_data_latest):
+    with open(json_file, "r") as file:
+        data = json.load(file)
+
+    update_json_file_app(data, 0, fetched_data_all, fetched_data_latest)
+    update_json_file_app(data, 1, fetched_data_all, fetched_data_latest)
 
     # Ensure 'news' key exists in data
     if "news" not in data:
         data["news"] = []
 
     # Add news entry if there's a new release
+    full_version = fetched_data_latest["tag_name"].lstrip('v')
+    tag = fetched_data_latest["tag_name"]
     news_identifier = f"release-{full_version}"
     news_entry = {
         "appID": "com.christianselig.Apollo",

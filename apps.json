@@ -110,6 +110,95 @@
           }
         ]
       }
+    },
+    {
+      "beta": false,
+      "name": "Apollo for Reddit (NO EXTENSIONS)",
+      "bundleIdentifier": "com.christianselig.Apollo",
+      "developerName": "Christian Selig (& JeffreyCA)",
+      "subtitle": " The award-winning Reddit app",
+      "version": "1.15.11",
+      "versionDate": "2025-01-04T08:01:48Z",
+      "versionDescription": "Apollo for Reddit (with ImprovedCustomApi) Release Information\r\nApollo .IPA Version: \"1.15.11\"\r\nImprovedCustomApi .DEB Version: \"1.2.1\"\r\n\r\nRELEASE \"1.15.11\"\u2022\"1.2.1\": (2025/01/04)\r\n\u2022 Updated ImprovedCustomApi from \"[1.1.8](https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_1.1.8)\" to \"1.2.1\"\r\n  \u2022 \u2022 Custom random and trending subreddits \u2022 you can now specify an external URL to use as the source for random and trending subreddits (in Settings > General > Custom API)\\r\\n    \u2022 Sources should be a plaintext file with one subreddit name per line, without the  prefix (see examples below)\\r\\n    \u2022 Default trending source (data from [gummysearch.com](https://gummysearch.com/tools/top\u2022subreddits/)): https://jeffreyca.github.io/subreddits/trending\u2022gummy\u2022daily.txt\\r\\n    \u2022 Default /r/random source: https://jeffreyca.github.io/subreddits/popular.txt\\r\\n    \u2022 New setting to customize how many trending subreddits to show (requires app restart)\\r\\n    \u2022 New setting to show a dedicated RandNSFW button (requires app restart)\\r\\n\u2022 Minor UI updates to the settings view\\r\\n\u2022 URL optimizations (52) \u2022 thanks @ryannair05!\r\n\r\nKnown issues\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n\u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser\r\n",
+      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.2.1/NO-EXTENSIONS_Apollo-1.15.11_improvedcustomapi-1.2.1.ipa",
+      "localizedDescription": "Apollo is an app for Reddit built for customizability, smoothness, gestures, and taking advantage of everything iOS has to offer. Apollo is a beautiful Reddit app built for fast navigation with an incredibly powerful set of features. Thanks to features like the Jump Bar, fully customizable gestures, and a super-charged Media Viewer, browsing Reddit has never been this amazing. It's created specifically with iOS design guidelines in mind, so it fits right at home on your device, and with input from thousands of Redditors helping sculpt and perfect it over several years before launching:\n\n\u2022 Jump Bar, for super-fast hopping between subreddits\n\u2022 Super-charged Media Viewer for an amazing experience viewing images, GIFs, videos, albums, and more from a variety of sources.\n\u2022 Tabbed interface for easy navigating\n\u2022 Incredibly powerful Markdown composer for writing comments and posts\n\u2022 Full inline Imgur uploading, both images and albums\n\u2022 Large or compact posts depending on your preference\n\u2022 Dark mode (can be automatic)\n\u2022 Fully customizable gestures\n\u2022 Safari View Controller for browsing articles and links\n\u2022 Inline previews of media in comments\n\u2022 3D Touch support\n\u2022 Beautifully organized Inbox\n\u2022 Filtering and blocking\n\u2022 Face ID / Touch ID / Passcode lock\n\u2022 Moderator features\n\u2022 Tons of settings to tweak\n\u2022 GIF scrubbing to go backward and forward in time\n\u2022 Multiple accounts\n\u2022 Powerful search\n\u2022 Full Markdown rendering\n\u2022 Unobtrusive Volume Indicator\n\nAs well as much, much more and it's constantly evolving. If you have anything you'd specifically like to see, come to the ApolloApp subreddit and we'd love to hear it! Apollo is an unofficial app, and side effects may include an incredible browsing experience.",
+      "iconURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_0.webp",
+      "tintColor": "4453f4",
+      "category": "social",
+      "size": 71305887,
+      "screenshotURLs": [
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_1.webp",
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_2.webp",
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_3.webp",
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_4.webp",
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_5.webp",
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_6.webp",
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_7.webp",
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_8.webp"
+      ],
+      "versions": [
+        {
+          "version": "1.15.11",
+          "date": "2025-01-04T08:01:48Z",
+          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"\r\nImprovedCustomApi .DEB Version: \"1.2.1\"\r\n\r\nRELEASE \"1.15.11\"\u2022\"1.2.1\": (2025/01/04)\r\n\u2022 Updated ImprovedCustomApi from \"[1.1.8](https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_1.1.8)\" to \"1.2.1\"\r\n  \u2022 \u2022 Custom random and trending subreddits \u2022 you can now specify an external URL to use as the source for random and trending subreddits (in Settings > General > Custom API)\\r\\n    \u2022 Sources should be a plaintext file with one subreddit name per line, without the  prefix (see examples below)\\r\\n    \u2022 Default trending source (data from [gummysearch.com](https://gummysearch.com/tools/top\u2022subreddits/)): https://jeffreyca.github.io/subreddits/trending\u2022gummy\u2022daily.txt\\r\\n    \u2022 Default /r/random source: https://jeffreyca.github.io/subreddits/popular.txt\\r\\n    \u2022 New setting to customize how many trending subreddits to show (requires app restart)\\r\\n    \u2022 New setting to show a dedicated RandNSFW button (requires app restart)\\r\\n\u2022 Minor UI updates to the settings view\\r\\n\u2022 URL optimizations (52) \u2022 thanks @ryannair05!\r\n\r\nKnown issues\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n\u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
+          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.2.1/NO-EXTENSIONS_Apollo-1.15.11_improvedcustomapi-1.2.1.ipa",
+          "size": 71305887
+        }
+      ],
+      "appPermissions": {
+        "entitlements": [
+          {
+            "name": "com.apple.security.application-groups"
+          },
+          {
+            "name": "com.apple.developer.associated-domains"
+          },
+          {
+            "name": "com.apple.developer.group-session"
+          },
+          {
+            "name": "com.apple.developer.icloud-container-identifiers"
+          },
+          {
+            "name": "com.apple.developer.ubiquity-kvstore-identifier"
+          },
+          {
+            "name": "keychain-access-groups"
+          },
+          {
+            "name": "aps-environment"
+          },
+          {
+            "name": "com.apple.developer.weatherkit"
+          }
+        ],
+        "privacy": [
+          {
+            "name": "Camera",
+            "usageDescription": "App needs camera access."
+          },
+          {
+            "name": "FaceID",
+            "usageDescription": "App uses Face ID."
+          },
+          {
+            "name": "LocationWhenInUse",
+            "usageDescription": "App needs location when in use."
+          },
+          {
+            "name": "Motion",
+            "usageDescription": "App uses motion sensors."
+          },
+          {
+            "name": "PhotoLibraryAdd",
+            "usageDescription": "App adds photos."
+          },
+          {
+            "name": "PhotoLibrary",
+            "usageDescription": "App accesses photo library."
+          }
+        ]
+      }
     }
   ],
   "news": [
