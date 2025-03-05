@@ -38,8 +38,8 @@
           "version": "1.15.11",
           "date": "2025-01-04T08:01:48Z",
           "localizedDescription": "Apollo .IPA Version: \"1.15.11\"\r\nImprovedCustomApi .DEB Version: \"1.2.1\"\r\n\r\n**RELEASE \"1.15.11\"\u2022\"1.2.1\":** (2025/01/04)\r\n\u2022 Updated ImprovedCustomApi from \"[1.1.8](https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_1.1.8)\" to \"1.2.1\"\r\n  \u2022 \u2022 Custom random and trending subreddits \u2022 you can now specify an external URL to use as the source for random and trending subreddits (in Settings > General > Custom API)\\r\\n    \u2022 Sources should be a plaintext file with one subreddit name per line, without the  prefix (see examples below)\\r\\n    \u2022 Default trending source (data from [gummysearch.com](https://gummysearch.com/tools/top\u2022subreddits/)): https://jeffreyca.github.io/subreddits/trending\u2022gummy\u2022daily.txt\\r\\n    \u2022 Default /r/random source: https://jeffreyca.github.io/subreddits/popular.txt\\r\\n    \u2022 New setting to customize how many trending subreddits to show (requires app restart)\\r\\n    \u2022 New setting to show a dedicated RandNSFW button (requires app restart)\\r\\n\u2022 Minor UI updates to the settings view\\r\\n\u2022 URL optimizations (52) \u2022 thanks @ryannair05!\r\n\r\nKnown issues\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n\u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.2.1/Apollo-1.15.11_improvedcustomapi-1.2.1.ipa",
-          "size": 108107473
+          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.2.1/NO-EXTENSIONS_Apollo-1.15.11_improvedcustomapi-1.2.1.ipa",
+          "size": 71305887
         }
       ],
       "appPermissions": {
