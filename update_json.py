@@ -64,7 +64,9 @@ def update_json_file(json_file, fetched_data_all, fetched_data_latest, prefix):
 
     for release in fetched_data_all:
         full_version = release["tag_name"].lstrip("v")
-        version = re.search(r"(\d+\.\d+\.\d+)", full_version).group(1)
+        # Keep the whole string but extract version for comparison
+        version_for_comparison = re.search(r"(\d+\.\d+\.\d+)(?:_(\d+\.\d+\.\d+))?", full_version)
+        version = version_for_comparison.group(2) if version_for_comparison.group(2) else version_for_comparison.group(1)
         version_date = release["published_at"]
         fetched_versions.append(version)
 
@@ -92,10 +94,12 @@ def update_json_file(json_file, fetched_data_all, fetched_data_latest, prefix):
 
     latest_version = fetched_data_latest["tag_name"].lstrip("v")
     tag = fetched_data_latest["tag_name"]
-    version_match = re.search(r"_(\d+\.\d+\.\d+)", latest_version)
+    version_match = re.search(r"(\d+\.\d+\.\d+)(?:_(\d+\.\d+\.\d+))?", latest_version)
 
     if version_match:
-        _, _, patch = map(int, version_match.group(1).split('.'))
+        if "_" in full_version and len(version_match.groups()) >= 2:
+            # Use the components from the part after the underscore
+            _, _, patch = map(int, version_match.group(2).split("."))
     else:
         raise ValueError("Invalid version format")
     
