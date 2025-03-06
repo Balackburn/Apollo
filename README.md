@@ -16,21 +16,21 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
 
 ## Standard Source
 
-<a href="https://intradeus.github.io/http-protocol-redirector?r=altstore://source?url=https://raw.githubusercontent.com/tanakrit-d/Apollo/refs/heads/main/apps.json"><img src="images/buttons/altstore_button.png" width="200"></a>
+<a href="https://intradeus.github.io/http-protocol-redirector?r=altstore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps.json"><img src="images/buttons/altstore_button.png" width="200"></a>
 &nbsp;
-<a href="https://intradeus.github.io/http-protocol-redirector?r=feather://source/https://raw.githubusercontent.com/tanakrit-d/Apollo/refs/heads/main/apps.json"><img src="images/buttons/feather_button.png" width="200"></a>
+<a href="https://intradeus.github.io/http-protocol-redirector?r=feather://source/https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps.json"><img src="images/buttons/feather_button.png" width="200"></a>
 &nbsp;
-<a href="https://intradeus.github.io/http-protocol-redirector?r=sidestore://source?url=https://raw.githubusercontent.com/tanakrit-d/Apollo/refs/heads/main/apps.json"><img src="images/buttons/sidestore_button.png" width="200"></a>
+<a href="https://intradeus.github.io/http-protocol-redirector?r=sidestore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps.json"><img src="images/buttons/sidestore_button.png" width="200"></a>
 &nbsp;
-<a href="https://raw.githubusercontent.com/tanakrit-d/Apollo/refs/heads/main/apps.json"><img src="images/buttons/url_button.png" width="200"></a>
+<a href="https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps.json"><img src="images/buttons/url_button.png" width="200"></a>
 
 ## No Extensions (Avoid AppID Limit) Source
 
-<a href="https://intradeus.github.io/http-protocol-redirector?r=altstore://source?url=https://raw.githubusercontent.com/tanakrit-d/Apollo/refs/heads/main/apps_noext.json"><img src="images/buttons/altstore_button.png" width="200"></a>
+<a href="https://intradeus.github.io/http-protocol-redirector?r=altstore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext.json"><img src="images/buttons/altstore_button.png" width="200"></a>
 &nbsp;
-<a href="https://intradeus.github.io/http-protocol-redirector?r=sidestore://source?url=https://raw.githubusercontent.com/tanakrit-d/Apollo/refs/heads/main/apps_noext.json"><img src="images/buttons/sidestore_button.png" width="200"></a>
+<a href="https://intradeus.github.io/http-protocol-redirector?r=sidestore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext.json"><img src="images/buttons/sidestore_button.png" width="200"></a>
 &nbsp;
-<a href="https://raw.githubusercontent.com/tanakrit-d/Apollo/refs/heads/main/apps_noext.json"><img src="images/buttons/url_button.png" width="200"></a>
+<a href="https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext.json"><img src="images/buttons/url_button.png" width="200"></a>
 
 ## Website
 
