@@ -108,27 +108,29 @@ def parse_version(version_string: str) -> Tuple[str, str]:
     """
     Parse version string to extract main version and secondary version if present.
     Support for both underscore and hyphen separators.
-    
+
     Args:
         version_string: Version string with optional underscore or hyphen component
-        
+
     Returns:
         Tuple of (app_version, tweak_version)
     """
     # Support both underscore and hyphen as separators
     # This captures prior releases which used a different formatting approach
-    version_match = re.search(r"(\d+\.\d+(?:\.\d+)?)(?:[_-](\d+\.\d+\.\d+[a-z]?))?", version_string)
-    
+    version_match = re.search(
+        r"(\d+\.\d+(?:\.\d+)?)(?:[_-](\d+\.\d+\.\d+[a-z]?))?", version_string
+    )
+
     if not version_match:
         raise ValueError(f"Invalid version format: {version_string}")
-        
+
     app_version = version_match.group(1)
     tweak_version = version_match.group(2)
 
     # Catches edge cases where only major and minor version are present in the tag
-    if tweak_version and tweak_version.count('.') == 1:  # If only major and minor exist
+    if tweak_version and tweak_version.count(".") == 1:  # If only major and minor exist
         tweak_version += ".0"
-    
+
     return app_version, tweak_version
 
 
@@ -183,17 +185,17 @@ def update_json_file(
     if "versions" not in app:
         app["versions"] = []
 
-    fetched_versions = []
+    # Dictionary to track newest release for each version
+    version_dates = {}  # version -> (published_at, entry_data)
 
     # Process all releases
     for release in fetched_data_all:
         full_version = release["tag_name"].lstrip("v")
-        
+
         # Parse the version for comparison
         app_version, tweak_version = parse_version(full_version)
-        version = tweak_version
+        version = app_version
         version_date = release["published_at"]
-        fetched_versions.append(version)
 
         # Extract and format description
         description = release.get("body", "")
@@ -215,12 +217,26 @@ def update_json_file(
             "size": size,
         }
 
-        # Remove any existing entry with the same version
-        app["versions"] = [v for v in app["versions"] if v.get("version") != version]
-
-        # Add new entry if download URL is available
+        # Only process entries that have a download URL
         if download_url:
-            app["versions"].insert(0, version_entry)
+            # Check if we already have this version in our tracking dictionary
+            if version not in version_dates or version_date > version_dates[version][0]:
+                # This is either a new version or a newer release of the same version
+                version_dates[version] = (version_date, version_entry)
+
+    # Remove all existing entries for versions that we're updating
+    app["versions"] = [
+        v for v in app["versions"] if v.get("version") not in version_dates
+    ]
+
+    # Add all the newest version entries
+    for version_date, entry in version_dates.values():
+        app["versions"].insert(0, entry)
+
+    # Sort versions by date (newest first)
+    app["versions"] = sorted(
+        app["versions"], key=lambda x: x.get("date", ""), reverse=True
+    )
 
     # Process latest release
     latest_version = fetched_data_latest["tag_name"].lstrip("v")
@@ -228,13 +244,13 @@ def update_json_file(
 
     try:
         app_version, tweak_version = parse_version(latest_version)
-        version = tweak_version if tweak_version else app_version
+        version = tweak_version
         patch_number = get_patch_number(latest_version)
     except ValueError as e:
         raise ValueError(f"Error parsing latest version: {str(e)}")
 
     # Update app metadata
-    app["version"] = version
+    app["version"] = app_version
     app["versionDate"] = fetched_data_latest["published_at"]
     app["versionDescription"] = format_description(fetched_data_latest.get("body", ""))
 
@@ -306,9 +322,7 @@ def main() -> None:
         fetched_data_all = fetch_all_releases()
         fetched_data_latest = fetch_latest_release()
 
-        update_json_file(
-            JSON_FILE, fetched_data_all, fetched_data_latest, None
-        )
+        update_json_file(JSON_FILE, fetched_data_all, fetched_data_latest, None)
         update_json_file(
             JSON_NOEXT, fetched_data_all, fetched_data_latest, "NO-EXTENSIONS"
         )

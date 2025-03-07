@@ -14,7 +14,7 @@
       "bundleIdentifier": "com.christianselig.Apollo",
       "developerName": "Christian Selig (& JeffreyCA)",
       "subtitle": "The award-winning Reddit app",
-      "version": "1.2.2",
+      "version": "1.15.11",
       "versionDate": "2025-03-06T08:33:31Z",
       "versionDescription": "Apollo version: \"1.15.11\"\nImprovedCustomApi version: \"1.2.2\"\n\nRelease Notes\n\u2022 Fix video downloads failing on certain v.redd.it videos (25, 55)\r\n\r\nNote that the \".deb\" file is significantly larger due to some new external dependencies needed to fix the issue (FFmpegKit).\nKnown Issues\n\u2022 Apollo Ultra features may cause app to crash\n\u2022 Imgur multi\u2022image upload\n\u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser\n",
       "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.2.2/Apollo-1.15.11_ImprovedCustomApi-1.2.2.ipa",
@@ -35,130 +35,11 @@
       ],
       "versions": [
         {
-          "version": "1.2.2",
+          "version": "1.15.11",
           "date": "2025-03-06T08:33:31Z",
           "localizedDescription": "Apollo version: \"1.15.11\"\nImprovedCustomApi version: \"1.2.2\"\n\nRelease Notes\n\u2022 Fix video downloads failing on certain v.redd.it videos (25, 55)\r\n\r\nNote that the \".deb\" file is significantly larger due to some new external dependencies needed to fix the issue (FFmpegKit).\nKnown Issues\n\u2022 Apollo Ultra features may cause app to crash\n\u2022 Imgur multi\u2022image upload\n\u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser\n",
           "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.2.2/Apollo-1.15.11_ImprovedCustomApi-1.2.2.ipa",
           "size": 114650898
-        },
-        {
-          "version": "1.2.1",
-          "date": "2025-01-04T08:01:48Z",
-          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"\r\nImprovedCustomApi .DEB Version: \"1.2.1\"\r\n\r\n**RELEASE \"1.15.11\"\u2022\"1.2.1\":** (2025/01/04)\r\n\u2022 Updated ImprovedCustomApi from \"[1.1.8](https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_1.1.8)\" to \"1.2.1\"\r\n  \u2022 \u2022 Custom random and trending subreddits \u2022 you can now specify an external URL to use as the source for random and trending subreddits (in Settings > General > Custom API)\\r\\n    \u2022 Sources should be a plaintext file with one subreddit name per line, without the  prefix (see examples below)\\r\\n    \u2022 Default trending source (data from [gummysearch.com](https://gummysearch.com/tools/top\u2022subreddits/)): https://jeffreyca.github.io/subreddits/trending\u2022gummy\u2022daily.txt\\r\\n    \u2022 Default /r/random source: https://jeffreyca.github.io/subreddits/popular.txt\\r\\n    \u2022 New setting to customize how many trending subreddits to show (requires app restart)\\r\\n    \u2022 New setting to show a dedicated RandNSFW button (requires app restart)\\r\\n\u2022 Minor UI updates to the settings view\\r\\n\u2022 URL optimizations (52) \u2022 thanks @ryannair05!\r\n\r\nKnown issues\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n\u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.2.1/Apollo-1.15.11_improvedcustomapi-1.2.1.ipa",
-          "size": 108107473
-        },
-        {
-          "version": "1.1.8",
-          "date": "2024-12-08T12:18:12Z",
-          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"\nImprovedCustomApi .DEB Version: \"1.1.8\"\n\n**RELEASE \"1.15.11\"\u2022\"1.1.8\":** (2024/12/08)\n\u2022 Updated ImprovedCustomApi from \"1.1.7b\" to \"1.1.8\"\n  \u2022 \u2022 Fix RedGIFs links loading without sound (48) \u2022 thank you @iCrazeiOS!\\r\\n\n\nKnown issues\n\u2022 Apollo Ultra features may cause app to crash\n\u2022 Imgur multi\u2022image upload\n\u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.1.8/Apollo-1.15.11_improvedcustomapi-1.1.8.ipa",
-          "size": 108103275
-        },
-        {
-          "version": "1.1.7b",
-          "date": "2024-11-02T05:56:30Z",
-          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"\r\nImprovedCustomApi .DEB Version: \"1.1.7b\"\r\n\r\n**RELEASE \"1.15.11\"\u2022\"1.1.7b\":** (2024/11/02)\r\n\u2022 Updated ImprovedCustomApi from \"1.1.7\" to \"1.1.7b\"\r\n  \u2022  Add rootless package support to Theos build workflow (https://github.com/JeffreyCA/Apollo\u2022ImprovedCustomApi/pull/46) \u2022 thanks @darkxdd\\r\\n\\r\\n(There are no functionality changes in this release)\r\n\r\nKnown issues\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n\u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.1.7b/Apollo-1.15.11_improvedcustomapi-1.1.7b.ipa",
-          "size": 108102952
-        },
-        {
-          "version": "1.1.7",
-          "date": "2024-10-20T01:10:52Z",
-          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"\nImprovedCustomApi .DEB Version: \"1.1.7\"\n\n**RELEASE \"1.15.11\"\u2022\"1.1.7\":** (2024/10/20)\n\u2022 Updated ImprovedCustomApi from \"1.1.6\" to \"1.1.7\"\n  \u2022 Improve parsing  and  links\r\nKnown issues\n\u2022 Apollo Ultra features may cause app to crash\n\u2022 Imgur multi\u2022image upload\n\u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.1.7/Apollo-1.15.11_improvedcustomapi-1.1.7.ipa",
-          "size": 108281478
-        },
-        {
-          "version": "1.1.6",
-          "date": "2024-10-06T01:09:56Z",
-          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"\nImprovedCustomApi .DEB Version: \"1.1.6\"\n\n**RELEASE \"1.15.11\"\u2022\"1.1.6\":** (2024/10/06)\n\u2022 Updated ImprovedCustomApi from \"1.1.5b\" to \"1.1.6\"\n  \u2022 \u2022 Fix issue with share URLs not working after device locks\r\n\u2022 Remove unused code for handling Imgur links\nKnown issues\n\u2022 Apollo Ultra features may cause app to crash\n\u2022 Imgur multi\u2022image upload\n\u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.1.6/Apollo-1.15.11_improvedcustomapi-1.1.6.ipa",
-          "size": 108282728
-        },
-        {
-          "version": "1.1.5b",
-          "date": "2024-09-20T00:28:59Z",
-          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"\nImprovedCustomApi .DEB Version: \"1.1.5b\"\n\n**RELEASE \"1.15.11\"\u2022\"1.1.5b\":** (2024/09/20)\n\u2022 Updated ImprovedCustomApi from \"1.1.4\" to \"1.1.5b\"\n  \u2022 \u2022 Fix rare crashing issue\r\n\u2022 Include tweak version in Custom API settings view\nKnown issues\n\u2022 Apollo Ultra features may cause app to crash\n\u2022 Imgur multi\u2022image upload\n\u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.1.5b/Apollo-1.15.11_improvedcustomapi-1.1.5b.ipa",
-          "size": 108282519
-        },
-        {
-          "version": "1.1.4",
-          "date": "2024-08-30T01:00:59Z",
-          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"\nImprovedCustomApi .DEB Version: \"1.1.4\"\n\n**RELEASE \"1.15.11\"\u2022\"1.1.4\":** (2024/09/18)\n\u2022 Updated ImprovedCustomApi from \"1.1.3\" to \"1.1.4\"\n  \u2022 \u2022 Improve share URL and Imgur link parsing (specifically URLs formatted like: )\r\n\u2022 Fix crashing issue when loading content\nKnown issues\n\u2022 Apollo Ultra features may cause app to crash\n\u2022 Imgur multi\u2022image upload\n\u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.1.4/Apollo-1.15.11_improvedcustomapi-1.1.4.ipa",
-          "size": 108282530
-        },
-        {
-          "version": "1.1.3",
-          "date": "2024-08-24T12:10:24Z",
-          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"\nImprovedCustomApi .DEB Version: \"1.1.3\"\n\n**RELEASE \"1.15.11\"\u2022\"1.1.3\":** (2024/08/24)\n\u2022 Updated ImprovedCustomApi from \"1.1.2\" to \"1.1.3\"\n  \u2022 Fix issue with some newer Imgur images and albums not loading properly (35)\r\nKnown issues\n\u2022 Apollo Ultra features may cause app to crash\n\u2022 Imgur multi\u2022image upload\n\u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.1.3/Apollo-1.15.11_improvedcustomapi-1.1.3.ipa",
-          "size": 108281984
-        },
-        {
-          "version": "1.1.2",
-          "date": "2024-08-02T07:24:21Z",
-          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"\nImprovedCustomApi .DEB Version: \"1.1.2\"\n\n**RELEASE \"1.15.11\"\u2022\"1.1.2\":** (2024/08/03)\n\u2022 Updated ImprovedCustomApi from \"1.1.1\" to \"1.1.2\"\n  \u2022 Update user agent to fix multireddit search (33) \u2022 thanks @paradoxally and @blvdmd!\r\n\r\n[Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36](https://useragents.io/uas/mozilla\u20225\u20220\u2022macintosh\u2022intel\u2022mac\u2022os\u2022x\u202210\u202215\u20227\u2022applewebkit\u2022537\u202236\u2022khtml\u2022like\u2022gecko\u2022chrome\u202291\u20220\u20224472\u2022114\u2022safari\u2022537\u202236\u2022gzipgfe_2497d28276f9d0c8d383700f3c2f7c9e)\nKnown issues\n\u2022 Apollo Ultra features may cause app to crash\n\u2022 Imgur multi\u2022image upload\n\u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.1.2/Apollo-1.15.11_improvedcustomapi-1.1.2.ipa",
-          "size": 108281925
-        },
-        {
-          "version": "1.1.1",
-          "date": "2024-07-31T19:21:54Z",
-          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"  \r\nImprovedCustomApi .DEB Version: \"1.1.1\" \r\n\r\n**RELEASE 1.15.11\u20221.1.1:** (2024\u202207\u202231)\r\n\u2022 Working hybrid implementation of the \"New Comments Highlighter\" Ultra feature \u2022 it's a custom implementation so it may not behave exactly like the original. Enable the feature in Settings \u2022> General \u2022> Custom API, not Settings \u2022> General as it crashes the app.\r\n\u2022 Add [FLEX integration](https://github.com/FLEXTool/FLEX) for debugging purposes. Use at your own risk! Requires app restart after enabling in Settings \u2022> General \u2022> Custom API.\r\n        Note: the .deb package is larger in size as a result\r\n\r\n**Known issues**\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n  \u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.1.1/Apollo-1.15.11_improvedcustomapi-1.1.1.ipa",
-          "size": 108681149
-        },
-        {
-          "version": "1.0.12",
-          "date": "2024-07-26T18:49:20Z",
-          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"  \r\nImprovedCustomApi .DEB Version: \"1.0.12\" \r\n\r\n**RELEASE 1.15.11\u20221.0.11:** (2024\u202207\u202226)\r\n\u2022 Updated ImprovedCustomApi from \"1.0.11\" to \"1.0.12\" \r\n    \u2022 Use a more generic user agent independent of bundle ID for requests to Reddit\r\n\r\n[Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1](https://useragents.io/explore/platforms/ios/maker/apple\u2022inc\u2022b93/uas/mozilla\u20225\u20220\u2022iphone\u2022cpu\u2022iphone\u2022os\u202217\u20225\u20221\u2022like\u2022mac\u2022os\u2022x\u2022applewebkit\u2022605\u20221\u202215\u2022khtml\u2022like\u2022gecko\u2022version\u202217\u20225\u2022mobile\u202215e148\u2022safari\u2022604\u20221_2f39fc840d9054105730c511db1920b7)\r\n\r\n**Known issues**\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n  \u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.0.12/Apollo-1.15.11_improvedcustomapi-1.0.12.ipa",
-          "size": 108152923
-        },
-        {
-          "version": "1.0.11",
-          "date": "2024-02-28T12:33:18Z",
-          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"  \r\nImprovedCustomApi .DEB Version: \"1.0.11\" \r\n\r\n**RELEASE 1.15.11\u20221.0.11:** (2024\u202202\u202228)\r\n\u2022 Updated ImprovedCustomApi from \"1.0.10\" to \"1.0.11\" \r\n    \u2022 Fix issue with Imgur uploads consistently failing. Note that multi\u2022image uploads may still fail on the first attempt.\r\n\r\n**Known issues**\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n  \u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.0.11/Apollo-1.15.11_improvedcustomapi-1.0.11.ipa",
-          "size": 108157689
-        },
-        {
-          "version": "1.0.10",
-          "date": "2024-01-23T12:32:35Z",
-          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"  \r\nImprovedCustomApi .DEB Version: \"1.0.10\" \r\n\r\n**RELEASE 1.15.11\u20221.0.9:** (2024\u202201\u202223)\r\n\u2022 Updated ImprovedCustomApi from \"1.0.9\" to \"1.0.10\" \r\n   \u2022 Add support for /u/ share links (e.g. \"reddit.com/u/username/s/xxxxxx\")\r\n\r\n**Known issues**\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n  \u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.0.10/Apollo-1.15.11_improvedcustomapi-1.0.10.ipa",
-          "size": 108157865
-        },
-        {
-          "version": "1.0.9",
-          "date": "2023-12-30T08:52:04Z",
-          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"  \r\nImprovedCustomApi .DEB Version: \"1.0.9\" \r\n\r\n**RELEASE 1.15.11\u20221.0.9:** (2023\u202212\u202230)\r\n\u2022 Updated ImprovedCustomApi from \"1.0.8\" to \"1.0.9\" \r\n   \u2022 Randomize \"trending subreddits\" list so it doesn't show iOS, Clock, Time, IfYouDontMind all the time \u2022 thanks @iCrazeiOS!\r\n      \u2022 Context: There isn't an official Reddit API to get the currently trending subreddits. Apollo has a hardcoded mapping of dates to trending subreddits in this file called trending\u2022subreddits.plist that is bundled inside the .ipa. The last date entry is 2023\u20229\u20229, which is why Apollo has been falling back to the default iOS, Clock, Time, IfYouDontMind subreddits lately.\r\n\r\n**Known issues**\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n  \u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.0.9/Apollo-1.15.11_improvedcustomapi-1.0.9.ipa",
-          "size": 108157858
-        },
-        {
-          "version": "1.0.8",
-          "date": "2023-12-16T15:09:37Z",
-          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"  \r\nImprovedCustomApi .DEB Version: \"1.0.8\" \r\n\r\n**RELEASE 1.15.11\u20221.0.8:** (2023\u202212\u202216)\r\n\u2022 Updated ImprovedCustomApi from \"1.0.7\" to \"1.0.8\" \r\n   \u2022 Lower minimum iOS version requirement to 14.0\r\n   \u2022 Toggleable settings for blocking announcements and some Ultra settings (not fully working, see https://github.com/JeffreyCA/Apollo\u2022ImprovedCustomApi/issues/1). These are the same as the previous experimental builds.\r\n        \u2022 All toggles are located in Settings \u2022> General \u2022> Custom API\r\n        \u2022 New Comments Highlightifier shows new comment count badge, but doesn't highlight comments inside a thread\r\n        \u2022 Subreddit Weather and Time widget doesn't seem to work (not showing or loads infinitely)\r\n \r\n**Known issues**\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n  \u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.0.8/Apollo-1.15.11_improvedcustomapi-1.0.8.ipa",
-          "size": 108157000
-        },
-        {
-          "version": "1.0.7",
-          "date": "2023-12-08T12:08:07Z",
-          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"  \r\nImprovedCustomApi .DEB Version: \"1.0.7\" \r\n\r\n**RELEASE 1.15.11\u20221.0.7:** (2023\u202212\u202208)\r\n\u2022 Updated ImprovedCustomApi from \"1.0.5\" to \"1.0.7\" \r\n   \u2022 Add support for resolving Reddit media share links (https://www.reddit.com/media?url=https%3A%2F%2Fi.redd.it%2F) (https://github.com/JeffreyCA/Apollo\u2022ImprovedCustomApi/pull/9) \u2022 thanks @mmshivesh!\r\n   \u2022 Add toggleable settings for blocking announcements and some Ultra settings (not working)\r\n   \u2022 Lower minimum iOS version requirement\r\n \r\n**Known issues**\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n  \u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.0.7/Apollo-1.15.11_improvedcustomapi-1.0.7.ipa",
-          "size": 108156033
-        },
-        {
-          "version": "1.0.5",
-          "date": "2023-12-04T10:09:25Z",
-          "localizedDescription": "Apollo .IPA Version: \"1.15.11\"  \r\nImprovedCustomApi .DEB Version: \"1.0.5\" \r\n\r\n**RELEASE 1.15.11\u20221.0.5:** (2023\u202212\u202204)\r\n\u2022 Initial release with ImprovedCustomApi \"1.0.5\" instead of Artemis\r\n   \u2022 Fix crash when tapping on spoiler tag\r\n \r\n**Features**\r\n\u2022 Use Apollo for Reddit with your own Reddit and Imgur API keys\r\n\u2022 Working Imgur integration (view, delete, and upload single images and multi\u2022image albums)\r\n\u2022 Handle x.com links as Twitter links so that they can be opened in the Twitter app\r\n\u2022 Suppress unwanted messages on app startup (wallpaper popup, in\u2022app announcements, etc)\r\n\u2022 Support new share link format (reddit.com/r/subreddit/s/xxxxxx) so they open like any other post and not in a browser\r\n\r\n**Known issues**\r\n\u2022 Apollo Ultra features may cause app to crash\r\n\u2022 Imgur multi\u2022image upload\r\n\u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\r\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11-1.0.5/Apollo-1.15.15_improvedcustomapi-1.0.5.ipa",
-          "size": 108155800
         }
       ],
       "appPermissions": {
