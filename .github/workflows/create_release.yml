@@ -1,8 +1,7 @@
-name: Check and Build Apollo .ipa with ImprovedCustomApi
+name: build release
 
 on:
-  schedule:
-    - cron: "0 0 * * *" # Runs every day
+  workflow_call:
   workflow_dispatch:
     inputs:
       apollo_ipa_url:
@@ -15,10 +14,11 @@ on:
         default: false
 
 env:
-  PYTHON_VERSION: '3.12'
-  APOLLO_DEB_URL: ${{ github.event.inputs.apollo_deb_url || 'https://files.catbox.moe/o2lue0.ipa' }}
+  PYTHON_VERSION: '3.13'
+  APOLLO_IPA_URL: ${{ inputs.apollo_ipa_url || 'https://files.catbox.moe/o2lue0.ipa' }}
   CATBOX_UPLOAD: ${{ inputs.catbox_upload == 'false' }}
   GITHUB_API_URL: "https://api.github.com/repos/JeffreyCA/Apollo-ImprovedCustomApi/releases/latest"
+  PYZULE_RW_URL: "https://github.com/asdfzxcvbn/pyzule-rw/archive/main.zip"
 
 jobs:
   build-apollo-ipa:
@@ -30,124 +30,137 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "${{ env.PYTHON_VERSION}}"
+
+      - name: Install python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+          pip install --force-reinstall "${{ env.PYZULE_RW_URL }}"
+
       - name: Fetch latest release information
-        id: get_release
+        id: get-release
         run: |
           RESPONSE=$(curl -s "${{ env.GITHUB_API_URL }}")
-          RELEASE_TAG=$(echo "$RESPONSE" | jq -r '.tag_name')
-          
-          # Extract the correct `.deb` file (rootless arm64 version)
-          DEB_URL=$(echo "$RESPONSE" | jq -r '.assets[] | select(.name | test("iphoneos-arm64_rootless.deb$")) | .browser_download_url')
+          if [ -z "$RESPONSE" ]; then
+            echo "Error: Failed to fetch release data!"
+            exit 1
+          fi
+
+          RELEASE_TAG=$(jq -r '.tag_name' <<< "$RESPONSE")
+          RELEASE_NOTES=$(jq -r '.body' <<< "$RESPONSE")
+
+          DEB_URL=$(jq -r '.assets[] | select(.name | test("iphoneos-arm64_rootless.deb$")) | .browser_download_url' <<< "$RESPONSE")
 
           if [ -z "$DEB_URL" ] || [ "$DEB_URL" == "null" ]; then
             echo "Error: No matching .deb file found!"
             exit 1
           fi
 
-          # Check if this is a new release
-          PREV_RELEASE=$(cat .current-release 2>/dev/null || echo "")
-          
-          if [ "$RELEASE_TAG" != "$PREV_RELEASE" ]; then
-            echo "New release detected: $RELEASE_TAG"
-            echo "$RELEASE_TAG" > .current-release
-            echo "is_new_release=true" >> $GITHUB_OUTPUT
-          else
-            echo "No new release detected."
-            echo "is_new_release=false" >> $GITHUB_OUTPUT
-          fi
+          echo "RELEASE_TAG=${RELEASE_TAG}" >> "$GITHUB_OUTPUT"
+          {
+            echo "RELEASE_NOTES<<EOF"
+            echo "$RELEASE_NOTES"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+          echo "DEB_URL=${DEB_URL}" >> "$GITHUB_OUTPUT"
 
-          echo "release_tag=$RELEASE_TAG" >> $GITHUB_OUTPUT
-          echo "deb_url=$DEB_URL" >> $GITHUB_OUTPUT
-
-      - name: Skip workflow if no new release
-        if: steps.get_release.outputs.is_new_release == 'false'
-        run: exit 0
-
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
-
-      - name: Install Python dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install requests
-          pip install --force-reinstall https://github.com/asdfzxcvbn/pyzule-rw/archive/main.zip
-
-      - name: Download Apollo .ipa and ImprovedCustomApi .deb
+      - name: Download apollo .ipa and improvedcustomapi .deb
+        id: download-files
         env:
-          DEB_URL: ${{ steps.get_release.outputs.deb_url }}
+          DEB_URL: ${{ steps.get-release.outputs.DEB_URL }}
         run: |
-          curl -L "${{ env.APOLLO_DEB_URL }}" -o Apollo.ipa
+          curl -L "$APOLLO_IPA_URL" -o Apollo.ipa
           APOLLO_VERSION=$(unzip -p Apollo.ipa 'Payload/*.app/Info.plist' | grep -A1 'CFBundleShortVersionString' | grep string | sed -E 's/<string>(.*)<\/string>/\1/' | tr -d '[:space:]')
           
           curl -L "$DEB_URL" -o improvedcustomapi.deb
           ICA_VERSION=$(echo "$DEB_URL" | grep -oP 'customapi_\K[0-9\.]+')
 
-          echo "APOLLO_VERSION=$APOLLO_VERSION" >> $GITHUB_ENV
-          echo "ICA_VERSION=$ICA_VERSION" >> $GITHUB_ENV
-  
-      - name: Build modified .ipa(s)
+          echo "APOLLO_VERSION=${APOLLO_VERSION}" >> "$GITHUB_OUTPUT"
+          echo "ICA_VERSION=${ICA_VERSION}" >> "$GITHUB_OUTPUT"
+
+      - name: Build modified .ipa
+        env:
+            APOLLO_VERSION: ${{ steps.download-files.outputs.APOLLO_VERSION }}
+            ICA_VERSION: ${{ steps.download-files.outputs.ICA_VERSION }}
         run: |
           cyan -i Apollo.ipa -o "Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" -f improvedcustomapi.deb --fakesign
           cyan -i Apollo.ipa -o "NO-EXTENSIONS_Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" -f improvedcustomapi.deb --fakesign -e
 
       - name: Generate release notes
+        env:
+          APOLLO_VERSION: ${{ steps.download-files.outputs.APOLLO_VERSION }}
+          RELEASE_TAG: ${{ steps.get-release.outputs.RELEASE_TAG }}
+          RELEASE_NOTES: ${{ steps.get-release.outputs.RELEASE_NOTES }}
         run: |
-          RELEASE_INFO=$(curl -s https://api.github.com/repos/JeffreyCA/Apollo-ImprovedCustomApi/releases/latest)
-          ICA_VERSION=$(echo "$RELEASE_INFO" | jq -r '.tag_name' | sed 's/^v//' | tr -d '[:space:]')
-          RELEASE_NOTES=$(echo "$RELEASE_INFO" | jq -r '.body')
+          if [ -z "${APOLLO_VERSION}" ] || [ -z "${RELEASE_TAG}" ] || [ -z "${RELEASE_NOTES}" ]; then
+            echo "Error: Missing required information for generating release notes!"
+            exit 1
+          fi
 
-          echo "Apollo version: \`${APOLLO_VERSION}\`" >> RELEASE_NOTES.md
-          echo "ImprovedCustomApi version: \`${ICA_VERSION}\`" >> RELEASE_NOTES.md
-          echo "" >> RELEASE_NOTES.md
-          echo "## Release Notes" >> RELEASE_NOTES.md
-          echo "$RELEASE_NOTES" >> RELEASE_NOTES.md
-          echo "## Known Issues" >> RELEASE_NOTES.md
-          echo "- Apollo Ultra features may cause app to crash" >> RELEASE_NOTES.md
-          echo "- Imgur multi-image upload" >> RELEASE_NOTES.md
-          echo "- Uploads usually fail on the first attempt but subsequent retries should succeed" >> RELEASE_NOTES.md
-          echo "- Share URLs in private messages and long-tapping them still open in the in-app browser" >> RELEASE_NOTES.md
+          {
+            echo "Apollo version: \`v${APOLLO_VERSION}\`"
+            echo "ImprovedCustomApi version: \`${RELEASE_TAG}\`"
+            echo ""
+            echo "## Release Notes"
+            echo "$RELEASE_NOTES"
+            echo "## Known Issues"
+            echo "- Apollo Ultra features may cause app to crash"
+            echo "- Imgur multi-image upload"
+            echo "- Uploads usually fail on the first attempt but subsequent retries should succeed"
+            echo "- Share URLs in private messages and long-tapping them still open in the in-app browser"
+          } >> RELEASE_NOTES.md
 
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ env.APOLLO_VERSION }}_${{ env.ICA_VERSION }}
-          name: Apollo v${{ env.APOLLO_VERSION }} with ImprovedCustomApi v${{ env.ICA_VERSION }}
+          tag_name: v${{ steps.download-files.outputs.APOLLO_VERSION }}_${{ steps.download-files.outputs.ICA_VERSION }}
+          name: Apollo v${{ steps.download-files.outputs.APOLLO_VERSION }} with ImprovedCustomApi v${{ steps.download-files.outputs.ICA_VERSION }}
           body_path: RELEASE_NOTES.md
           files: |
-            Apollo-${{ env.APOLLO_VERSION }}_ImprovedCustomApi-${{ env.ICA_VERSION }}.ipa
-            NO-EXTENSIONS_Apollo-${{ env.APOLLO_VERSION }}_ImprovedCustomApi-${{ env.ICA_VERSION }}.ipa
+            Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}.ipa
+            NO-EXTENSIONS_Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}.ipa
 
-      - name: Upload to Catbox
+      - name: Upload to catbox
         if: env.CATBOX_UPLOAD == 'true'
+        env:
+          APOLLO_VERSION: ${{ steps.download-files.outputs.APOLLO_VERSION }}
+          ICA_VERSION: ${{ steps.download-files.outputs.ICA_VERSION }}
         run: |
+          if [ -z "${APOLLO_VERSION}" ] || [ -z "${ICA_VERSION}" ]; then
+            echo "Error: Missing required information for uploading to Catbox!"
+            exit 1
+          fi
+
           CATBOX_URL=$(curl -F "fileToUpload=@Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" https://catbox.moe/user/api.php)
-          CATBOX_URL_NO_EXT=$(curl -F "fileToUpload=@NO-EXTENSIONS_Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" https://catbox.moe/user/api.php)
+          CATBOX_URL_NO_EXT=$(curl -F "fileToUpload=@NO-EXTENSIONS-Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" https://catbox.moe/user/api.php)
           
-          echo "CATBOX_URL=$CATBOX_URL" >> $GITHUB_ENV
-          echo "CATBOX_URL_NO_EXT=$CATBOX_URL_NO_EXT" >> $GITHUB_ENV
+          echo "CATBOX_URL=${CATBOX_URL}" >> "$GITHUB_ENV"
+          echo "CATBOX_URL_NO_EXT=${CATBOX_URL_NO_EXT}" >> "$GITHUB_ENV"
 
       - name: Update source files
-        run: | 
+        env:
+          RELEASE_TAG: ${{ steps.get-release.outputs.RELEASE_TAG }}
+        run: |
           python update_json.py
 
-      - name: Commit and push changes
-        run: |
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
 
-          git add --all -- ':!*.ipa' ':!*.deb' ':!*.md'
+          git add apps.json apps_noext.json
 
           if git diff --cached --quiet; then
             echo "No changes detected, skipping commit."
           else
-            git commit -m "Update version to ${{ steps.get_release.outputs.release_tag }}"
+            git commit -m "update version to $RELEASE_TAG"
             git push
           fi
 
       - name: Job summary
         run: |
           echo "### 📊 Workflow Summary" >> $GITHUB_STEP_SUMMARY
-          echo "✅ New release created: v${{ env.APOLLO_VERSION }}-${{ env.ICA_VERSION }}" >> $GITHUB_STEP_SUMMARY
-          echo "🔗 [View release](https://github.com/${{ github.repository }}/releases/tag/v${{ env.APOLLO_VERSION }}_${{ env.ICA_VERSION }})" >> $GITHUB_STEP_SUMMARY
+          echo "✅ New release created: v${{ steps.download-files.outputs.APOLLO_VERSION }}-${{ steps.download-files.outputs.ICA_VERSION }}" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 [View release](https://github.com/${{ github.repository }}/releases/tag/v${{ steps.download-files.outputs.APOLLO_VERSION }}_${{ steps.download-files.outputs.ICA_VERSION }})" >> $GITHUB_STEP_SUMMARY  

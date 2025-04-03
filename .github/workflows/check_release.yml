@@ -1,0 +1,68 @@
+name: check release
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # Runs every day
+  workflow_dispatch:
+
+env:
+  GITHUB_API_URL: "https://api.github.com/repos/JeffreyCA/Apollo-ImprovedCustomApi/releases/latest"
+
+jobs:
+  check-release:
+    runs-on: ubuntu-latest
+    outputs:
+      IS_NEW_RELEASE: ${{ steps.check-release.outputs.IS_NEW_RELEASE }}
+      RELEASE_TAG: ${{ steps.check-release.outputs.RELEASE_TAG }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch latest release information
+        id: check-release
+        run: |
+            RESPONSE="$(curl -s "${{ env.GITHUB_API_URL }}")"
+            if [ -z "$RESPONSE" ]; then
+              echo "Error: Empty response from GitHub API"
+              exit 1
+            fi
+
+            RELEASE_TAG=$(jq -r '.tag_name // empty' <<< "$RESPONSE")
+            if [ -z "$RELEASE_TAG" ]; then
+              echo "Error: Failed to extract tag_name from GitHub API response."
+              exit 1
+            fi
+            
+            PREV_RELEASE=$(cat .current-release 2>/dev/null || echo "")
+            echo "release_tag=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
+
+            echo "Previous Release: $PREV_RELEASE"
+            echo "Current Release: $RELEASE_TAG"
+            
+            if [ "$RELEASE_TAG" != "$PREV_RELEASE" ]; then
+                echo "New release detected."
+                echo "$RELEASE_TAG" > .current-release
+                echo "IS_NEW_RELEASE=true" >> "$GITHUB_OUTPUT"
+                
+                git config --global user.name 'GitHub Action'
+                git config --global user.email 'action@github.com'
+                git add .current-release
+
+                if git diff --cached --quiet; then
+                    echo "No changes detected, skipping commit."
+                else
+                    git commit -m "update version to $RELEASE_TAG"
+                    git push
+                fi
+            else
+                echo "No new release detected."
+                echo "IS_NEW_RELEASE=false" >> "$GITHUB_OUTPUT"
+            fi
+  
+
+  create-release:
+    needs: check-release
+    if: needs.check-release.outputs.IS_NEW_RELEASE == 'true'
+    uses: ./.github/workflows/create_release.yml

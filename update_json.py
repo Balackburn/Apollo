@@ -2,335 +2,382 @@ import json
 import re
 import requests
 from datetime import datetime
-from typing import Dict, List, Tuple, Any, Optional
+from typing import Dict, List, Optional, Any, TypedDict
 
 
-GITHUB_REPO = "Balackburn/Apollo"
-JSON_FILE = "apps.json"
-JSON_NOEXT = "apps_noext.json"
+class ReleaseAsset(TypedDict):
+    browser_download_url: str
+    name: str
+    size: int
 
 
-def fetch_all_releases() -> List[Dict[str, Any]]:
+class GitHubRelease(TypedDict):
+    tag_name: str
+    published_at: str
+    body: str
+    assets: List[ReleaseAsset]
+
+
+class VersionEntry(TypedDict):
+    version: str
+    date: str
+    localizedDescription: str
+    downloadURL: Optional[str]
+    size: Optional[int]
+
+
+class AppInfo(TypedDict):
+    versions: List[VersionEntry]
+    version: str
+    versionDate: str
+    versionDescription: str
+    downloadURL: Optional[str]
+    size: Optional[int]
+
+
+class NewsEntry(TypedDict):
+    appID: str
+    title: str
+    identifier: str
+    caption: str
+    date: str
+    tintColor: str
+    imageURL: str
+    notify: bool
+    url: str
+
+
+class AppData(TypedDict):
+    apps: List[Dict[str, Any]]
+    news: List[NewsEntry]
+
+
+class AppConfig(TypedDict):
+    repo_url: str
+    json_file: str
+    app_id: str
+    app_name: str
+    caption: str
+    tint_colour: str
+    image_url: str
+
+
+def load_config(config_path: str) -> AppConfig:
     """
-    Fetch all release information from GitHub.
+    Load repo configuration values.
+    """
+    try:
+        with open(config_path, "r") as config_file:
+            config_data = json.load(config_file)
+
+        return {
+            "repo_url": config_data["repo_url"],
+            "json_file": config_data["json_file"],
+            "json_noext_file": config_data["json_noext_file"],
+            "app_id": config_data["app_id"],
+            "app_name": config_data["app_name"],
+            "caption": config_data["caption"],
+            "tint_colour": config_data["tint_colour"],
+            "image_url": config_data["image_url"],
+        }
+
+    except FileNotFoundError:
+        print(f"Configuration file not found at {config_path}")
+        raise
+    except (json.JSONDecodeError, KeyError) as e:
+        print(f"Error parsing configuration: {e}")
+        raise
+
+
+def fetch_all_releases(repo_url: str) -> List[GitHubRelease]:
+    """
+    Fetch all GitHub releases for the repository, sorted by published date (oldest first).
 
     Returns:
-        List of release objects sorted by publication date (oldest first)
-
-    Raises:
-        requests.RequestException: If the API request fails
+        List[GitHubRelease]: List of all releases sorted by publication date
     """
-    api_url = f"https://api.github.com/repos/{GITHUB_REPO}/releases"
-    headers = {"Accept": "application/vnd.github+json"}
+    api_url: str = f"https://api.github.com/repos/{repo_url}/releases"
+    headers: Dict[str, str] = {"Accept": "application/vnd.github+json"}
 
     response = requests.get(api_url, headers=headers)
-    response.raise_for_status()  # Raise exception for non 200 OK responses
+    response.raise_for_status()  # Raise exception for HTTP errors
 
-    releases = response.json()
+    releases: List[GitHubRelease] = response.json()
     sorted_releases = sorted(releases, key=lambda x: x["published_at"], reverse=False)
 
     return sorted_releases
 
 
-def fetch_latest_release() -> Dict[str, Any]:
+def fetch_latest_release(repo_url: str) -> GitHubRelease:
     """
-    Fetch the latest release information from GitHub.
+    Fetch the latest GitHub release for the repository.
 
     Returns:
-        Latest release object
+        GitHubRelease: The latest release
 
     Raises:
-        requests.RequestException: If the API request fails
         ValueError: If no releases are found
     """
-    api_url = f"https://api.github.com/repos/{GITHUB_REPO}/releases"
-    headers = {"Accept": "application/vnd.github+json"}
+    api_url: str = f"https://api.github.com/repos/{repo_url}/releases"
+    headers: Dict[str, str] = {"Accept": "application/vnd.github+json"}
 
     response = requests.get(api_url, headers=headers)
-    response.raise_for_status()
+    response.raise_for_status()  # Raise exception for HTTP errors
 
-    releases = response.json()
+    releases: List[GitHubRelease] = response.json()
     sorted_releases = sorted(releases, key=lambda x: x["published_at"], reverse=True)
 
-    if not sorted_releases:
-        raise ValueError("No release found.")
+    if sorted_releases:
+        return sorted_releases[0]
 
-    return sorted_releases[0]
+    raise ValueError("No release found.")
 
 
-def format_description(input_text: str) -> str:
+def format_description(description: str) -> str:
     """
-    Format release description by removing HTML tags and markdown formatting.
+    Format release description by removing HTML tags and replacing certain characters.
 
     Args:
-        input_text: Raw release description
+        description: The raw description text
 
     Returns:
-        Formatted description text
+        str: Cleaned description text
     """
-    description = input_text
-    description = re.sub(r"<[^<]+?>", "", description)  # HTML tags
-    description = re.sub(r"#{1,6}\s?", "", description)  # Markdown header tags
-    description = description.replace(r"\*{2}", "").replace("-", "•").replace("`", '"')
-    return description
+    formatted = re.sub(r"<[^<]+?>", "", description)  # HTML tags
+    formatted = re.sub(r"#{1,6}\s?", "", formatted)  # Markdown header tags
+    formatted = formatted.replace(r"\*{2}", "").replace("-", "•").replace("`", '"')
+
+    return formatted
 
 
-def get_download_info(
-    release: Dict[str, Any], prefix: Optional[str]
-) -> Tuple[Optional[str], Optional[int]]:
+def find_download_url_and_size(
+    release: GitHubRelease, prefix: Optional[str]
+) -> tuple[Optional[str], Optional[int]]:
     """
-    Get download URL and size for a specific release asset.
+    Find the download URL and size for a release's IPA file.
 
     Args:
-        release: GitHub release object
+        release: The GitHub release
         prefix: Asset name prefix to search for (None or "NO-EXTENSIONS")
 
     Returns:
-        Tuple of (download_url, size) - both can be None if asset not found
+        tuple: (download_url, size) or (None, None) if not found
     """
     target_prefix = "NO-EXTENSIONS" if prefix == "NO-EXTENSIONS" else "Apollo"
 
-    download_url = None
-    size = None
+    for asset in release["assets"]:
+        if asset["name"].startswith(target_prefix) and asset["name"].endswith(".ipa"):
+            return asset["browser_download_url"], asset["size"]
 
-    for asset in release.get("assets", []):
-        if asset.get("name", "").startswith(target_prefix) and asset.get(
-            "browser_download_url"
-        ):
-            download_url = asset["browser_download_url"]
-            size = asset.get("size")
-            break
-
-    return download_url, size
+    return None, None
 
 
-def parse_version(version_string: str) -> Tuple[str, str]:
+def normalize_version(version: str) -> str:
     """
-    Parse version string to extract main version and secondary version if present.
-    Support for both underscore and hyphen separators.
+    Strip the version tag (e.g., -hotfix) from a version string.
 
     Args:
-        version_string: Version string with optional underscore or hyphen component
+        version: Version string (e.g., v0.5.2-hotfix, 0.5.2-beta)
 
     Returns:
-        Tuple of (app_version, tweak_version)
+        Normalized version string without the tag (e.g., 0.5.2)
     """
-    # Support both underscore and hyphen as separators
-    # This captures prior releases which used a different formatting approach
-    version_match = re.search(
-        r"(\d+\.\d+(?:\.\d+)?)(?:[_-](\d+\.\d+\.\d+[a-z]?))?", version_string
-    )
+    version = version.lstrip("v")
 
-    if not version_match:
-        raise ValueError(f"Invalid version format: {version_string}")
-
-    app_version = version_match.group(1)
-    tweak_version = version_match.group(2)
-
-    # Catches edge cases where only major and minor version are present in the tag
-    if tweak_version and tweak_version.count(".") == 1:  # If only major and minor exist
-        tweak_version += ".0"
-
-    return app_version, tweak_version
+    match = re.search(r"(\d+\.\d+\.\d+)", version)
+    if match:
+        return match.group(1)
+    return version
 
 
-def get_patch_number(version_string: str) -> int:
+def process_versions(versions_data: List[VersionEntry]) -> List[VersionEntry]:
     """
-    Extract patch number from version string.
+    Process the versions list to remove duplicate versions, keeping the newest version.
 
     Args:
-        version_string: Version string (i.e. "1.2.3_1.2.3")
+        versions_data (List[VersionEntry]): List of version dictionaries containing:
+                                            version: str
+                                            date: str
+                                            localizedDescription: str
+                                            downloadURL: Optional[str]
+                                            size: Optional[int]
 
     Returns:
-        Patch number (third component of version)
+        List[VersionEntry]: Processed list with only the newest versions.
     """
-    _, tweak_version = parse_version(version_string)
+    # Create a list to store unique versions with their details
+    version_entries: List[VersionEntry] = []
 
-    # Extract patch number (third component)
-    _, _, patch = map(int, tweak_version.split("."))
+    # Iterate through the versions in the order they appear
+    for version in versions_data:
+        # Parse the date for comparison
+        current_date = datetime.fromisoformat(version["date"].replace("Z", "+00:00"))
 
-    return patch
+        # Check if this version already exists in unique_versions
+        existing_version_index = next(
+            (
+                index
+                for index, v in enumerate(version_entries)
+                if v["version"] == version["version"]
+            ),
+            None,
+        )
+
+        if existing_version_index is not None:
+            # Compare dates and keep the newer version
+            existing_date = datetime.fromisoformat(
+                version_entries[existing_version_index]["date"].replace("Z", "+00:00")
+            )
+
+            if current_date > existing_date:
+                version_entries[existing_version_index] = version
+        else:
+            # If no duplicate found, add to unique versions
+            version_entries.append(version)
+
+    return version_entries
 
 
 def update_json_file(
+    config: AppConfig,
     json_file: str,
-    fetched_data_all: List[Dict[str, Any]],
-    fetched_data_latest: Dict[str, Any],
+    fetched_data_all: List[GitHubRelease],
+    fetched_data_latest: GitHubRelease,
     prefix: Optional[str],
 ) -> None:
     """
-    Update app source JSON file with fetched release information.
+    Update the apps.json file with the fetched GitHub releases.
 
     Args:
-        json_file: Path to the app source JSON file to update
-        fetched_data_all: List of all releases
-        fetched_data_latest: Latest release data
+        json_file: Path to the JSON file
+        fetched_data_all: List of all GitHub releases
+        fetched_data_latest: The latest GitHub release
         prefix: Asset name prefix to search for (None or "NO-EXTENSIONS")
     """
-    try:
-        with open(json_file, "r") as file:
-            data = json.load(file)
-    except (json.JSONDecodeError, FileNotFoundError) as e:
-        raise ValueError(f"Error reading JSON file {json_file}: {str(e)}")
-
-    if (
-        not data.get("apps")
-        or not isinstance(data["apps"], list)
-        or len(data["apps"]) == 0
-    ):
-        raise ValueError("Invalid JSON structure: missing or empty 'apps' array")
+    with open(json_file, "r") as file:
+        data: AppData = json.load(file)
 
     app = data["apps"][0]
 
-    if "versions" not in app:
-        app["versions"] = []
-
-    # Dictionary to track newest release for each version
-    version_dates = {}  # version -> (published_at, entry_data)
+    releases = []
 
     # Process all releases
     for release in fetched_data_all:
         full_version = release["tag_name"].lstrip("v")
+        version_match = re.search(r"(\d+\.\d+\.\d+)(?:-([a-zA-Z0-9]+))?", full_version)
 
-        # Parse the version for comparison
-        app_version, tweak_version = parse_version(full_version)
-        version = app_version
+        if not version_match:
+            continue
+
         version_date = release["published_at"]
 
-        # Extract and format description
-        description = release.get("body", "")
-        keyword = "Apollo for Reddit (with ImprovedCustomApi) Release Information"
+        # Get base version without tags
+        base_version = normalize_version(full_version)
+
+        # Clean up description
+        description = release["body"]
+        keyword = "{APP_NAME} Release Information"
         if keyword in description:
             description = description.split(keyword, 1)[1].strip()
-
         description = format_description(description)
 
-        # Get download information
-        download_url, size = get_download_info(release, prefix)
+        # Find download URL and size
+        download_url, size = find_download_url_and_size(release, prefix)
+
+        # Skip release entries without a download URL
+        if not download_url:
+            continue
 
         # Create version entry
-        version_entry = {
-            "version": version,
+        version_entry: VersionEntry = {
+            "version": base_version,
             "date": version_date,
             "localizedDescription": description,
             "downloadURL": download_url,
             "size": size,
         }
 
-        # Only process entries that have a download URL
-        if download_url:
-            # Check if we already have this version in our tracking dictionary
-            if version not in version_dates or version_date > version_dates[version][0]:
-                # This is either a new version or a newer release of the same version
-                version_dates[version] = (version_date, version_entry)
+        releases.append(version_entry)
 
-    # Remove all existing entries for versions that we're updating
-    app["versions"] = [
-        v for v in app["versions"] if v.get("version") not in version_dates
-    ]
-
-    # Add all the newest version entries
-    for version_date, entry in version_dates.values():
-        app["versions"].insert(0, entry)
-
-    # Sort versions by date (newest first)
+    deduplicated_versions = process_versions(releases)
+    app["versions"] = []
+    for i in deduplicated_versions:
+        app["versions"].insert(0, i)
     app["versions"] = sorted(
         app["versions"], key=lambda x: x.get("date", ""), reverse=True
     )
 
-    # Process latest release
+    # Update app info with latest release
     latest_version = fetched_data_latest["tag_name"].lstrip("v")
     tag = fetched_data_latest["tag_name"]
+    version_match = re.search(r"(\d+\.\d+\.\d+)(?:-([a-zA-Z0-9]+))?", latest_version)
 
-    try:
-        app_version, tweak_version = parse_version(latest_version)
-        version = tweak_version
-        patch_number = get_patch_number(latest_version)
-    except ValueError as e:
-        raise ValueError(f"Error parsing latest version: {str(e)}")
+    if not version_match:
+        raise ValueError("Invalid version format")
 
-    # Update app metadata
-    app["version"] = app_version
+    app["version"] = normalize_version(full_version)
     app["versionDate"] = fetched_data_latest["published_at"]
-    app["versionDescription"] = format_description(fetched_data_latest.get("body", ""))
+    app["versionDescription"] = format_description(fetched_data_latest["body"])
 
-    # Find IPA download URL and size
-    app["downloadURL"] = next(
-        (
-            asset["browser_download_url"]
-            for asset in fetched_data_latest.get("assets", [])
-            if asset.get("name", "").endswith(".ipa")
-            and asset.get("browser_download_url")
-        ),
-        None,
-    )
+    # Find latest download URL and size
+    download_url, size = find_download_url_and_size(fetched_data_latest, prefix)
+    app["downloadURL"] = download_url
+    app["size"] = size
 
-    app["size"] = next(
-        (
-            asset["size"]
-            for asset in fetched_data_latest.get("assets", [])
-            if asset.get("browser_download_url") == app["downloadURL"]
-        ),
-        None,
-    )
-
-    # Add news entry if not already present
     if "news" not in data:
         data["news"] = []
 
+    # Add news entry for the latest version if it doesn't exist
     news_identifier = f"release-{latest_version}"
-    if not any(item.get("identifier") == news_identifier for item in data["news"]):
+    if not any(item["identifier"] == news_identifier for item in data["news"]):
         formatted_date = datetime.strptime(
             fetched_data_latest["published_at"], "%Y-%m-%dT%H:%M:%SZ"
         ).strftime("%d %b")
 
-        # Determine caption and image_url based on patch number
-        if patch_number == 0:
-            caption = "Major update of Apollo (with ImprovedCustomApi) is here!"
-            image_url = "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/news/news_1.webp"
-        else:
-            caption = "Update of Apollo (with ImprovedCustomApi) now available!"
-            image_url = "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/news/news_2.webp"
-
-        news_entry = {
-            "appID": "com.christianselig.Apollo",
+        news_entry: NewsEntry = {
+            "appID": config["app_id"],
             "title": f"{latest_version} - {formatted_date}",
             "identifier": news_identifier,
-            "caption": caption,
+            "caption": config["caption"],
             "date": fetched_data_latest["published_at"],
-            "tintColor": "3F91FE",
-            "imageURL": image_url,
+            "tintColor": config["tint_colour"],
+            "imageURL": config["image_url"],
             "notify": True,
-            "url": f"https://github.com/Balackburn/Apollo/releases/tag/{tag}",
+            "url": f"https://github.com/{config['repo_url']}/releases/tag/{tag}",
         }
         data["news"].append(news_entry)
 
-    try:
-        with open(json_file, "w") as file:
-            json.dump(data, file, indent=2)
-    except IOError as e:
-        raise ValueError(f"Error writing to JSON file {json_file}: {str(e)}")
+    with open(json_file, "w") as file:
+        json.dump(data, file, indent=2)
 
 
 def main() -> None:
     """
-    Entrypoint for the GitHub workflow action.
+    Entrypoint for GitHub workflow action.
 
     The script runs two passes to populate both the sources (standard and no-extensions).
     """
     try:
-        fetched_data_all = fetch_all_releases()
-        fetched_data_latest = fetch_latest_release()
-
-        update_json_file(JSON_FILE, fetched_data_all, fetched_data_latest, None)
+        config = load_config("config.json")
+        fetched_data_all = fetch_all_releases(config["repo_url"])
+        fetched_data_latest = fetch_latest_release(config["repo_url"])
         update_json_file(
-            JSON_NOEXT, fetched_data_all, fetched_data_latest, "NO-EXTENSIONS"
+            config,
+            config["json_file"],
+            fetched_data_all,
+            fetched_data_latest,
+            None
         )
-
-        print(f"Successfully updated {JSON_FILE} and {JSON_NOEXT}")
+        update_json_file(
+            config,
+            config["json_noext_file"],
+            fetched_data_all,
+            fetched_data_latest,
+            "NO-EXTENSIONS",
+        )
+        print("Successfully updated sources with latest releases.")
     except Exception as e:
-        print(f"Error: {str(e)}")
-        raise
+        print(f"Error updating releases: {e}")
 
 
 if __name__ == "__main__":
