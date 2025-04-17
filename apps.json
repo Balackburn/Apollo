@@ -117,7 +117,7 @@
       "caption": "Update for Apollo now available!",
       "date": "2025-04-09T01:51:05Z",
       "tintColor": "3F91FE",
-      "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/repo/images/news/news_2.webp",
+      "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.webp",
       "notify": true,
       "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_1.2.3"
     }
