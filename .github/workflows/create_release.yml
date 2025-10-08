@@ -22,7 +22,10 @@ env:
 
 jobs:
   build-apollo-ipa:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
+    defaults:
+      run:
+        shell: bash
 
     steps:
       - name: Check out repository
@@ -40,6 +43,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests
           pip install --force-reinstall "${{ env.PYZULE_RW_URL }}"
+
+      - name: Install ldid
+        run: brew install ldid
 
       - name: Fetch latest release information
         id: get-release
@@ -72,23 +78,81 @@ jobs:
         id: download-files
         env:
           DEB_URL: ${{ steps.get-release.outputs.DEB_URL }}
+          RELEASE_TAG: ${{ steps.get-release.outputs.RELEASE_TAG }}
         run: |
           curl -L "$APOLLO_IPA_URL" -o Apollo.ipa
           APOLLO_VERSION=$(unzip -p Apollo.ipa 'Payload/*.app/Info.plist' | grep -A1 'CFBundleShortVersionString' | grep string | sed -E 's/<string>(.*)<\/string>/\1/' | tr -d '[:space:]')
-          
+
           curl -L "$DEB_URL" -o improvedcustomapi.deb
-          ICA_VERSION=$(echo "$DEB_URL" | grep -oP 'customapi_\K[0-9\.]+')
 
           echo "APOLLO_VERSION=${APOLLO_VERSION}" >> "$GITHUB_OUTPUT"
-          echo "ICA_VERSION=${ICA_VERSION}" >> "$GITHUB_OUTPUT"
+          echo "ICA_VERSION=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Setup build folders
+        env:
+            APOLLO_VERSION: ${{ steps.download-files.outputs.APOLLO_VERSION }}
+            ICA_VERSION: ${{ steps.download-files.outputs.ICA_VERSION }}
+        run: |
+          mkdir -p "Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}/Payload"
+          mkdir -p "NO-EXTENSIONS_Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}/Payload"
 
       - name: Build modified .ipa
         env:
             APOLLO_VERSION: ${{ steps.download-files.outputs.APOLLO_VERSION }}
             ICA_VERSION: ${{ steps.download-files.outputs.ICA_VERSION }}
+        working-directory: Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}
         run: |
-          cyan -i Apollo.ipa -o "Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" -f improvedcustomapi.deb --fakesign
-          cyan -i Apollo.ipa -o "NO-EXTENSIONS_Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" -f improvedcustomapi.deb --fakesign -e
+          cyan -i "${GITHUB_WORKSPACE}/Apollo.ipa" -o "Payload/Apollo.app" -f "${GITHUB_WORKSPACE}/improvedcustomapi.deb" --fakesign
+          echo "Zipping Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa"
+          zip -6 -rq "Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" "Payload" -x "*/.*"
+
+          echo "Updating build version in Apollo Executable!"
+          echo "Previous $(vtool -show-build Payload/Apollo.app/Apollo)"
+          vtool -set-build-version ios 15.0 19.0 -replace -output "Payload/Apollo.app/Apollo" "Payload/Apollo.app/Apollo"
+          echo "Updated $(vtool -show-build Payload/Apollo.app/Apollo)"
+
+          echo "Checking for duplicate LC_RPATH entries..."
+          executable_path_count=$(otool -l "Payload/Apollo.app/Apollo" | grep -A 2 LC_RPATH | grep "@executable_path/Frameworks" | wc -l | tr -d ' ')
+          echo "Found $executable_path_count @executable_path/Frameworks LC_RPATH entries"
+          if [ "$executable_path_count" -gt 1 ]; then
+            echo "Removing duplicate @executable_path/Frameworks LC_RPATH entry..."
+            install_name_tool -delete_rpath "@executable_path/Frameworks" "Payload/Apollo.app/Apollo"
+            echo "Duplicate LC_RPATH entry removed"
+          fi
+
+          echo "Fake Signing Apollo Executable!"
+          ldid -S -M "Payload/Apollo.app/Apollo"
+          echo "Zipping GLASS_Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa"
+          zip -6 -rq "GLASS_Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" "Payload" -x "*/.*"
+
+      - name: Build no extension modified .ipa
+        env:
+            APOLLO_VERSION: ${{ steps.download-files.outputs.APOLLO_VERSION }}
+            ICA_VERSION: ${{ steps.download-files.outputs.ICA_VERSION }}
+        working-directory: NO-EXTENSIONS_Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}
+        run: |
+          cyan -i "${GITHUB_WORKSPACE}/Apollo.ipa" -o "Payload/Apollo.app" -f "${GITHUB_WORKSPACE}/improvedcustomapi.deb" --fakesign -e
+          echo "Zipping Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa"
+          zip -6 -rq "NO-EXTENSIONS_Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" "Payload" -x "*/.*"
+
+          echo "Updating build version in Apollo Executable!"
+          echo "Previous $(vtool -show-build Payload/Apollo.app/Apollo)"
+          vtool -set-build-version ios 15.0 19.0 -replace -output "Payload/Apollo.app/Apollo" "Payload/Apollo.app/Apollo"
+          echo "Updated $(vtool -show-build Payload/Apollo.app/Apollo)"
+
+          echo "Checking for duplicate LC_RPATH entries..."
+          executable_path_count=$(otool -l "Payload/Apollo.app/Apollo" | grep -A 2 LC_RPATH | grep "@executable_path/Frameworks" | wc -l | tr -d ' ')
+          echo "Found $executable_path_count @executable_path/Frameworks LC_RPATH entries"
+          if [ "$executable_path_count" -gt 1 ]; then
+            echo "Removing duplicate @executable_path/Frameworks LC_RPATH entry..."
+            install_name_tool -delete_rpath "@executable_path/Frameworks" "Payload/Apollo.app/Apollo"
+            echo "Duplicate LC_RPATH entry removed"
+          fi
+
+          echo "Fake Signing Apollo Executable!"
+          ldid -S -M "Payload/Apollo.app/Apollo"
+          echo "Zipping NO-EXTENSIONS_GLASS_Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa"
+          zip -6 -rq "NO-EXTENSIONS_GLASS_Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" "Payload" -x "*/.*"
 
       - name: Generate release notes
         env:
@@ -121,8 +185,10 @@ jobs:
           name: Apollo v${{ steps.download-files.outputs.APOLLO_VERSION }} with ImprovedCustomApi v${{ steps.download-files.outputs.ICA_VERSION }}
           body_path: RELEASE_NOTES.md
           files: |
-            Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}.ipa
-            NO-EXTENSIONS_Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}.ipa
+            Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}/Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}.ipa
+            Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}/GLASS_Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}.ipa
+            NO-EXTENSIONS_Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}/NO-EXTENSIONS_Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}.ipa
+            NO-EXTENSIONS_Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}/NO-EXTENSIONS_GLASS_Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}.ipa
 
       - name: Upload to catbox
         if: env.CATBOX_UPLOAD == 'true'
@@ -135,9 +201,12 @@ jobs:
             exit 1
           fi
 
-          CATBOX_URL=$(curl -F "fileToUpload=@Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" https://catbox.moe/user/api.php)
-          CATBOX_URL_NO_EXT=$(curl -F "fileToUpload=@NO-EXTENSIONS-Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" https://catbox.moe/user/api.php)
-          
+          CATBOX_URL=$(curl -F "fileToUpload=@Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}/Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" https://catbox.moe/user/api.php)
+          CATBOX_URL_GLASS=$(curl -F "fileToUpload=@Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}/GLASS_Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" https://catbox.moe/user/api.php)
+
+          CATBOX_URL_NO_EXT=$(curl -F "fileToUpload=@NO-EXTENSIONS_Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" https://catbox.moe/user/api.php)
+          CATBOX_URL_NO_EXT_GLASS=$(curl -F "fileToUpload=@NO-EXTENSIONS_GLASS_Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}/NO-EXTENSIONS-Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" https://catbox.moe/user/api.php)
+
           echo "CATBOX_URL=${CATBOX_URL}" >> "$GITHUB_ENV"
           echo "CATBOX_URL_NO_EXT=${CATBOX_URL_NO_EXT}" >> "$GITHUB_ENV"
 
@@ -156,15 +225,15 @@ jobs:
             echo "No changes detected, skipping commit."
           else
             git fetch origin main
-            
+
             git checkout -b new-release origin/main
             git checkout --detach HEAD
 
             git commit -m "update version to $RELEASE_TAG"
-            
+
             git checkout new-release
             git cherry-pick HEAD@{1}
-            
+
             git push origin new-release:main
           fi
 
@@ -172,4 +241,4 @@ jobs:
         run: |
           echo "### 📊 Workflow Summary" >> $GITHUB_STEP_SUMMARY
           echo "✅ New release created: v${{ steps.download-files.outputs.APOLLO_VERSION }}-${{ steps.download-files.outputs.ICA_VERSION }}" >> $GITHUB_STEP_SUMMARY
-          echo "🔗 [View release](https://github.com/${{ github.repository }}/releases/tag/v${{ steps.download-files.outputs.APOLLO_VERSION }}_${{ steps.download-files.outputs.ICA_VERSION }})" >> $GITHUB_STEP_SUMMARY  
+          echo "🔗 [View release](https://github.com/${{ github.repository }}/releases/tag/v${{ steps.download-files.outputs.APOLLO_VERSION }}_${{ steps.download-files.outputs.ICA_VERSION }})" >> $GITHUB_STEP_SUMMARY
