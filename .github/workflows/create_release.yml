@@ -85,26 +85,27 @@ jobs:
 
           curl -L "$DEB_URL" -o improvedcustomapi.deb
 
+          ICA_VERSION=$(echo "$RELEASE_TAG" | sed -nE 's/v(.+)/\1/p')
+
           echo "APOLLO_VERSION=${APOLLO_VERSION}" >> "$GITHUB_OUTPUT"
-          echo "ICA_VERSION=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
+          echo "ICA_VERSION=$ICA_VERSION" >> "$GITHUB_OUTPUT"
+          echo "OUTPUT_NAME=Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}" >> "$GITHUB_OUTPUT"
 
       - name: Setup build folders
         env:
-            APOLLO_VERSION: ${{ steps.download-files.outputs.APOLLO_VERSION }}
-            ICA_VERSION: ${{ steps.download-files.outputs.ICA_VERSION }}
+            OUTPUT_NAME: ${{ steps.download-files.outputs.OUTPUT_NAME }}
         run: |
-          mkdir -p "Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}/Payload"
-          mkdir -p "NO-EXTENSIONS_Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}/Payload"
+          mkdir -p "${OUTPUT_NAME}/Payload"
+          mkdir -p "NO-EXTENSIONS_${OUTPUT_NAME}/Payload"
 
       - name: Build modified .ipa
         env:
-            APOLLO_VERSION: ${{ steps.download-files.outputs.APOLLO_VERSION }}
-            ICA_VERSION: ${{ steps.download-files.outputs.ICA_VERSION }}
-        working-directory: Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}
+            OUTPUT_NAME: ${{ steps.download-files.outputs.OUTPUT_NAME }}
+        working-directory: ${{ steps.download-files.outputs.OUTPUT_NAME }}
         run: |
           cyan -i "${GITHUB_WORKSPACE}/Apollo.ipa" -o "Payload/Apollo.app" -f "${GITHUB_WORKSPACE}/improvedcustomapi.deb" --fakesign
-          echo "Zipping Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa"
-          zip -6 -rq "Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" "Payload" -x "*/.*"
+          echo "Zipping ${OUTPUT_NAME}.ipa"
+          zip -6 -rq "${OUTPUT_NAME}.ipa" "Payload" -x "*/.*"
 
           echo "Updating build version in Apollo Executable!"
           echo "Previous $(vtool -show-build Payload/Apollo.app/Apollo)"
@@ -122,18 +123,17 @@ jobs:
 
           echo "Fake Signing Apollo Executable!"
           ldid -S -M "Payload/Apollo.app/Apollo"
-          echo "Zipping GLASS_Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa"
-          zip -6 -rq "GLASS_Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" "Payload" -x "*/.*"
+          echo "Zipping ${OUTPUT_NAME}.ipa"
+          zip -6 -rq "GLASS_${OUTPUT_NAME}.ipa" "Payload" -x "*/.*"
 
       - name: Build no extension modified .ipa
         env:
-            APOLLO_VERSION: ${{ steps.download-files.outputs.APOLLO_VERSION }}
-            ICA_VERSION: ${{ steps.download-files.outputs.ICA_VERSION }}
-        working-directory: NO-EXTENSIONS_Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}
+            OUTPUT_NAME: ${{ steps.download-files.outputs.OUTPUT_NAME }}
+        working-directory: NO-EXTENSIONS_${{ steps.download-files.outputs.OUTPUT_NAME }}
         run: |
           cyan -i "${GITHUB_WORKSPACE}/Apollo.ipa" -o "Payload/Apollo.app" -f "${GITHUB_WORKSPACE}/improvedcustomapi.deb" --fakesign -e
-          echo "Zipping Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa"
-          zip -6 -rq "NO-EXTENSIONS_Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" "Payload" -x "*/.*"
+          echo "Zipping NO-EXTENSIONS_${OUTPUT_NAME}.ipa"
+          zip -6 -rq "NO-EXTENSIONS_${OUTPUT_NAME}.ipa" "Payload" -x "*/.*"
 
           echo "Updating build version in Apollo Executable!"
           echo "Previous $(vtool -show-build Payload/Apollo.app/Apollo)"
@@ -151,8 +151,8 @@ jobs:
 
           echo "Fake Signing Apollo Executable!"
           ldid -S -M "Payload/Apollo.app/Apollo"
-          echo "Zipping NO-EXTENSIONS_GLASS_Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa"
-          zip -6 -rq "NO-EXTENSIONS_GLASS_Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" "Payload" -x "*/.*"
+          echo "Zipping NO-EXTENSIONS_GLASS_${OUTPUT_NAME}.ipa"
+          zip -6 -rq "NO-EXTENSIONS_GLASS_${OUTPUT_NAME}.ipa" "Payload" -x "*/.*"
 
       - name: Generate release notes
         env:
@@ -185,30 +185,31 @@ jobs:
           name: Apollo v${{ steps.download-files.outputs.APOLLO_VERSION }} with ImprovedCustomApi v${{ steps.download-files.outputs.ICA_VERSION }}
           body_path: RELEASE_NOTES.md
           files: |
-            Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}/Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}.ipa
-            Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}/GLASS_Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}.ipa
-            NO-EXTENSIONS_Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}/NO-EXTENSIONS_Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}.ipa
-            NO-EXTENSIONS_Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}/NO-EXTENSIONS_GLASS_Apollo-${{ steps.download-files.outputs.APOLLO_VERSION }}_ImprovedCustomApi-${{ steps.download-files.outputs.ICA_VERSION }}.ipa
+            ${{ steps.download-files.outputs.OUTPUT_NAME }}/${{ steps.download-files.outputs.OUTPUT_NAME }}.ipa
+            ${{ steps.download-files.outputs.OUTPUT_NAME }}/GLASS_${{ steps.download-files.outputs.OUTPUT_NAME }}.ipa
+            NO-EXTENSIONS_${{ steps.download-files.outputs.OUTPUT_NAME }}/NO-EXTENSIONS_${{ steps.download-files.outputs.OUTPUT_NAME }}.ipa
+            NO-EXTENSIONS_${{ steps.download-files.outputs.OUTPUT_NAME }}/NO-EXTENSIONS_GLASS_${{ steps.download-files.outputs.OUTPUT_NAME }}.ipa
 
       - name: Upload to catbox
         if: env.CATBOX_UPLOAD == 'true'
         env:
-          APOLLO_VERSION: ${{ steps.download-files.outputs.APOLLO_VERSION }}
-          ICA_VERSION: ${{ steps.download-files.outputs.ICA_VERSION }}
+          OUTPUT_NAME: ${{ steps.download-files.outputs.OUTPUT_NAME }}
         run: |
           if [ -z "${APOLLO_VERSION}" ] || [ -z "${ICA_VERSION}" ]; then
             echo "Error: Missing required information for uploading to Catbox!"
             exit 1
           fi
 
-          CATBOX_URL=$(curl -F "fileToUpload=@Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}/Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" https://catbox.moe/user/api.php)
-          CATBOX_URL_GLASS=$(curl -F "fileToUpload=@Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}/GLASS_Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" https://catbox.moe/user/api.php)
+          CATBOX_URL=$(curl -F "fileToUpload=@${OUTPUT_NAME}/${OUTPUT_NAME}.ipa" https://catbox.moe/user/api.php)
+          CATBOX_URL_GLASS=$(curl -F "fileToUpload=@${OUTPUT_NAME}/GLASS_${OUTPUT_NAME}.ipa" https://catbox.moe/user/api.php)
 
-          CATBOX_URL_NO_EXT=$(curl -F "fileToUpload=@NO-EXTENSIONS_Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" https://catbox.moe/user/api.php)
-          CATBOX_URL_NO_EXT_GLASS=$(curl -F "fileToUpload=@NO-EXTENSIONS_GLASS_Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}/NO-EXTENSIONS-Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}.ipa" https://catbox.moe/user/api.php)
+          CATBOX_URL_NO_EXT=$(curl -F "fileToUpload=@NO-EXTENSIONS_${OUTPUT_NAME}/NO-EXTENSIONS_${OUTPUT_NAME}.ipa" https://catbox.moe/user/api.php)
+          CATBOX_URL_NO_EXT_GLASS=$(curl -F "fileToUpload=@NO-EXTENSIONS_${OUTPUT_NAME}/NO-EXTENSIONS_GLASS_${OUTPUT_NAME}}.ipa" https://catbox.moe/user/api.php)
 
           echo "CATBOX_URL=${CATBOX_URL}" >> "$GITHUB_ENV"
+          echo "CATBOX_URL_GLASS=${CATBOX_URL_GLASS}" >> "$GITHUB_ENV"
           echo "CATBOX_URL_NO_EXT=${CATBOX_URL_NO_EXT}" >> "$GITHUB_ENV"
+          echo "CATBOX_URL_NO_EXT_GLASS=${CATBOX_URL_NO_EXT_GLASS}" >> "$GITHUB_ENV"
 
       - name: Update source files
         env:
