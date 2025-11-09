@@ -15,14 +15,14 @@
       "developerName": "Christian Selig (& JeffreyCA)",
       "subtitle": "The award-winning Reddit app",
       "version": "1.15.11",
-      "versionDate": "2025-10-19T02:03:31Z",
-      "versionDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v1.2.5\"\n\nRelease Notes\n\u2022 Fix occassional crashes when scrolling on iOS 26 with Liquid Glass patch (thanks @dankrichtofen for the original implementation)\r\n  \u2022 To apply Liquid Glass patch: see [instructions](https://github.com/JeffreyCA/Apollo\u2022ImprovedCustomApi?tab=readme\u2022ov\u2022fileios\u202226\u2022liquid\u2022glass\u2022patch) or [original issue](https://github.com/JeffreyCA/Apollo\u2022ImprovedCustomApi/issues/63)\r\n\u2022 Fix crashes when tapping share URL link buttons on iOS 26\r\n    \u2022 Note that this is **not** a full fix. Tapping the link button now navigates to a webview on iOS 26. As a workaround, tap the inline text (see [this comment](https://github.com/JeffreyCA/Apollo\u2022ImprovedCustomApi/issues/62issuecomment\u20223247359652)).\r\n\u2022 Fix debug logging on iOS 26\r\nKnown Issues\n\u2022 Apollo Ultra features may cause app to crash\n\u2022 Imgur multi\u2022image upload\n\u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser\n",
-      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.2.5/NO-EXTENSIONS_Apollo-1.15.11_ImprovedCustomApi-1.2.5.ipa",
+      "versionDate": "2025-11-09T02:46:32Z",
+      "versionDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v1.2.6\"\n\nRelease Notes\n\u2022 Fix video downloads failing on certain v.redd.it videos (issue: https://github.com/JeffreyCA/Apollo\u2022ImprovedCustomApi/issues/75, PR: https://github.com/JeffreyCA/Apollo\u2022ImprovedCustomApi/pull/76)\r\n    \u2022 Context: recently, Reddit started using [CMAF media format](https://developer.apple.com/documentation/http\u2022live\u2022streaming/about\u2022the\u2022common\u2022media\u2022application\u2022format\u2022with\u2022http\u2022live\u2022streaming\u2022hls) for serving video content, which Apollo does not natively support downloading for.\nKnown Issues\n\u2022 Apollo Ultra features may cause app to crash\n\u2022 Imgur multi\u2022image upload\n\u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser\n",
+      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.2.6/NO-EXTENSIONS_Apollo-1.15.11_ImprovedCustomApi-1.2.6.ipa",
       "localizedDescription": "Apollo is an app for Reddit built for customizability, smoothness, gestures, and taking advantage of everything iOS has to offer. Apollo is a beautiful Reddit app built for fast navigation with an incredibly powerful set of features. Thanks to features like the Jump Bar, fully customizable gestures, and a super-charged Media Viewer, browsing Reddit has never been this amazing. It's created specifically with iOS design guidelines in mind, so it fits right at home on your device, and with input from thousands of Redditors helping sculpt and perfect it over several years before launching:\n\n\u2022 Jump Bar, for super-fast hopping between subreddits\n\u2022 Super-charged Media Viewer for an amazing experience viewing images, GIFs, videos, albums, and more from a variety of sources.\n\u2022 Tabbed interface for easy navigating\n\u2022 Incredibly powerful Markdown composer for writing comments and posts\n\u2022 Full inline Imgur uploading, both images and albums\n\u2022 Large or compact posts depending on your preference\n\u2022 Dark mode (can be automatic)\n\u2022 Fully customizable gestures\n\u2022 Safari View Controller for browsing articles and links\n\u2022 Inline previews of media in comments\n\u2022 3D Touch support\n\u2022 Beautifully organized Inbox\n\u2022 Filtering and blocking\n\u2022 Face ID / Touch ID / Passcode lock\n\u2022 Moderator features\n\u2022 Tons of settings to tweak\n\u2022 GIF scrubbing to go backward and forward in time\n\u2022 Multiple accounts\n\u2022 Powerful search\n\u2022 Full Markdown rendering\n\u2022 Unobtrusive Volume Indicator\n\nAs well as much, much more and it's constantly evolving. If you have anything you'd specifically like to see, come to the ApolloApp subreddit and we'd love to hear it! Apollo is an unofficial app, and side effects may include an incredible browsing experience.",
       "iconURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_0.webp",
       "tintColor": "4453f4",
       "category": "social",
-      "size": 77852804,
+      "size": 77855378,
       "screenshotURLs": [
         "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_1.webp",
         "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_2.webp",
@@ -36,10 +36,10 @@
       "versions": [
         {
           "version": "1.15.11",
-          "date": "2025-10-19T02:03:31Z",
-          "localizedDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v1.2.5\"\n\nRelease Notes\n\u2022 Fix occassional crashes when scrolling on iOS 26 with Liquid Glass patch (thanks @dankrichtofen for the original implementation)\r\n  \u2022 To apply Liquid Glass patch: see [instructions](https://github.com/JeffreyCA/Apollo\u2022ImprovedCustomApi?tab=readme\u2022ov\u2022fileios\u202226\u2022liquid\u2022glass\u2022patch) or [original issue](https://github.com/JeffreyCA/Apollo\u2022ImprovedCustomApi/issues/63)\r\n\u2022 Fix crashes when tapping share URL link buttons on iOS 26\r\n    \u2022 Note that this is **not** a full fix. Tapping the link button now navigates to a webview on iOS 26. As a workaround, tap the inline text (see [this comment](https://github.com/JeffreyCA/Apollo\u2022ImprovedCustomApi/issues/62issuecomment\u20223247359652)).\r\n\u2022 Fix debug logging on iOS 26\r\nKnown Issues\n\u2022 Apollo Ultra features may cause app to crash\n\u2022 Imgur multi\u2022image upload\n\u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser\n",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.2.5/NO-EXTENSIONS_Apollo-1.15.11_ImprovedCustomApi-1.2.5.ipa",
-          "size": 77852804
+          "date": "2025-11-09T02:46:32Z",
+          "localizedDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v1.2.6\"\n\nRelease Notes\n\u2022 Fix video downloads failing on certain v.redd.it videos (issue: https://github.com/JeffreyCA/Apollo\u2022ImprovedCustomApi/issues/75, PR: https://github.com/JeffreyCA/Apollo\u2022ImprovedCustomApi/pull/76)\r\n    \u2022 Context: recently, Reddit started using [CMAF media format](https://developer.apple.com/documentation/http\u2022live\u2022streaming/about\u2022the\u2022common\u2022media\u2022application\u2022format\u2022with\u2022http\u2022live\u2022streaming\u2022hls) for serving video content, which Apollo does not natively support downloading for.\nKnown Issues\n\u2022 Apollo Ultra features may cause app to crash\n\u2022 Imgur multi\u2022image upload\n\u2022 Uploads usually fail on the first attempt but subsequent retries should succeed\n\u2022 Share URLs in private messages and long\u2022tapping them still open in the in\u2022app browser\n",
+          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.2.6/NO-EXTENSIONS_Apollo-1.15.11_ImprovedCustomApi-1.2.6.ipa",
+          "size": 77855378
         }
       ],
       "appPermissions": {
@@ -142,6 +142,17 @@
       "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.webp",
       "notify": true,
       "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_1.2.5"
+    },
+    {
+      "appID": "com.christianselig.Apollo",
+      "title": "1.15.11_1.2.6 - 09 Nov",
+      "identifier": "release-1.15.11_1.2.6",
+      "caption": "Update for Apollo now available!",
+      "date": "2025-11-09T02:46:32Z",
+      "tintColor": "3F91FE",
+      "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.webp",
+      "notify": true,
+      "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_1.2.6"
     }
   ]
 }
