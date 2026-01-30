@@ -13,6 +13,9 @@ on:
         type: boolean
         default: false
 
+permissions:
+  contents: write
+
 env:
   PYTHON_VERSION: '3.13'
   APOLLO_IPA_URL: ${{ inputs.apollo_ipa_url || 'https://files.catbox.moe/o2lue0.ipa' }}
@@ -49,8 +52,10 @@ jobs:
 
       - name: Fetch latest release information
         id: get-release
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          RESPONSE=$(curl -s "${{ env.GITHUB_API_URL }}")
+          RESPONSE=$(curl -s -H "Authorization: token $GH_TOKEN" "${{ env.GITHUB_API_URL }}")
           if [ -z "$RESPONSE" ]; then
             echo "Error: Failed to fetch release data!"
             exit 1
@@ -215,27 +220,36 @@ jobs:
         env:
           RELEASE_TAG: ${{ steps.get-release.outputs.RELEASE_TAG }}
         run: |
-          python update_json.py
-
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
+
+          git fetch origin main
+          git checkout main
+          git pull origin main
+
+          python update_json.py
 
           git add apps.json apps_noext.json
 
           if git diff --cached --quiet; then
             echo "No changes detected, skipping commit."
           else
-            git fetch origin main
+            git commit -m "update source files for $RELEASE_TAG"
+            git push origin main || (git pull --rebase origin main && git push origin main)
+          fi
 
-            git checkout -b new-release origin/main
-            git checkout --detach HEAD
-
-            git commit -m "update version to $RELEASE_TAG"
-
-            git checkout new-release
-            git cherry-pick HEAD@{1}
-
-            git push origin new-release:main
+      - name: Update release marker
+        env:
+          RELEASE_TAG: ${{ steps.get-release.outputs.RELEASE_TAG }}
+        run: |
+          git pull origin main
+          echo "$RELEASE_TAG" > .current-release
+          git add .current-release
+          if git diff --cached --quiet; then
+            echo "Release marker already up to date, skipping commit."
+          else
+            git commit -m "mark $RELEASE_TAG as released"
+            git push origin main || (git pull --rebase origin main && git push origin main)
           fi
 
       - name: Job summary

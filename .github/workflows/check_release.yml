@@ -5,6 +5,9 @@ on:
     - cron: "0 0 * * *" # Runs every day
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 env:
   GITHUB_API_URL: "https://api.github.com/repos/JeffreyCA/Apollo-ImprovedCustomApi/releases/latest"
 
@@ -22,8 +25,10 @@ jobs:
 
       - name: Fetch latest release information
         id: check-release
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-            RESPONSE="$(curl -s "${{ env.GITHUB_API_URL }}")"
+            RESPONSE="$(curl -s -H "Authorization: token $GH_TOKEN" "${{ env.GITHUB_API_URL }}")"
             if [ -z "$RESPONSE" ]; then
               echo "Error: Empty response from GitHub API"
               exit 1
@@ -43,19 +48,8 @@ jobs:
             
             if [ "$RELEASE_TAG" != "$PREV_RELEASE" ]; then
                 echo "New release detected."
-                echo "$RELEASE_TAG" > .current-release
                 echo "IS_NEW_RELEASE=true" >> "$GITHUB_OUTPUT"
-                
-                git config --global user.name 'GitHub Action'
-                git config --global user.email 'action@github.com'
-                git add .current-release
-
-                if git diff --cached --quiet; then
-                    echo "No changes detected, skipping commit."
-                else
-                    git commit -m "update version to $RELEASE_TAG"
-                    git push
-                fi
+                echo "RELEASE_TAG=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
             else
                 echo "No new release detected."
                 echo "IS_NEW_RELEASE=false" >> "$GITHUB_OUTPUT"
@@ -66,3 +60,4 @@ jobs:
     needs: check-release
     if: needs.check-release.outputs.IS_NEW_RELEASE == 'true'
     uses: ./.github/workflows/create_release.yml
+    secrets: inherit
