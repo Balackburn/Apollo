@@ -20,6 +20,7 @@ class GitHubRelease(TypedDict):
 
 class VersionEntry(TypedDict):
     version: str
+    buildVersion: str
     date: str
     localizedDescription: str
     downloadURL: Optional[str]
@@ -29,6 +30,7 @@ class VersionEntry(TypedDict):
 class AppInfo(TypedDict):
     versions: List[VersionEntry]
     version: str
+    buildVersion: str
     versionDate: str
     versionDescription: str
     downloadURL: Optional[str]
@@ -133,6 +135,32 @@ def fetch_latest_release(repo_url: str) -> GitHubRelease:
     raise ValueError("No release found.")
 
 
+def extract_build_version(tag_name: str) -> str:
+    """
+    Extract the ImprovedCustomApi version from a tag and convert it to a buildVersion.
+    
+    For tags like v1.15.11_1.3.2, this extracts "1.3.2" and converts to "132".
+    For tags without underscore, returns "1".
+    
+    Args:
+        tag_name: GitHub release tag (e.g., "v1.15.11_1.3.2")
+    
+    Returns:
+        str: Build version as an integer string (e.g., "132")
+    """
+    # Try to extract the ImprovedCustomApi version after the underscore
+    match = re.search(r'_(\d+)\.(\d+)\.(\d+)', tag_name)
+    
+    if match:
+        # Convert version like "1.3.2" to "132"
+        major, minor, patch = match.groups()
+        build_version = f"{major}{minor}{patch}"
+        return build_version
+    
+    # Fallback for tags without ImprovedCustomApi version
+    return "1"
+
+
 def format_description(description: str) -> str:
     """
     Format release description by removing HTML tags and replacing certain characters.
@@ -174,16 +202,17 @@ def find_download_url_and_size(
 
 def normalize_version(version: str) -> str:
     """
-    Strip the version tag (e.g., -hotfix) from a version string.
+    Strip the version tag (e.g., -hotfix) from a version string and extract base Apollo version.
 
     Args:
-        version: Version string (e.g., v0.5.2-hotfix, 0.5.2-beta)
+        version: Version string (e.g., v1.15.11_1.3.2, 1.15.11_1.2.2)
 
     Returns:
-        Normalized version string without the tag (e.g., 0.5.2)
+        Normalized Apollo version string (e.g., 1.15.11)
     """
     version = version.lstrip("v")
 
+    # Extract the Apollo version (before the underscore)
     match = re.search(r"(\d+\.\d+\.\d+)", version)
     if match:
         return match.group(1)
@@ -193,10 +222,13 @@ def normalize_version(version: str) -> str:
 def process_versions(versions_data: List[VersionEntry]) -> List[VersionEntry]:
     """
     Process the versions list to remove duplicate versions, keeping the newest version.
+    
+    Two entries are considered duplicates if they have the same version AND buildVersion.
 
     Args:
         versions_data (List[VersionEntry]): List of version dictionaries containing:
                                             version: str
+                                            buildVersion: str
                                             date: str
                                             localizedDescription: str
                                             downloadURL: Optional[str]
@@ -213,12 +245,13 @@ def process_versions(versions_data: List[VersionEntry]) -> List[VersionEntry]:
         # Parse the date for comparison
         current_date = datetime.fromisoformat(version["date"].replace("Z", "+00:00"))
 
-        # Check if this version already exists in unique_versions
+        # Check if this version+buildVersion combination already exists
         existing_version_index = next(
             (
                 index
                 for index, v in enumerate(version_entries)
-                if v["version"] == version["version"]
+                if v["version"] == version["version"] 
+                and v["buildVersion"] == version["buildVersion"]
             ),
             None,
         )
@@ -264,15 +297,13 @@ def update_json_file(
     # Process all releases
     for release in fetched_data_all:
         full_version = release["tag_name"].lstrip("v")
-        version_match = re.search(r"(\d+\.\d+\.\d+)(?:-([a-zA-Z0-9]+))?", full_version)
-
-        if not version_match:
-            continue
-
         version_date = release["published_at"]
 
-        # Get base version without tags
+        # Get base Apollo version (e.g., "1.15.11")
         base_version = normalize_version(full_version)
+
+        # Extract buildVersion from the tag
+        build_version = extract_build_version(release["tag_name"])
 
         # Clean up description
         description = release["body"]
@@ -288,9 +319,10 @@ def update_json_file(
         if not download_url:
             continue
 
-        # Create version entry
+        # Create version entry with buildVersion
         version_entry: VersionEntry = {
             "version": base_version,
+            "buildVersion": build_version,
             "date": version_date,
             "localizedDescription": description,
             "downloadURL": download_url,
@@ -299,23 +331,23 @@ def update_json_file(
 
         releases.append(version_entry)
 
+    # Process versions to remove duplicates
     deduplicated_versions = process_versions(releases)
-    app["versions"] = []
-    for i in deduplicated_versions:
-        app["versions"].insert(0, i)
+    
+    # Sort by date (newest first) for the versions array
     app["versions"] = sorted(
-        app["versions"], key=lambda x: x.get("date", ""), reverse=True
+        deduplicated_versions, 
+        key=lambda x: x.get("date", ""), 
+        reverse=True
     )
 
     # Update app info with latest release
     latest_version = fetched_data_latest["tag_name"].lstrip("v")
     tag = fetched_data_latest["tag_name"]
-    version_match = re.search(r"(\d+\.\d+\.\d+)(?:-([a-zA-Z0-9]+))?", latest_version)
-
-    if not version_match:
-        raise ValueError("Invalid version format")
-
-    app["version"] = normalize_version(full_version)
+    
+    # Get base version and buildVersion for latest
+    app["version"] = normalize_version(latest_version)
+    app["buildVersion"] = extract_build_version(tag)
     app["versionDate"] = fetched_data_latest["published_at"]
     app["versionDescription"] = format_description(fetched_data_latest["body"])
 
@@ -356,11 +388,14 @@ def main() -> None:
     Entrypoint for GitHub workflow action.
 
     The script runs two passes to populate both the sources (standard and no-extensions).
+    Each version entry now includes a buildVersion field for proper AltStore/SideStore update detection.
     """
     try:
         config = load_config("config.json")
         fetched_data_all = fetch_all_releases(config["repo_url"])
         fetched_data_latest = fetch_latest_release(config["repo_url"])
+        
+        print("Updating standard source...")
         update_json_file(
             config,
             config["json_file"],
@@ -368,6 +403,8 @@ def main() -> None:
             fetched_data_latest,
             None
         )
+        
+        print("Updating no-extensions source...")
         update_json_file(
             config,
             config["json_noext_file"],
@@ -375,9 +412,11 @@ def main() -> None:
             fetched_data_latest,
             "NO-EXTENSIONS",
         )
-        print("Successfully updated sources with latest releases.")
+        
+        print("Successfully updated both sources with buildVersion support.")
     except Exception as e:
         print(f"Error updating releases: {e}")
+        raise
 
 
 if __name__ == "__main__":
