@@ -1,10 +1,10 @@
 {
-    "repo_url": "Balackburn/Apollo",
-    "json_file": "apps.json",
-    "json_noext_file": "apps_noext.json",
-    "app_id": "com.christianselig.Apollo",
-    "app_name": "Apollo for Reddit (with ImprovedCustomApi)",
-    "caption": "Update for Apollo now available!",
-    "tint_colour": "3F91FE",
-    "image_url": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.webp"
+  "repo_url": "Balackburn/Apollo",
+  "json_file": "apps.json",
+  "json_noext_file": "apps_noext.json",
+  "app_id": "com.christianselig.Apollo",
+  "app_name": "Apollo for Reddit (with ImprovedCustomApi)",
+  "caption": "Update for Apollo now available!",
+  "tint_colour": "#3F91FE",
+  "image_url": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.webp"
 }
