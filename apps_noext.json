@@ -34,7 +34,7 @@
           "date": "2026-01-30T17:02:57Z",
           "localizedDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v1.4.1\"\n\nRelease Notes\n• Fix certain Streamable links not loading in media view (https://github.com/JeffreyCA/Apollo•ImprovedCustomApi/pull/95)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
           "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.4.1/NO-EXTENSIONS_Apollo-1.15.11_ImprovedCustomApi-1.4.1.ipa",
-          "size": 77915454
+          "size": 77914638
         },
         {
           "version": "1.15.11",
@@ -150,7 +150,7 @@
       "versionDate": "2026-01-30T17:02:57Z",
       "versionDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v1.4.1\"\n\nRelease Notes\n• Fix certain Streamable links not loading in media view (https://github.com/JeffreyCA/Apollo•ImprovedCustomApi/pull/95)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
       "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.4.1/NO-EXTENSIONS_Apollo-1.15.11_ImprovedCustomApi-1.4.1.ipa",
-      "size": 77915454
+      "size": 77914638
     }
   ],
   "news": [
