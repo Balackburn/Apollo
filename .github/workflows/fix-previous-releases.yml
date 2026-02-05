@@ -1,0 +1,212 @@
+name: Fix CFBundleVersion in Previous Releases
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (preview changes without uploading)'
+        type: boolean
+        default: true
+      specific_tag:
+        description: 'Fix specific tag only (leave empty for all releases)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+jobs:
+  fix-releases:
+    runs-on: macos-latest
+    
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Fetch all releases
+        id: get-releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SPECIFIC_TAG: ${{ inputs.specific_tag }}
+        run: |
+          if [ -n "$SPECIFIC_TAG" ]; then
+            echo "Fetching specific release: $SPECIFIC_TAG"
+            curl -s -H "Authorization: token $GH_TOKEN" \
+              "https://api.github.com/repos/${{ github.repository }}/releases/tags/$SPECIFIC_TAG" | jq -c '[.]' > releases.json
+          else
+            echo "Fetching all releases..."
+            curl -s -H "Authorization: token $GH_TOKEN" \
+              "https://api.github.com/repos/${{ github.repository }}/releases?per_page=100" | jq -c '.' > releases.json
+          fi
+          
+          echo "Releases saved to releases.json"
+          RELEASE_COUNT=$(jq 'length' releases.json)
+          echo "Found $RELEASE_COUNT release(s)"
+
+      - name: Process releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          if [ ! -f releases.json ]; then
+            echo "Error: releases.json not found!"
+            exit 1
+          fi
+          
+          echo "Processing releases..."
+          jq -c '.[]' releases.json 2>/dev/null | while read -r release; do
+            TAG_NAME=$(echo "$release" | jq -r '.tag_name')
+            RELEASE_ID=$(echo "$release" | jq -r '.id')
+            RELEASE_NAME=$(echo "$release" | jq -r '.name')
+            
+            echo ""
+            echo "======================================"
+            echo "Processing: $TAG_NAME"
+            echo "======================================"
+            
+            # Extract ICA version from tag (e.g., v1.15.11_1.4.1 -> 1.4.1)
+            if [[ "$TAG_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+_([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+              ICA_VERSION="${BASH_REMATCH[1]}"
+              echo "Target CFBundleVersion: $ICA_VERSION"
+            else
+              echo "⚠️  Skipping $TAG_NAME - does not match expected format (v*.*.*_*.*.*)"
+              continue
+            fi
+            
+            # Get all IPA assets for this release
+            IPA_ASSETS=$(echo "$release" | jq -c '.assets[] | select(.name | endswith(".ipa"))')
+            
+            if [ -z "$IPA_ASSETS" ]; then
+              echo "⚠️  No IPA files found in this release"
+              continue
+            fi
+            
+            # Process each IPA
+            echo "$IPA_ASSETS" | jq -c '.' 2>/dev/null | while read -r asset; do
+              ASSET_NAME=$(echo "$asset" | jq -r '.name')
+              ASSET_URL=$(echo "$asset" | jq -r '.browser_download_url')
+              ASSET_ID=$(echo "$asset" | jq -r '.id')
+              
+              echo ""
+              echo "  Processing: $ASSET_NAME"
+              
+              # Download IPA
+              echo "    Downloading..."
+              curl -L -o "$ASSET_NAME" "$ASSET_URL"
+              
+              # Create working directory
+              WORK_DIR="work_${ASSET_NAME%.ipa}"
+              mkdir -p "$WORK_DIR"
+              
+              # Extract IPA
+              echo "    Extracting..."
+              unzip -q "$ASSET_NAME" -d "$WORK_DIR"
+              
+              # Find Info.plist
+              INFO_PLIST=$(find "$WORK_DIR/Payload" -name "Info.plist" -type f | head -n 1)
+              
+              if [ -z "$INFO_PLIST" ]; then
+                echo "    ⚠️  Could not find Info.plist, skipping"
+                rm -rf "$WORK_DIR" "$ASSET_NAME"
+                continue
+              fi
+              
+              # Get current CFBundleVersion
+              CURRENT_VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "$INFO_PLIST" 2>/dev/null || echo "unknown")
+              echo "    Current CFBundleVersion: $CURRENT_VERSION"
+              
+              # Check if already correct
+              if [ "$CURRENT_VERSION" = "$ICA_VERSION" ]; then
+                echo "    ✓ Already correct, skipping"
+                rm -rf "$WORK_DIR" "$ASSET_NAME"
+                continue
+              fi
+              
+              # Update or Add CFBundleVersion
+              echo "    Updating CFBundleVersion to: $ICA_VERSION"
+              if [ "$CURRENT_VERSION" = "unknown" ]; then
+                # Key doesn't exist, add it
+                /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string $ICA_VERSION" "$INFO_PLIST"
+              else
+                # Key exists, update it
+                /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $ICA_VERSION" "$INFO_PLIST"
+              fi
+              
+              # Verify the change
+              NEW_VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "$INFO_PLIST")
+              echo "    Verified CFBundleVersion: $NEW_VERSION"
+              
+              # Re-sign the app
+              echo "    Re-signing..."
+              APP_PATH=$(find "$WORK_DIR/Payload" -name "*.app" -type d | head -n 1)
+              ldid -S -M "$APP_PATH/$(basename ${APP_PATH%.app})" 2>/dev/null || true
+              
+              # Create new IPA
+              echo "    Creating fixed IPA..."
+              cd "$WORK_DIR"
+              zip -q -r "../${ASSET_NAME}.fixed" Payload
+              cd ..
+              
+              if [ "$DRY_RUN" = "true" ]; then
+                echo "    [DRY RUN] Would upload fixed IPA to replace asset"
+                FILE_SIZE=$(stat -f%z "${ASSET_NAME}.fixed" 2>/dev/null || stat -c%s "${ASSET_NAME}.fixed")
+                echo "    [DRY RUN] Fixed IPA size: $FILE_SIZE bytes"
+              else
+                echo "    Deleting old asset..."
+                curl -X DELETE \
+                  -H "Authorization: token $GH_TOKEN" \
+                  -H "Accept: application/vnd.github+json" \
+                  "https://api.github.com/repos/${{ github.repository }}/releases/assets/$ASSET_ID"
+                
+                # Wait a moment for deletion to process
+                sleep 2
+                
+                echo "    Uploading fixed IPA..."
+                UPLOAD_URL=$(echo "$release" | jq -r '.upload_url' | sed 's/{?name,label}//')
+                
+                curl -X POST \
+                  -H "Authorization: token $GH_TOKEN" \
+                  -H "Content-Type: application/octet-stream" \
+                  --data-binary @"${ASSET_NAME}.fixed" \
+                  "${UPLOAD_URL}?name=${ASSET_NAME}"
+                
+                echo "    ✓ Successfully updated $ASSET_NAME"
+              fi
+              
+              # Cleanup
+              rm -rf "$WORK_DIR" "$ASSET_NAME" "${ASSET_NAME}.fixed"
+            done
+            
+            echo "✓ Completed processing $TAG_NAME"
+          done
+          
+          echo ""
+          echo "======================================"
+          if [ "$DRY_RUN" = "true" ]; then
+            echo "DRY RUN COMPLETE - No changes were made"
+            echo "Set dry_run to false to apply changes"
+          else
+            echo "ALL RELEASES FIXED"
+          fi
+          echo "======================================"
+
+      - name: Summary
+        run: |
+          echo "## Fix CFBundleVersion Summary" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            echo "**Mode:** 🔍 Dry Run (Preview Only)" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "No changes were made. Review the logs above and set \`dry_run: false\` to apply fixes." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "**Mode:** ✅ Live Update" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "All IPAs have been updated with correct CFBundleVersion values." >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          if [ -n "${{ inputs.specific_tag }}" ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Target:** Specific release \`${{ inputs.specific_tag }}\`" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Target:** All releases" >> $GITHUB_STEP_SUMMARY
+          fi

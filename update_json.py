@@ -1,3 +1,12 @@
+"""
+AltStore Source JSON Generator
+
+Automatically generates and updates AltStore source JSON files from GitHub releases.
+Supports 4 IPA variants: standard, NO-EXTENSIONS, GLASS, and NO-EXTENSIONS_GLASS.
+
+Specification: https://faq.altstore.io/developers/make-a-source
+"""
+
 import json
 import re
 import sys
@@ -24,8 +33,8 @@ def load_config(config_path: str = "config.json") -> Dict:
 
     # Validate required keys
     required_keys = [
-        "repo_url", "json_file", "json_noext_file", "app_id",
-        "app_name", "caption", "tint_colour", "image_url"
+        "repo_url", "json_file", "json_noext_file", "json_glass_file", "json_noext_glass_file",
+        "app_id", "app_name", "caption", "tint_colour", "image_url"
     ]
     missing_keys = [key for key in required_keys if key not in config_data]
     if missing_keys:
@@ -123,17 +132,34 @@ def find_ipa_asset(release: Dict, prefix: Optional[str] = None) -> Tuple[Optiona
     
     Args:
         release: GitHub release object
-        prefix: 'NO-EXTENSIONS' for no-ext variant, None for standard
+        prefix: IPA variant to find:
+                - None: Standard (Apollo*.ipa, not GLASS or NO-EXTENSIONS)
+                - "NO-EXTENSIONS": NO-EXTENSIONS*.ipa (not NO-EXTENSIONS_GLASS)
+                - "GLASS": GLASS_*.ipa (not NO-EXTENSIONS_GLASS)
+                - "NO-EXTENSIONS_GLASS": NO-EXTENSIONS_GLASS*.ipa
         
     Returns:
         Tuple of (download_url, size) or (None, None)
     """
-    target_prefix = "NO-EXTENSIONS" if prefix == "NO-EXTENSIONS" else "Apollo"
-
     for asset in release.get("assets", []):
         name = asset.get("name", "")
-        if name.startswith(target_prefix) and name.endswith(".ipa"):
-            return asset.get("browser_download_url"), asset.get("size")
+        
+        if not name.endswith(".ipa"):
+            continue
+        
+        # Check for specific variant (order matters - check most specific first)
+        if prefix == "NO-EXTENSIONS_GLASS":
+            if name.startswith("NO-EXTENSIONS_GLASS"):
+                return asset.get("browser_download_url"), asset.get("size")
+        elif prefix == "NO-EXTENSIONS":
+            if name.startswith("NO-EXTENSIONS") and not name.startswith("NO-EXTENSIONS_GLASS"):
+                return asset.get("browser_download_url"), asset.get("size")
+        elif prefix == "GLASS":
+            if name.startswith("GLASS") and not name.startswith("NO-EXTENSIONS"):
+                return asset.get("browser_download_url"), asset.get("size")
+        else:  # Standard (None)
+            if name.startswith("Apollo") and not name.startswith("NO-EXTENSIONS") and not name.startswith("GLASS"):
+                return asset.get("browser_download_url"), asset.get("size")
 
     return None, None
 
@@ -280,15 +306,21 @@ def main() -> int:
             print("\nError: No releases found")
             return 1
 
-        # Update both source files
+        # Update all source files
         print(f"\nUpdating standard source ({config['json_file']})...")
         update_source_json(config["json_file"], releases, config, prefix=None)
 
         print(f"Updating no-extensions source ({config['json_noext_file']})...")
         update_source_json(config["json_noext_file"], releases, config, prefix="NO-EXTENSIONS")
 
+        print(f"Updating GLASS source ({config['json_glass_file']})...")
+        update_source_json(config["json_glass_file"], releases, config, prefix="GLASS")
+
+        print(f"Updating no-extensions GLASS source ({config['json_noext_glass_file']})...")
+        update_source_json(config["json_noext_glass_file"], releases, config, prefix="NO-EXTENSIONS_GLASS")
+
         print("\n" + "=" * 60)
-        print("✓ Successfully updated both source files")
+        print("✓ Successfully updated all 4 source files")
         print("=" * 60)
 
         return 0

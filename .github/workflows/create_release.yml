@@ -12,6 +12,9 @@ on:
         description: 'Upload to Catbox.moe'
         type: boolean
         default: false
+  schedule:
+    # Runs every 6 hours to check for new releases
+    - cron: '0 */6 * * *'
 
 permissions:
   contents: write
@@ -24,7 +27,65 @@ env:
   PYZULE_RW_URL: "https://github.com/asdfzxcvbn/pyzule-rw/archive/main.zip"
 
 jobs:
+  check-new-release:
+    runs-on: ubuntu-latest
+    outputs:
+      should_build: ${{ steps.check.outputs.should_build }}
+      release_tag: ${{ steps.check.outputs.release_tag }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for new release
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Get the latest release tag from external repo
+          LATEST_TAG=$(curl -s -H "Authorization: token $GH_TOKEN" "${{ env.GITHUB_API_URL }}" | jq -r '.tag_name')
+          echo "Latest external release: $LATEST_TAG"
+          
+          # Get the latest release tag from this repo
+          CURRENT_TAG=$(curl -s -H "Authorization: token $GH_TOKEN" \
+            "https://api.github.com/repos/${{ github.repository }}/releases/latest" \
+            | jq -r '.tag_name // empty')
+          echo "Current repo release: $CURRENT_TAG"
+          
+          # Extract version from current tag (format: v1.17.5_1.0.14)
+          if [ -n "$CURRENT_TAG" ]; then
+            CURRENT_ICA_VERSION=$(echo "$CURRENT_TAG" | sed -nE 's/.*_v?(.+)/\1/p')
+          else
+            CURRENT_ICA_VERSION=""
+          fi
+          
+          # Extract version from latest tag
+          LATEST_ICA_VERSION=$(echo "$LATEST_TAG" | sed -nE 's/v(.+)/\1/p')
+          
+          echo "Current ICA version: $CURRENT_ICA_VERSION"
+          echo "Latest ICA version: $LATEST_ICA_VERSION"
+          
+          # Check if we should build (new release detected or manual/workflow_call trigger)
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "Manual or workflow_call trigger - building"
+            echo "should_build=true" >> "$GITHUB_OUTPUT"
+          elif [ -z "$CURRENT_ICA_VERSION" ]; then
+            echo "No existing release found - building"
+            echo "should_build=true" >> "$GITHUB_OUTPUT"
+          elif [ "$LATEST_ICA_VERSION" != "$CURRENT_ICA_VERSION" ]; then
+            echo "New release detected - building"
+            echo "should_build=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "No new release - skipping build"
+            echo "should_build=false" >> "$GITHUB_OUTPUT"
+          fi
+          
+          echo "release_tag=$LATEST_TAG" >> "$GITHUB_OUTPUT"
+
   build-apollo-ipa:
+    needs: check-new-release
+    if: needs.check-new-release.outputs.should_build == 'true'
     runs-on: macos-latest
     defaults:
       run:
@@ -113,7 +174,12 @@ jobs:
           
           # Update CFBundleVersion in Info.plist to match ICA version
           echo "Updating CFBundleVersion to ${ICA_VERSION}"
-          /usr/libexec/PlistBuddy -c "Set :CFBundleVersion ${ICA_VERSION}" "Payload/Apollo.app/Info.plist"
+          # Check if key exists, add or set accordingly
+          if /usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "Payload/Apollo.app/Info.plist" 2>/dev/null; then
+            /usr/libexec/PlistBuddy -c "Set :CFBundleVersion ${ICA_VERSION}" "Payload/Apollo.app/Info.plist"
+          else
+            /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string ${ICA_VERSION}" "Payload/Apollo.app/Info.plist"
+          fi
           
           # Verify the change
           BUILD_VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "Payload/Apollo.app/Info.plist")
@@ -151,7 +217,12 @@ jobs:
           
           # Update CFBundleVersion in Info.plist to match ICA version
           echo "Updating CFBundleVersion to ${ICA_VERSION}"
-          /usr/libexec/PlistBuddy -c "Set :CFBundleVersion ${ICA_VERSION}" "Payload/Apollo.app/Info.plist"
+          # Check if key exists, add or set accordingly
+          if /usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "Payload/Apollo.app/Info.plist" 2>/dev/null; then
+            /usr/libexec/PlistBuddy -c "Set :CFBundleVersion ${ICA_VERSION}" "Payload/Apollo.app/Info.plist"
+          else
+            /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string ${ICA_VERSION}" "Payload/Apollo.app/Info.plist"
+          fi
           
           # Verify the change
           BUILD_VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "Payload/Apollo.app/Info.plist")
@@ -249,26 +320,12 @@ jobs:
 
           python update_json.py
 
-          git add apps.json apps_noext.json
+          git add apps.json apps_noext.json apps_glass.json apps_noext_glass.json
 
           if git diff --cached --quiet; then
             echo "No changes detected, skipping commit."
           else
             git commit -m "update source files for $RELEASE_TAG"
-            git push origin main || (git pull --rebase origin main && git push origin main)
-          fi
-
-      - name: Update release marker
-        env:
-          RELEASE_TAG: ${{ steps.get-release.outputs.RELEASE_TAG }}
-        run: |
-          git pull origin main
-          echo "$RELEASE_TAG" > .current-release
-          git add .current-release
-          if git diff --cached --quiet; then
-            echo "Release marker already up to date, skipping commit."
-          else
-            git commit -m "mark $RELEASE_TAG as released"
             git push origin main || (git pull --rebase origin main && git push origin main)
           fi
 

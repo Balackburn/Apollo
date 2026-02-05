@@ -1,0 +1,138 @@
+{
+  "name": "Apollo for Reddit - GLASS",
+  "subtitle": "Apollo for Reddit unofficial AltStore source with Liquid Glass UI.",
+  "description": "This is an unofficial AltStore source for Apollo for Reddit tweaked with ImprovedCustomApi by @JeffreyCA.\n\nThis is the GLASS version - Apollo injected with ImprovedCustomApi and Liquid Glass UI Patch (iOS 18+).\n\nFor full details, check the GitHub repository:\nhttps://github.com/Balackburn/Apollo",
+  "iconURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_0.webp",
+  "website": "https://balackburn.github.io/Apollo",
+  "tintColor": "#4453f4",
+  "featuredApps": [],
+  "headerURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/header/altstore_header.png",
+  "apps": [
+    {
+      "name": "Apollo for Reddit - GLASS",
+      "bundleIdentifier": "com.christianselig.Apollo",
+      "developerName": "Christian Selig (& JeffreyCA)",
+      "subtitle": "The award-winning Reddit app with Liquid Glass UI",
+      "localizedDescription": "Apollo is an app for Reddit built for customizability, smoothness, gestures, and taking advantage of everything iOS has to offer. Apollo is a beautiful Reddit app built for fast navigation with an incredibly powerful set of features. Thanks to features like the Jump Bar, fully customizable gestures, and a super-charged Media Viewer, browsing Reddit has never been this amazing. It's created specifically with iOS design guidelines in mind, so it fits right at home on your device, and with input from thousands of Redditors helping sculpt and perfect it over several years before launching:\n\n• Jump Bar, for super-fast hopping between subreddits\n• Super-charged Media Viewer for an amazing experience viewing images, GIFs, videos, albums, and more from a variety of sources.\n• Tabbed interface for easy navigating\n• Incredibly powerful Markdown composer for writing comments and posts\n• Full inline Imgur uploading, both images and albums\n• Large or compact posts depending on your preference\n• Dark mode (can be automatic)\n• Fully customizable gestures\n• Safari View Controller for browsing articles and links\n• Inline previews of media in comments\n• 3D Touch support\n• Beautifully organized Inbox\n• Filtering and blocking\n• Face ID / Touch ID / Passcode lock\n• Moderator features\n• Tons of settings to tweak\n• GIF scrubbing to go backward and forward in time\n• Multiple accounts\n• Powerful search\n• Full Markdown rendering\n• Unobtrusive Volume Indicator\n\nThis version includes the Liquid Glass UI patch for iOS 18+ compatibility.\n\nAs well as much, much more and it's constantly evolving. If you have anything you'd specifically like to see, come to the ApolloApp subreddit and we'd love to hear it! Apollo is an unofficial app, and side effects may include an incredible browsing experience.",
+      "iconURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_0.webp",
+      "tintColor": "#4453f4",
+      "category": "social",
+      "screenshots": [
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_1.webp",
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_2.webp",
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_3.webp",
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_4.webp",
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_5.webp",
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_6.webp",
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_7.webp",
+        "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_8.webp"
+      ],
+      "versions": [
+        {
+          "version": "1.15.11",
+          "buildVersion": "1.4.1",
+          "date": "2026-01-30T17:02:57Z",
+          "localizedDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v1.4.1\"\n\nRelease Notes\n• Fix certain Streamable links not loading in media view (https://github.com/JeffreyCA/Apollo•ImprovedCustomApi/pull/95)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
+          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.4.1/GLASS_Apollo-1.15.11_ImprovedCustomApi-1.4.1.ipa",
+          "size": 114785651
+        },
+        {
+          "version": "1.15.11",
+          "buildVersion": "1.3.2",
+          "date": "2026-01-08T02:08:52Z",
+          "localizedDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v1.3.2\"\n\nRelease Notes\n• Fix crashes in Custom API settings on iOS 14 (issue: 10, PR: 88)\r\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
+          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.3.2/GLASS_Apollo-1.15.11_ImprovedCustomApi-1.3.2.ipa",
+          "size": 114784932
+        },
+        {
+          "version": "1.15.11",
+          "buildVersion": "1.3.0",
+          "date": "2025-12-29T02:22:28Z",
+          "localizedDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v1.3.0\"\n\nRelease Notes\n• Backup and restore most Apollo and tweak settings (in Settings > General > Custom API) (issue: https://github.com/JeffreyCA/Apollo•ImprovedCustomApi/issues/83, PR: https://github.com/JeffreyCA/Apollo•ImprovedCustomApi/pull/84)\r\n    • Settings are exported as a .zip file with 2 plist files: \"preferences.plist\" (most Apollo and tweak settings) and \"group.plist\" (filters, theme settings)\r\n    • Restoring settings does not restore or affect existing account logins. This means on a clean install, accounts need to be re•added manually. The backup .zip contains an \"accounts.txt\" with all account usernames for reference.\r\n• Update Custom API Settings layout\r\n\r\n\r\n\r\n\r\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
+          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.3.0/GLASS_Apollo-1.15.11_ImprovedCustomApi-1.3.0.ipa",
+          "size": 114778835
+        },
+        {
+          "version": "1.15.11",
+          "buildVersion": "1.2.6",
+          "date": "2025-11-09T02:46:32Z",
+          "localizedDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v1.2.6\"\n\nRelease Notes\n• Fix video downloads failing on certain v.redd.it videos (issue: https://github.com/JeffreyCA/Apollo•ImprovedCustomApi/issues/75, PR: https://github.com/JeffreyCA/Apollo•ImprovedCustomApi/pull/76)\r\n    • Context: recently, Reddit started using [CMAF media format](https://developer.apple.com/documentation/http•live•streaming/about•the•common•media•application•format•with•http•live•streaming•hls) for serving video content, which Apollo does not natively support downloading for.\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
+          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.2.6/GLASS_Apollo-1.15.11_ImprovedCustomApi-1.2.6.ipa",
+          "size": 114726231
+        }
+      ],
+      "appPermissions": {
+        "entitlements": [
+          "com.apple.security.application-groups",
+          "com.apple.developer.associated-domains",
+          "com.apple.developer.group-session",
+          "com.apple.developer.icloud-container-identifiers",
+          "com.apple.developer.ubiquity-kvstore-identifier",
+          "keychain-access-groups",
+          "aps-environment",
+          "com.apple.developer.weatherkit"
+        ],
+        "privacy": {
+          "Camera": "App needs camera access.",
+          "FaceID": "App uses Face ID.",
+          "LocationWhenInUse": "App needs location when in use.",
+          "Motion": "App uses motion sensors.",
+          "PhotoLibraryAdd": "App adds photos.",
+          "PhotoLibrary": "App accesses photo library."
+        }
+      },
+      "version": "1.15.11",
+      "buildVersion": "1.4.1",
+      "versionDate": "2026-01-30T17:02:57Z",
+      "versionDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v1.4.1\"\n\nRelease Notes\n• Fix certain Streamable links not loading in media view (https://github.com/JeffreyCA/Apollo•ImprovedCustomApi/pull/95)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
+      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.4.1/GLASS_Apollo-1.15.11_ImprovedCustomApi-1.4.1.ipa",
+      "size": 114785651
+    }
+  ],
+  "news": [
+    {
+      "appID": "com.christianselig.Apollo",
+      "title": "1.15.11_1.4.1 - 30 Jan",
+      "identifier": "release-1.15.11_1.4.1",
+      "caption": "Update for ImprovedCustomApi now available!",
+      "date": "2026-01-30T17:02:57Z",
+      "tintColor": "#3F91FE",
+      "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.webp",
+      "notify": true,
+      "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_1.4.1"
+    },
+    {
+      "appID": "com.christianselig.Apollo",
+      "title": "1.15.11_1.3.2 - 08 Jan",
+      "identifier": "release-1.15.11_1.3.2",
+      "caption": "Update for ImprovedCustomApi now available!",
+      "date": "2026-01-08T02:08:52Z",
+      "tintColor": "#3F91FE",
+      "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.webp",
+      "notify": true,
+      "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_1.3.2"
+    },
+    {
+      "appID": "com.christianselig.Apollo",
+      "title": "1.15.11_1.3.0 - 29 Dec",
+      "identifier": "release-1.15.11_1.3.0",
+      "caption": "Update for ImprovedCustomApi now available!",
+      "date": "2025-12-29T02:22:28Z",
+      "tintColor": "#3F91FE",
+      "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.webp",
+      "notify": true,
+      "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_1.3.0"
+    },
+    {
+      "appID": "com.christianselig.Apollo",
+      "title": "1.15.11_1.2.6 - 09 Nov",
+      "identifier": "release-1.15.11_1.2.6",
+      "caption": "Update for ImprovedCustomApi now available!",
+      "date": "2025-11-09T02:46:32Z",
+      "tintColor": "#3F91FE",
+      "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.webp",
+      "notify": true,
+      "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_1.2.6"
+    }
+  ]
+}

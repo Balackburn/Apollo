@@ -14,6 +14,15 @@ It uses version `1.15.11` of the app and the latest release of the tweak.
 
 Before raising any issues, please check the [ImprovedCustomApi](https://github.com/JeffreyCA/Apollo-ImprovedCustomApi/issues) repo first - as this source only integrates it.
 
+## Available Sources
+
+| Version | Best For | Features |
+|---------|----------|----------|
+| **Standard** | Most users | Apollo injected with ImprovedCustomApi |
+| **No Extensions** | Free Apple Developer accounts | Apollo injected with ImprovedCustomApi and removed extensions - Uses fewer App IDs (1 vs 7) |
+| **GLASS** | iOS 18+ users | Apollo injected with ImprovedCustomApi and Liquid Glass UI Patch (ios 18+) |
+| **No Extensions + LIQUID GLASS** | iOS 18 + Free accounts | Combines both options |
+
 ## Standard Source
 
 <a href="https://intradeus.github.io/http-protocol-redirector?r=altstore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps.json"><img src="images/buttons/altstore_button.png" width="200"></a>
@@ -24,18 +33,38 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
 &nbsp;
 <a href="https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps.json"><img src="images/buttons/url_button.png" width="200"></a>
 
-## No Extensions (Avoid AppID Limit) Source
+## No Extensions Source (Avoid AppID Limit)
 
 <a href="https://intradeus.github.io/http-protocol-redirector?r=altstore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext.json"><img src="images/buttons/altstore_button.png" width="200"></a>
+&nbsp;
+<a href="https://intradeus.github.io/http-protocol-redirector?r=feather://source/https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext.json"><img src="images/buttons/feather_button.png" width="200"></a>
 &nbsp;
 <a href="https://intradeus.github.io/http-protocol-redirector?r=sidestore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext.json"><img src="images/buttons/sidestore_button.png" width="200"></a>
 &nbsp;
 <a href="https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext.json"><img src="images/buttons/url_button.png" width="200"></a>
 
+## GLASS Source (iOS 18+)
+
+<a href="https://intradeus.github.io/http-protocol-redirector?r=altstore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_glass.json"><img src="images/buttons/altstore_button.png" width="200"></a>
+&nbsp;
+<a href="https://intradeus.github.io/http-protocol-redirector?r=feather://source/https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_glass.json"><img src="images/buttons/feather_button.png" width="200"></a>
+&nbsp;
+<a href="https://intradeus.github.io/http-protocol-redirector?r=sidestore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_glass.json"><img src="images/buttons/sidestore_button.png" width="200"></a>
+&nbsp;
+<a href="https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_glass.json"><img src="images/buttons/url_button.png" width="200"></a>
+
+## No Extensions + GLASS Source (Avoid AppID Limit - iOS 18+)
+
+<a href="https://intradeus.github.io/http-protocol-redirector?r=altstore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext_glass.json"><img src="images/buttons/altstore_button.png" width="200"></a>
+&nbsp;
+<a href="https://intradeus.github.io/http-protocol-redirector?r=feather://source/https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext_glass.json"><img src="images/buttons/feather_button.png" width="200"></a>
+&nbsp;
+<a href="https://intradeus.github.io/http-protocol-redirector?r=sidestore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext_glass.json"><img src="images/buttons/sidestore_button.png" width="200"></a>
+&nbsp;
+<a href="https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext_glass.json"><img src="images/buttons/url_button.png" width="200"></a>
+
 ## Website
 
 <a href="https://balackburn.github.io/Apollo"><img src="images/buttons/website_button.png" width="200"></a>
-
-----
 
 This project is not affiliated with Apollo or Christian Selig.
