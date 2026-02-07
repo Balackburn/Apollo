@@ -20,8 +20,8 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
 |---------|----------|----------|
 | **Standard** | Most users | Apollo injected with ImprovedCustomApi |
 | **No Extensions** | Free Apple Developer accounts | Apollo injected with ImprovedCustomApi and removed extensions - Uses fewer App IDs (1 vs 7) |
-| **GLASS** | iOS 18+ users | Apollo injected with ImprovedCustomApi and Liquid Glass UI Patch (ios 18+) |
-| **No Extensions + LIQUID GLASS** | iOS 18 + Free accounts | Combines both options |
+| **GLASS** | iOS 26+ users | Apollo injected with ImprovedCustomApi and Liquid Glass UI Patch (iOS 26+) |
+| **No Extensions + LIQUID GLASS** | iOS 26 + Free accounts | Combines both options |
 
 ## Standard Source
 
@@ -43,7 +43,7 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
 &nbsp;
 <a href="https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext.json"><img src="images/buttons/url_button.png" width="200"></a>
 
-## GLASS Source (iOS 18+)
+## GLASS Source (iOS 26+)
 
 <a href="https://intradeus.github.io/http-protocol-redirector?r=altstore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_glass.json"><img src="images/buttons/altstore_button.png" width="200"></a>
 &nbsp;
@@ -53,7 +53,7 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
 &nbsp;
 <a href="https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_glass.json"><img src="images/buttons/url_button.png" width="200"></a>
 
-## No Extensions + GLASS Source (Avoid AppID Limit - iOS 18+)
+## No Extensions + GLASS Source (Avoid AppID Limit - iOS 26+)
 
 <a href="https://intradeus.github.io/http-protocol-redirector?r=altstore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext_glass.json"><img src="images/buttons/altstore_button.png" width="200"></a>
 &nbsp;
