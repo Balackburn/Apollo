@@ -30,6 +30,14 @@
       "versions": [
         {
           "version": "1.15.11",
+          "buildVersion": "1.4.2",
+          "date": "2026-02-07T06:48:10Z",
+          "localizedDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v1.4.2\"\n\nRelease Notes\n• Update default trending subreddit source to \"https://jeffreyca.github.io/subreddits/trending•subriff•blended.txt\" ([source](https://github.com/JeffreyCA/subreddits?tab=readme•ov•filetrending•subriff•blendedtxt))\r\n    • Previous source has been discontinued\r\n• Fix certain GIFs playing at 2x speed on 120Hz displays (97)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
+          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.4.2/GLASS_Apollo-1.15.11_ImprovedCustomApi-1.4.2.ipa",
+          "size": 114786398
+        },
+        {
+          "version": "1.15.11",
           "buildVersion": "1.4.1",
           "date": "2026-01-30T17:02:57Z",
           "localizedDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v1.4.1\"\n\nRelease Notes\n• Fix certain Streamable links not loading in media view (https://github.com/JeffreyCA/Apollo•ImprovedCustomApi/pull/95)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
@@ -82,14 +90,25 @@
         }
       },
       "version": "1.15.11",
-      "buildVersion": "1.4.1",
-      "versionDate": "2026-01-30T17:02:57Z",
-      "versionDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v1.4.1\"\n\nRelease Notes\n• Fix certain Streamable links not loading in media view (https://github.com/JeffreyCA/Apollo•ImprovedCustomApi/pull/95)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
-      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.4.1/GLASS_Apollo-1.15.11_ImprovedCustomApi-1.4.1.ipa",
-      "size": 114785651
+      "buildVersion": "1.4.2",
+      "versionDate": "2026-02-07T06:48:10Z",
+      "versionDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v1.4.2\"\n\nRelease Notes\n• Update default trending subreddit source to \"https://jeffreyca.github.io/subreddits/trending•subriff•blended.txt\" ([source](https://github.com/JeffreyCA/subreddits?tab=readme•ov•filetrending•subriff•blendedtxt))\r\n    • Previous source has been discontinued\r\n• Fix certain GIFs playing at 2x speed on 120Hz displays (97)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
+      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.4.2/GLASS_Apollo-1.15.11_ImprovedCustomApi-1.4.2.ipa",
+      "size": 114786398
     }
   ],
   "news": [
+    {
+      "appID": "com.christianselig.Apollo",
+      "title": "1.15.11_1.4.2 - 07 Feb",
+      "identifier": "release-1.15.11_1.4.2",
+      "caption": "Update for ImprovedCustomApi now available!",
+      "date": "2026-02-07T06:48:10Z",
+      "tintColor": "#3F91FE",
+      "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.webp",
+      "notify": true,
+      "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_1.4.2"
+    },
     {
       "appID": "com.christianselig.Apollo",
       "title": "1.15.11_1.4.1 - 30 Jan",
