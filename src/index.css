@@ -297,6 +297,21 @@
   --font-sm: 18px;
   --font-xs: 16px;
   --font-xxs: 14px;
+  --bg-color: #ffffff;
+  --text-color: #1a1a1a;
+  --text-secondary: #6b6b6b;
+  --link-hover: #8eaacc;
+  --border-color: #cccccc;
+  --footer-text: #1a1a1a;
+}
+
+.dark {
+  --bg-color: #000000;
+  --text-color: #ffffff;
+  --text-secondary: #868686;
+  --link-hover: #516486;
+  --border-color: #858585;
+  --footer-text: #ffffff;
 }
 
 @media (max-width: 768px) {
@@ -312,18 +327,19 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  color: #ffffff;
+  color: var(--text-color);
   display: flex;
   min-height: 100vh;
   flex-direction: column;
   font-size: var(--font-md);
-  background-color: #000000;
+  background-color: var(--bg-color);
   background-size: cover;
   background-position-x: 20vw;
   background-position-y: -10vh;
   background-repeat: no-repeat;
   line-height: 1.4;
   margin: 0;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 main {
@@ -332,12 +348,12 @@ main {
 }
 
 a {
-  color: #ffffff;
+  color: var(--text-color);
   text-decoration: none;
 }
 
 a:hover {
-  color: #516486;
+  color: var(--link-hover);
 }
 
 .container {
@@ -420,7 +436,7 @@ h2 {
   width: 100%;
   height: auto;
   border-radius: 20px;
-  border: 2px solid #858585;
+  border: 2px solid var(--border-color);
 }
 
 .app__name {
@@ -430,7 +446,7 @@ h2 {
 
 .app__description {
   font-size: var(--font-lg);
-  color: #868686;
+  color: var(--text-secondary);
   margin-top: 0px;
 }
 
@@ -457,7 +473,7 @@ h2 {
 
 .app__screenshot {
   width: 100%;
-  border: 1px solid #858585;
+  border: 1px solid var(--border-color);
   border-radius: 16px;
   box-shadow: 0 12px 48px rgba(17, 16, 62, 0.12);
   transition: all 0.3s ease-in-out;
@@ -474,83 +490,93 @@ h2 {
   overflow-y: auto;
 }
 
-.app__buttons {
+/* ===== Source Sections ===== */
+.app__sources {
+  margin-bottom: 40px;
+}
+
+.source-section {
+  margin-bottom: 32px;
+}
+
+.source-title {
+  font-size: 1.3em;
+  margin-bottom: 4px;
+}
+
+.source-desc {
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.source-buttons {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
   align-items: center;
 }
 
-.app__buttons--mobile {
-  display: none;
+.source-buttons img {
+  height: 55px;
+  transition: filter 0.2s;
+}
+
+.source-buttons img:hover {
+  filter: brightness(80%);
+}
+
+.bottom-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color);
+}
+
+.bottom-links img {
+  height: 55px;
+  transition: filter 0.2s;
+}
+
+.bottom-links img:hover {
+  filter: brightness(80%);
+}
+
+/* ===== Theme Toggle ===== */
+.theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 100;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.theme-toggle:hover {
+  opacity: 0.8;
 }
 
 @media (max-width: 768px) {
-  .app__buttons {
-    margin-left: 0;
-    margin-bottom: 25px;
+  .source-buttons img {
+    height: 40px;
   }
 
-  .app__buttons--mobile {
-    display: flex;
-    justify-content: left;
-  }
-
-  .app__buttons--desktop {
-    display: none;
-  }
-}
-
-.app__button-ios img {
-  width: 200px;
-}
-
-.app__button-ios img:hover {
-  filter: brightness(70%);
-}
-
-.app__button-web {
-  margin-left: 12px;
-}
-
-.app__button-web img {
-  width: 200px;
-}
-
-.app__button-web img:hover {
-  filter: brightness(70%);
-}
-
-.app__button-download img {
-  height: 59.2667px;
-}
-
-.app__button-download img:hover {
-  filter: brightness(70%);
-}
-
-.app__button-download {
-  margin-left: 12px;
-}
-
-@media (max-width: 768px) {
-  .app__button-ios img {
-    width: 116px;
-  }
-
-  .app__button-web {
-    margin-left: 10px;
-  }
-
-  .app__button-web img {
-    width: 116px;
-  }
-
-  .app__button-download img {
-    height: 34.3667px;
-  }
-
-  .app__button-download {
-    margin-left: 10px;
+  .bottom-links img {
+    height: 40px;
   }
 }
 
@@ -570,7 +596,7 @@ h2 {
 }
 
 .footer__container {
-  color: #ffffff;
+  color: var(--footer-text);
   display: flex;
   width: 100%;
   justify-content: space-between;
