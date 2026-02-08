@@ -67,16 +67,38 @@ function SourceButtons({ jsonFile, isDark }) {
   );
 }
 
-function BottomLinks({ downloadUrl, isDark }) {
+function ActionButtons({ downloadUrl, isDark, isMobile }) {
   const folder = isDark ? 'DARK' : 'LIGHT';
+  const jsonUrl = `${BASE_URL}/apps.json`;
 
   return (
-    <div className="bottom-links">
-      <a href={downloadUrl} target="_blank" rel="noreferrer" title=".ipa Download">
-        <img alt=".ipa Download" src={`${BASE}images/buttons/${folder}/Download.png`} />
+    <div className={`app__buttons ${isMobile ? 'app__buttons--mobile container' : 'app__buttons--desktop'}`}>
+      <a
+        className="app__button-ios"
+        href={`${REDIRECT}altstore://source?url=${jsonUrl}`}
+        target="_blank"
+        rel="noreferrer"
+        title="Add to AltStore"
+      >
+        <img alt="Add to AltStore" src={`${BASE}images/buttons/${folder}/Altstore.png`} />
       </a>
-      <a href="https://github.com/Balackburn/Apollo" target="_blank" rel="noreferrer" title="GitHub">
-        <img alt="GitHub" src={`${BASE}images/buttons/${folder}/Github.png`} />
+      <a
+        className="app__button-web"
+        href="https://github.com/Balackburn/Apollo"
+        target="_blank"
+        rel="noreferrer"
+        title="See on Github"
+      >
+        <img alt="See on Github" src={`${BASE}images/buttons/${folder}/Github.png`} />
+      </a>
+      <a
+        className="app__button-download"
+        href={downloadUrl}
+        target="_blank"
+        rel="noreferrer"
+        title=".ipa download"
+      >
+        <img alt=".ipa download" src={`${BASE}images/buttons/${folder}/Download.png`} />
       </a>
     </div>
   );
@@ -95,9 +117,11 @@ export default function Header() {
         </div>
         <div className="app__infos">
           <h1 className="app__name">Apollo for Reddit</h1>
-          <p className="app__description">The award-winning Reddit app !</p>
+          <p className="app__description"> The award-winning Reddit app !</p>
+          <ActionButtons downloadUrl={downloadUrl} isDark={isDark} isMobile={false} />
         </div>
       </header>
+      <ActionButtons downloadUrl={downloadUrl} isDark={isDark} isMobile={true} />
 
       <section className="app__sources container">
         {SOURCES.map((source) => (
@@ -107,7 +131,6 @@ export default function Header() {
             <SourceButtons jsonFile={source.json} isDark={isDark} />
           </div>
         ))}
-        <BottomLinks downloadUrl={downloadUrl} isDark={isDark} />
       </section>
     </>
   );
