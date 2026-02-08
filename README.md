@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="images/header/altstore_header.png" alt="Apollo for Reddit Banner" />
+  <img src="images/header/github_header.png" alt="Apollo for Reddit Banner" />
 </p>
 
 [![Platform](http://img.shields.io/badge/platform-iOS/iPadOS/macOS-blue.svg)](https://developer.apple.com/iphone/index.action)
