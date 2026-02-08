@@ -29,7 +29,7 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Altstore.png">
     <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Altstore.png">
-    <img alt="Add to AltStore" src="images/buttons/LIGHT/Altstore.png" height="65">
+    <img alt="Add to AltStore" src="images/buttons/LIGHT/Altstore.png" height="55">
   </picture>
 </a>
 &nbsp;
@@ -37,7 +37,7 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Feather.png">
     <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Feather.png">
-    <img alt="Add to Feather" src="images/buttons/LIGHT/Feather.png" height="65">
+    <img alt="Add to Feather" src="images/buttons/LIGHT/Feather.png" height="55">
   </picture>
 </a>
 &nbsp;
@@ -45,7 +45,7 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Sidestore.png">
     <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Sidestore.png">
-    <img alt="Add to SideStore" src="images/buttons/LIGHT/Sidestore.png" height="65">
+    <img alt="Add to SideStore" src="images/buttons/LIGHT/Sidestore.png" height="55">
   </picture>
 </a>
 &nbsp;
@@ -53,7 +53,7 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/DirectURL.png">
     <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/DirectURL.png">
-    <img alt="Direct URL" src="images/buttons/LIGHT/DirectURL.png" height="65">
+    <img alt="Direct URL" src="images/buttons/LIGHT/DirectURL.png" height="55">
   </picture>
 </a>
 
@@ -63,7 +63,7 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Altstore.png">
     <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Altstore.png">
-    <img alt="Add to AltStore" src="images/buttons/LIGHT/Altstore.png" height="65">
+    <img alt="Add to AltStore" src="images/buttons/LIGHT/Altstore.png" height="55">
   </picture>
 </a>
 &nbsp;
@@ -71,7 +71,7 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Feather.png">
     <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Feather.png">
-    <img alt="Add to Feather" src="images/buttons/LIGHT/Feather.png" height="65">
+    <img alt="Add to Feather" src="images/buttons/LIGHT/Feather.png" height="55">
   </picture>
 </a>
 &nbsp;
@@ -79,7 +79,7 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Sidestore.png">
     <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Sidestore.png">
-    <img alt="Add to SideStore" src="images/buttons/LIGHT/Sidestore.png" height="65">
+    <img alt="Add to SideStore" src="images/buttons/LIGHT/Sidestore.png" height="55">
   </picture>
 </a>
 &nbsp;
@@ -87,7 +87,7 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/DirectURL.png">
     <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/DirectURL.png">
-    <img alt="Direct URL" src="images/buttons/LIGHT/DirectURL.png" height="65">
+    <img alt="Direct URL" src="images/buttons/LIGHT/DirectURL.png" height="55">
   </picture>
 </a>
 
@@ -97,7 +97,7 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Altstore.png">
     <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Altstore.png">
-    <img alt="Add to AltStore" src="images/buttons/LIGHT/Altstore.png" height="65">
+    <img alt="Add to AltStore" src="images/buttons/LIGHT/Altstore.png" height="55">
   </picture>
 </a>
 &nbsp;
@@ -105,7 +105,7 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Feather.png">
     <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Feather.png">
-    <img alt="Add to Feather" src="images/buttons/LIGHT/Feather.png" height="65">
+    <img alt="Add to Feather" src="images/buttons/LIGHT/Feather.png" height="55">
   </picture>
 </a>
 &nbsp;
@@ -113,7 +113,7 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Sidestore.png">
     <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Sidestore.png">
-    <img alt="Add to SideStore" src="images/buttons/LIGHT/Sidestore.png" height="65">
+    <img alt="Add to SideStore" src="images/buttons/LIGHT/Sidestore.png" height="55">
   </picture>
 </a>
 &nbsp;
@@ -121,7 +121,7 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/DirectURL.png">
     <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/DirectURL.png">
-    <img alt="Direct URL" src="images/buttons/LIGHT/DirectURL.png" height="65">
+    <img alt="Direct URL" src="images/buttons/LIGHT/DirectURL.png" height="55">
   </picture>
 </a>
 
@@ -131,7 +131,7 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Altstore.png">
     <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Altstore.png">
-    <img alt="Add to AltStore" src="images/buttons/LIGHT/Altstore.png" height="65">
+    <img alt="Add to AltStore" src="images/buttons/LIGHT/Altstore.png" height="55">
   </picture>
 </a>
 &nbsp;
@@ -139,7 +139,7 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Feather.png">
     <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Feather.png">
-    <img alt="Add to Feather" src="images/buttons/LIGHT/Feather.png" height="65">
+    <img alt="Add to Feather" src="images/buttons/LIGHT/Feather.png" height="55">
   </picture>
 </a>
 &nbsp;
@@ -147,7 +147,7 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Sidestore.png">
     <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Sidestore.png">
-    <img alt="Add to SideStore" src="images/buttons/LIGHT/Sidestore.png" height="65">
+    <img alt="Add to SideStore" src="images/buttons/LIGHT/Sidestore.png" height="55">
   </picture>
 </a>
 &nbsp;
@@ -155,7 +155,7 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/DirectURL.png">
     <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/DirectURL.png">
-    <img alt="Direct URL" src="images/buttons/LIGHT/DirectURL.png" height="65">
+    <img alt="Direct URL" src="images/buttons/LIGHT/DirectURL.png" height="55">
   </picture>
 </a>
 
@@ -165,7 +165,7 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Website.png">
     <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Website.png">
-    <img alt="Visit Website" src="images/buttons/LIGHT/Website.png" height="65">
+    <img alt="Visit Website" src="images/buttons/LIGHT/Website.png" height="55">
   </picture>
 </a>
 
