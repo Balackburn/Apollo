@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/Balackburn/Apollo/assets/93828569/532f0b7e-8c06-483c-9d04-8b84ada7b972" alt="Apollo for Reddit Banner" />
+  <img src="images/header/altstore_header.png" alt="Apollo for Reddit Banner" />
 </p>
 
 [![Platform](http://img.shields.io/badge/platform-iOS/iPadOS/macOS-blue.svg)](https://developer.apple.com/iphone/index.action)
