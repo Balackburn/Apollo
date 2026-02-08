@@ -490,6 +490,86 @@ h2 {
   overflow-y: auto;
 }
 
+.app__buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.app__buttons--mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .app__buttons {
+    margin-left: 0;
+    margin-bottom: 25px;
+  }
+
+  .app__buttons--mobile {
+    display: flex;
+    justify-content: left;
+  }
+
+  .app__buttons--desktop {
+    display: none;
+  }
+}
+
+.app__button-ios img {
+  height: 59.2667px;
+}
+
+.app__button-ios img:hover {
+  filter: brightness(70%);
+}
+
+.app__button-web {
+  margin-left: 12px;
+}
+
+.app__button-web img {
+  height: 59.2667px;
+}
+
+.app__button-web img:hover {
+  filter: brightness(70%);
+}
+
+.app__button-download img {
+  height: 59.2667px;
+}
+
+.app__button-download img:hover {
+  filter: brightness(70%);
+}
+
+.app__button-download {
+  margin-left: 12px;
+}
+
+@media (max-width: 768px) {
+  .app__button-ios img {
+    height: 34.3667px;
+  }
+
+  .app__button-web {
+    margin-left: 10px;
+  }
+
+  .app__button-web img {
+    height: 34.3667px;
+  }
+
+  .app__button-download img {
+    height: 34.3667px;
+  }
+
+  .app__button-download {
+    margin-left: 10px;
+  }
+}
+
 /* ===== Source Sections ===== */
 .app__sources {
   margin-bottom: 40px;
@@ -527,25 +607,6 @@ h2 {
   filter: brightness(80%);
 }
 
-.bottom-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
-  margin-top: 24px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border-color);
-}
-
-.bottom-links img {
-  height: 55px;
-  transition: filter 0.2s;
-}
-
-.bottom-links img:hover {
-  filter: brightness(80%);
-}
-
 /* ===== Theme Toggle ===== */
 .theme-toggle {
   position: fixed;
@@ -572,10 +633,6 @@ h2 {
 
 @media (max-width: 768px) {
   .source-buttons img {
-    height: 40px;
-  }
-
-  .bottom-links img {
     height: 40px;
   }
 }
