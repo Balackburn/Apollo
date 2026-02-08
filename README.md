@@ -169,4 +169,5 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
   </picture>
 </a>
 
+##
 This project is not affiliated with Apollo or Christian Selig.
