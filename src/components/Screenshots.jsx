@@ -32,7 +32,7 @@ export default function Screenshots() {
       if (tobiRef.current && typeof tobiRef.current.destroy === 'function') {
         try {
           tobiRef.current.destroy();
-        } catch (e) {
+        } catch {
           // Ignore cleanup errors
         }
       }
