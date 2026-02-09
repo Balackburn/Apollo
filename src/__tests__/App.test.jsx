@@ -28,7 +28,9 @@ describe('App', () => {
   
   it('shows Apollo for Reddit heading', () => {
     render(<App />);
-    const heading = screen.getByText('Apollo for Reddit', { selector: 'h1' });
-    expect(heading).toBeDefined();
+    const headings = screen.getAllByText('Apollo for Reddit');
+    expect(headings.length).toBeGreaterThanOrEqual(1);
+    const h1 = headings.find(el => el.tagName === 'H1');
+    expect(h1).toBeDefined();
   });
 });
