@@ -4,7 +4,7 @@ const TOTAL_ICONS = 156;
 const BASE = import.meta.env.BASE_URL;
 
 function getRandomIcon() {
-  const randomIndex = Math.floor(Math.random() * TOTAL_ICONS);
+  const randomIndex = Math.floor(Math.random() * TOTAL_ICONS) + 1;
   return `${BASE}apollo_icons/icon_${randomIndex}.webp`;
 }
 
