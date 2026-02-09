@@ -20,8 +20,6 @@ Object.defineProperty(window, 'matchMedia', {
 describe('App', () => {
   it('renders without crashing and produces content', () => {
     const { container } = render(<App />);
-    console.log('Rendered HTML length:', container.innerHTML.length);
-    console.log('First 200 chars:', container.innerHTML.substring(0, 200));
     expect(container.innerHTML).not.toBe('');
     expect(container.innerHTML.length).toBeGreaterThan(0);
   });
