@@ -1,86 +1,17 @@
-import { useTheme } from '../hooks/useTheme';
 import useRandomIcon from '../hooks/useRandomIcon';
 import useDownloadLink from '../hooks/useDownloadLink';
 
-const BASE_URL = 'https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main';
-const REDIRECT = 'https://intradeus.github.io/http-protocol-redirector?r=';
-const BASE = import.meta.env.BASE_URL;
-
-const SOURCES = [
-  {
-    title: 'Standard',
-    description: 'Apollo + ImprovedCustomApi',
-    json: 'apps.json',
-  },
-  {
-    title: 'No Extensions',
-    description: 'Fewer App IDs (1 vs 7) — ideal for free developer accounts',
-    json: 'apps_noext.json',
-  },
-  {
-    title: 'GLASS',
-    description: 'Liquid Glass UI Patch (iOS 26+)',
-    json: 'apps_glass.json',
-  },
-  {
-    title: 'No Extensions + GLASS',
-    description: 'Both options combined (iOS 26+)',
-    json: 'apps_noext_glass.json',
-  },
-];
-
-function SourceButtons({ jsonFile, isDark }) {
-  const folder = isDark ? 'DARK' : 'LIGHT';
-  const jsonUrl = `${BASE_URL}/${jsonFile}`;
-
-  const buttons = [
-    {
-      href: `${REDIRECT}altstore://source?url=${jsonUrl}`,
-      alt: 'Add to AltStore',
-      img: `${BASE}images/buttons/${folder}/Altstore.png`,
-    },
-    {
-      href: `${REDIRECT}feather://source/${jsonUrl}`,
-      alt: 'Add to Feather',
-      img: `${BASE}images/buttons/${folder}/Feather.png`,
-    },
-    {
-      href: `${REDIRECT}sidestore://source?url=${jsonUrl}`,
-      alt: 'Add to SideStore',
-      img: `${BASE}images/buttons/${folder}/Sidestore.png`,
-    },
-    {
-      href: jsonUrl,
-      alt: 'Direct URL',
-      img: `${BASE}images/buttons/${folder}/DirectURL.png`,
-    },
-  ];
-
-  return (
-    <div className="source-buttons">
-      {buttons.map((btn) => (
-        <a key={btn.alt} href={btn.href} target="_blank" rel="noreferrer" title={btn.alt}>
-          <img alt={btn.alt} src={btn.img} />
-        </a>
-      ))}
-    </div>
-  );
-}
-
-function ActionButtons({ downloadUrl, isDark, isMobile }) {
-  const folder = isDark ? 'DARK' : 'LIGHT';
-  const jsonUrl = `${BASE_URL}/apps.json`;
-
+function ActionButtons({ downloadUrl, isMobile }) {
   return (
     <div className={`app__buttons ${isMobile ? 'app__buttons--mobile container' : 'app__buttons--desktop'}`}>
       <a
         className="app__button-ios"
-        href={`${REDIRECT}altstore://source?url=${jsonUrl}`}
+        href="altstore://source/?url=https://balackburn.github.io/Apollo/apps.json"
         target="_blank"
         rel="noreferrer"
-        title="Add to AltStore"
+        title="Add to Altstore"
       >
-        <img alt="Add to AltStore" src={`${BASE}images/buttons/${folder}/Altstore.png`} />
+        <img alt="Add to Altstore" src={isMobile ? '/images/UI/image_4.webp' : '/images/UI/image_1.webp'} />
       </a>
       <a
         className="app__button-web"
@@ -89,7 +20,7 @@ function ActionButtons({ downloadUrl, isDark, isMobile }) {
         rel="noreferrer"
         title="See on Github"
       >
-        <img alt="See on Github" src={`${BASE}images/buttons/${folder}/Github.png`} />
+        <img alt="See on Github" src={isMobile ? '/images/UI/image_5.webp' : '/images/UI/image_2.webp'} />
       </a>
       <a
         className="app__button-download"
@@ -98,7 +29,7 @@ function ActionButtons({ downloadUrl, isDark, isMobile }) {
         rel="noreferrer"
         title=".ipa download"
       >
-        <img alt=".ipa download" src={`${BASE}images/buttons/${folder}/Download.png`} />
+        <img alt=".ipa download" src="/images/UI/image_3.webp" />
       </a>
     </div>
   );
@@ -107,7 +38,6 @@ function ActionButtons({ downloadUrl, isDark, isMobile }) {
 export default function Header() {
   const iconSrc = useRandomIcon();
   const downloadUrl = useDownloadLink();
-  const { isDark } = useTheme();
 
   return (
     <>
@@ -118,20 +48,10 @@ export default function Header() {
         <div className="app__infos">
           <h1 className="app__name">Apollo for Reddit</h1>
           <p className="app__description"> The award-winning Reddit app !</p>
-          <ActionButtons downloadUrl={downloadUrl} isDark={isDark} isMobile={false} />
+          <ActionButtons downloadUrl={downloadUrl} isMobile={false} />
         </div>
       </header>
-      <ActionButtons downloadUrl={downloadUrl} isDark={isDark} isMobile={true} />
-
-      <section className="app__sources container">
-        {SOURCES.map((source) => (
-          <div key={source.title} className="source-section">
-            <h2 className="source-title">{source.title}</h2>
-            <p className="source-desc">{source.description}</p>
-            <SourceButtons jsonFile={source.json} isDark={isDark} />
-          </div>
-        ))}
-      </section>
+      <ActionButtons downloadUrl={downloadUrl} isMobile={true} />
     </>
   );
 }

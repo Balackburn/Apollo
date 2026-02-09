@@ -1,16 +1,14 @@
 import { useEffect, useRef } from 'react';
 
-const BASE = import.meta.env.BASE_URL;
-
 const SCREENSHOT_IMAGES = [
-  `${BASE}images/image_1.webp`,
-  `${BASE}images/image_2.webp`,
-  `${BASE}images/image_3.webp`,
-  `${BASE}images/image_4.webp`,
-  `${BASE}images/image_5.webp`,
-  `${BASE}images/image_6.webp`,
-  `${BASE}images/image_7.webp`,
-  `${BASE}images/image_8.webp`,
+  '/images/image_1.webp',
+  '/images/image_2.webp',
+  '/images/image_3.webp',
+  '/images/image_4.webp',
+  '/images/image_5.webp',
+  '/images/image_6.webp',
+  '/images/image_7.webp',
+  '/images/image_8.webp',
 ];
 
 export default function Screenshots() {
