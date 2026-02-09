@@ -11,7 +11,7 @@ function ActionButtons({ downloadUrl, isMobile }) {
         rel="noreferrer"
         title="Add to Altstore"
       >
-        <img alt="Add to Altstore" src={isMobile ? '/images/UI/image_4.webp' : '/images/UI/image_1.webp'} />
+        <img alt="Add to Altstore" src={isMobile ? `${import.meta.env.BASE_URL}images/UI/image_4.webp` : `${import.meta.env.BASE_URL}images/UI/image_1.webp`} />
       </a>
       <a
         className="app__button-web"
@@ -20,7 +20,7 @@ function ActionButtons({ downloadUrl, isMobile }) {
         rel="noreferrer"
         title="See on Github"
       >
-        <img alt="See on Github" src={isMobile ? '/images/UI/image_5.webp' : '/images/UI/image_2.webp'} />
+        <img alt="See on Github" src={isMobile ? `${import.meta.env.BASE_URL}images/UI/image_5.webp` : `${import.meta.env.BASE_URL}images/UI/image_2.webp`} />
       </a>
       <a
         className="app__button-download"
@@ -29,7 +29,7 @@ function ActionButtons({ downloadUrl, isMobile }) {
         rel="noreferrer"
         title=".ipa download"
       >
-        <img alt=".ipa download" src="/images/UI/image_3.webp" />
+        <img alt=".ipa download" src={`${import.meta.env.BASE_URL}images/UI/image_3.webp`} />
       </a>
     </div>
   );
