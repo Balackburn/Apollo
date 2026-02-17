@@ -30,6 +30,14 @@
       "versions": [
         {
           "version": "1.15.11",
+          "buildVersion": "1.4.5",
+          "date": "2026-02-17T20:15:39Z",
+          "localizedDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v1.4.5\"\n\nRelease Notes\nPrevent certain crashes when Reddit API goes down (105)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
+          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.4.5/Apollo-1.15.11_ImprovedCustomApi-1.4.5.ipa",
+          "size": 114721749
+        },
+        {
+          "version": "1.15.11",
           "buildVersion": "1.4.4",
           "date": "2026-02-14T02:23:18Z",
           "localizedDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v1.4.4\"\n\nRelease Notes\nFix certain GIFs showing up as \"Processing img \" in comments (102)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
@@ -170,14 +178,25 @@
         }
       },
       "version": "1.15.11",
-      "buildVersion": "1.4.4",
-      "versionDate": "2026-02-14T02:23:18Z",
-      "versionDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v1.4.4\"\n\nRelease Notes\nFix certain GIFs showing up as \"Processing img \" in comments (102)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
-      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.4.4/Apollo-1.15.11_ImprovedCustomApi-1.4.4.ipa",
-      "size": 114722249
+      "buildVersion": "1.4.5",
+      "versionDate": "2026-02-17T20:15:39Z",
+      "versionDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v1.4.5\"\n\nRelease Notes\nPrevent certain crashes when Reddit API goes down (105)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
+      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.4.5/Apollo-1.15.11_ImprovedCustomApi-1.4.5.ipa",
+      "size": 114721749
     }
   ],
   "news": [
+    {
+      "appID": "com.christianselig.Apollo",
+      "title": "1.15.11_1.4.5 - 17 Feb",
+      "identifier": "release-1.15.11_1.4.5",
+      "caption": "Update for ImprovedCustomApi now available!",
+      "date": "2026-02-17T20:15:39Z",
+      "tintColor": "#3F91FE",
+      "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.png",
+      "notify": true,
+      "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_1.4.5"
+    },
     {
       "appID": "com.christianselig.Apollo",
       "title": "1.15.11_1.4.4 - 14 Feb",
