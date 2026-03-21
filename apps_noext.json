@@ -30,6 +30,14 @@
       "versions": [
         {
           "version": "1.15.11",
+          "buildVersion": "2.2.0",
+          "date": "2026-03-21T02:12:33Z",
+          "localizedDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v2.2.0\"\n\nRelease Notes\n• Add \"Collapse Pinned Comments\" setting to auto•collapse pinned/stickied comments (118)\r\n• Add \"Can't sign in?\" troubleshooting section (112)\r\n• Liquid Glass: fix blur overlay issue when viewing messages (116)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
+          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_2.2.0/NO-EXTENSIONS_Apollo-1.15.11_ImprovedCustomApi-2.2.0.ipa",
+          "size": 77987799
+        },
+        {
+          "version": "1.15.11",
           "buildVersion": "2.1.0",
           "date": "2026-03-13T06:59:18Z",
           "localizedDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v2.1.0\"\n\nRelease Notes\n• Add Steam store deep linking support (thanks @wdeezy for the contribution!) (110)\r\n    • To enable, toggle \"Open Steam Links in App\" in Custom API > General\r\n• Update default recently read posts limit to be unlimited\r\n• Fix share links opening in different Apollo app (113)\r\n• Fix Pixel Pals making dynamic island taller than expected on newer iPhone models (111)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
@@ -194,14 +202,25 @@
         }
       },
       "version": "1.15.11",
-      "buildVersion": "2.1.0",
-      "versionDate": "2026-03-13T06:59:18Z",
-      "versionDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v2.1.0\"\n\nRelease Notes\n• Add Steam store deep linking support (thanks @wdeezy for the contribution!) (110)\r\n    • To enable, toggle \"Open Steam Links in App\" in Custom API > General\r\n• Update default recently read posts limit to be unlimited\r\n• Fix share links opening in different Apollo app (113)\r\n• Fix Pixel Pals making dynamic island taller than expected on newer iPhone models (111)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
-      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_2.1.0/NO-EXTENSIONS_Apollo-1.15.11_ImprovedCustomApi-2.1.0.ipa",
-      "size": 77987250
+      "buildVersion": "2.2.0",
+      "versionDate": "2026-03-21T02:12:33Z",
+      "versionDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v2.2.0\"\n\nRelease Notes\n• Add \"Collapse Pinned Comments\" setting to auto•collapse pinned/stickied comments (118)\r\n• Add \"Can't sign in?\" troubleshooting section (112)\r\n• Liquid Glass: fix blur overlay issue when viewing messages (116)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
+      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_2.2.0/NO-EXTENSIONS_Apollo-1.15.11_ImprovedCustomApi-2.2.0.ipa",
+      "size": 77987799
     }
   ],
   "news": [
+    {
+      "appID": "com.christianselig.Apollo",
+      "title": "1.15.11_2.2.0 - 21 Mar",
+      "identifier": "release-1.15.11_2.2.0",
+      "caption": "Update for ImprovedCustomApi now available!",
+      "date": "2026-03-21T02:12:33Z",
+      "tintColor": "#3F91FE",
+      "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.png",
+      "notify": true,
+      "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_2.2.0"
+    },
     {
       "appID": "com.christianselig.Apollo",
       "title": "1.15.11_2.1.0 - 13 Mar",
@@ -520,17 +539,6 @@
       "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.png",
       "notify": true,
       "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11-1.0.8"
-    },
-    {
-      "appID": "com.christianselig.Apollo",
-      "title": "1.15.11-1.0.7 - 08 Dec",
-      "identifier": "release-1.15.11-1.0.7",
-      "caption": "Update for ImprovedCustomApi now available!",
-      "date": "2023-12-08T12:08:07Z",
-      "tintColor": "#3F91FE",
-      "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.png",
-      "notify": true,
-      "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11-1.0.7"
     }
   ]
 }
