@@ -20,7 +20,7 @@ if (spectraCanvas) {
     const prog = gl.getParameter(gl.CURRENT_PROGRAM);
     const uHue = gl.getUniformLocation(prog, 'uHueShift');
     const tickHue = () => {
-      hue = (hue + 0.15) % 360;
+      hue = (hue + 0.4) % 360;
       gl.useProgram(prog);
       gl.uniform1f(uHue, hue);
       requestAnimationFrame(tickHue);
@@ -269,16 +269,29 @@ if (dlBtn && dlMenu) {
   });
 }
 
-// ═══ GLOBAL CLICK — close all dropdowns when clicking outside ═══
+// ═══ CLOSE DROPDOWNS — on outside click OR on item click (mobile fix) ═══
+function closeDlDropdown() {
+  if (!dlOpen) return;
+  dlOpen = false;
+  animate(dlMenu, { opacity: 0, y: -6, scale: 0.97 }, { duration: 0.12, easing: 'ease-in' }).then(() => { dlMenu.style.display = 'none'; });
+}
+
 document.addEventListener('click', (e) => {
-  // Close install dropdown
+  const clickedItem = e.target.closest('.dropdown-item');
+
+  // If clicked a dropdown item link — close both dropdowns after navigation
+  if (clickedItem) {
+    setTimeout(() => { closeDropdown(); closeDlDropdown(); }, 100);
+    return;
+  }
+
+  // Close install dropdown on outside click
   if (dropdownOpen && dropdown && !dropdown.contains(e.target) && dropdownBtn && !dropdownBtn.contains(e.target)) {
     closeDropdown();
   }
-  // Close download dropdown
+  // Close download dropdown on outside click
   if (dlOpen && dlMenu && !dlMenu.contains(e.target) && dlBtn && !dlBtn.contains(e.target)) {
-    dlOpen = false;
-    animate(dlMenu, { opacity: 0, y: -6, scale: 0.97 }, { duration: 0.12, easing: 'ease-in' }).then(() => { dlMenu.style.display = 'none'; });
+    closeDlDropdown();
   }
 });
 
