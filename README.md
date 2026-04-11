@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="images/header/github_header.png" alt="Apollo for Reddit Banner" />
+  <img src="public/images/header/github_header.png" alt="Apollo for Reddit Banner" />
 </p>
 
 [![Platform](http://img.shields.io/badge/platform-iOS/iPadOS/macOS-blue.svg)](https://developer.apple.com/iphone/index.action)
@@ -27,33 +27,33 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
 
 <a href="https://intradeus.github.io/http-protocol-redirector?r=altstore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps.json">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Altstore.png">
-    <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Altstore.png">
-    <img alt="Add to AltStore" src="images/buttons/LIGHT/Altstore.png" height="55">
+    <source media="(prefers-color-scheme: dark)" srcset="public/images/buttons/DARK/Altstore.png">
+    <source media="(prefers-color-scheme: light)" srcset="public/images/buttons/LIGHT/Altstore.png">
+    <img alt="Add to AltStore" src="public/images/buttons/LIGHT/Altstore.png" height="55">
   </picture>
 </a>
 &nbsp;
 <a href="https://intradeus.github.io/http-protocol-redirector?r=feather://source/https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps.json">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Feather.png">
-    <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Feather.png">
-    <img alt="Add to Feather" src="images/buttons/LIGHT/Feather.png" height="55">
+    <source media="(prefers-color-scheme: dark)" srcset="public/images/buttons/DARK/Feather.png">
+    <source media="(prefers-color-scheme: light)" srcset="public/images/buttons/LIGHT/Feather.png">
+    <img alt="Add to Feather" src="public/images/buttons/LIGHT/Feather.png" height="55">
   </picture>
 </a>
 &nbsp;
 <a href="https://intradeus.github.io/http-protocol-redirector?r=sidestore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps.json">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Sidestore.png">
-    <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Sidestore.png">
-    <img alt="Add to SideStore" src="images/buttons/LIGHT/Sidestore.png" height="55">
+    <source media="(prefers-color-scheme: dark)" srcset="public/images/buttons/DARK/Sidestore.png">
+    <source media="(prefers-color-scheme: light)" srcset="public/images/buttons/LIGHT/Sidestore.png">
+    <img alt="Add to SideStore" src="public/images/buttons/LIGHT/Sidestore.png" height="55">
   </picture>
 </a>
 &nbsp;
 <a href="https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps.json">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/DirectURL.png">
-    <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/DirectURL.png">
-    <img alt="Direct URL" src="images/buttons/LIGHT/DirectURL.png" height="55">
+    <source media="(prefers-color-scheme: dark)" srcset="public/images/buttons/DARK/DirectURL.png">
+    <source media="(prefers-color-scheme: light)" srcset="public/images/buttons/LIGHT/DirectURL.png">
+    <img alt="Direct URL" src="public/images/buttons/LIGHT/DirectURL.png" height="55">
   </picture>
 </a>
 
@@ -61,33 +61,33 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
 
 <a href="https://intradeus.github.io/http-protocol-redirector?r=altstore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext.json">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Altstore.png">
-    <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Altstore.png">
-    <img alt="Add to AltStore" src="images/buttons/LIGHT/Altstore.png" height="55">
+    <source media="(prefers-color-scheme: dark)" srcset="public/images/buttons/DARK/Altstore.png">
+    <source media="(prefers-color-scheme: light)" srcset="public/images/buttons/LIGHT/Altstore.png">
+    <img alt="Add to AltStore" src="public/images/buttons/LIGHT/Altstore.png" height="55">
   </picture>
 </a>
 &nbsp;
 <a href="https://intradeus.github.io/http-protocol-redirector?r=feather://source/https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext.json">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Feather.png">
-    <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Feather.png">
-    <img alt="Add to Feather" src="images/buttons/LIGHT/Feather.png" height="55">
+    <source media="(prefers-color-scheme: dark)" srcset="public/images/buttons/DARK/Feather.png">
+    <source media="(prefers-color-scheme: light)" srcset="public/images/buttons/LIGHT/Feather.png">
+    <img alt="Add to Feather" src="public/images/buttons/LIGHT/Feather.png" height="55">
   </picture>
 </a>
 &nbsp;
 <a href="https://intradeus.github.io/http-protocol-redirector?r=sidestore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext.json">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Sidestore.png">
-    <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Sidestore.png">
-    <img alt="Add to SideStore" src="images/buttons/LIGHT/Sidestore.png" height="55">
+    <source media="(prefers-color-scheme: dark)" srcset="public/images/buttons/DARK/Sidestore.png">
+    <source media="(prefers-color-scheme: light)" srcset="public/images/buttons/LIGHT/Sidestore.png">
+    <img alt="Add to SideStore" src="public/images/buttons/LIGHT/Sidestore.png" height="55">
   </picture>
 </a>
 &nbsp;
 <a href="https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext.json">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/DirectURL.png">
-    <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/DirectURL.png">
-    <img alt="Direct URL" src="images/buttons/LIGHT/DirectURL.png" height="55">
+    <source media="(prefers-color-scheme: dark)" srcset="public/images/buttons/DARK/DirectURL.png">
+    <source media="(prefers-color-scheme: light)" srcset="public/images/buttons/LIGHT/DirectURL.png">
+    <img alt="Direct URL" src="public/images/buttons/LIGHT/DirectURL.png" height="55">
   </picture>
 </a>
 
@@ -95,33 +95,33 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
 
 <a href="https://intradeus.github.io/http-protocol-redirector?r=altstore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_glass.json">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Altstore.png">
-    <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Altstore.png">
-    <img alt="Add to AltStore" src="images/buttons/LIGHT/Altstore.png" height="55">
+    <source media="(prefers-color-scheme: dark)" srcset="public/images/buttons/DARK/Altstore.png">
+    <source media="(prefers-color-scheme: light)" srcset="public/images/buttons/LIGHT/Altstore.png">
+    <img alt="Add to AltStore" src="public/images/buttons/LIGHT/Altstore.png" height="55">
   </picture>
 </a>
 &nbsp;
 <a href="https://intradeus.github.io/http-protocol-redirector?r=feather://source/https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_glass.json">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Feather.png">
-    <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Feather.png">
-    <img alt="Add to Feather" src="images/buttons/LIGHT/Feather.png" height="55">
+    <source media="(prefers-color-scheme: dark)" srcset="public/images/buttons/DARK/Feather.png">
+    <source media="(prefers-color-scheme: light)" srcset="public/images/buttons/LIGHT/Feather.png">
+    <img alt="Add to Feather" src="public/images/buttons/LIGHT/Feather.png" height="55">
   </picture>
 </a>
 &nbsp;
 <a href="https://intradeus.github.io/http-protocol-redirector?r=sidestore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_glass.json">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Sidestore.png">
-    <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Sidestore.png">
-    <img alt="Add to SideStore" src="images/buttons/LIGHT/Sidestore.png" height="55">
+    <source media="(prefers-color-scheme: dark)" srcset="public/images/buttons/DARK/Sidestore.png">
+    <source media="(prefers-color-scheme: light)" srcset="public/images/buttons/LIGHT/Sidestore.png">
+    <img alt="Add to SideStore" src="public/images/buttons/LIGHT/Sidestore.png" height="55">
   </picture>
 </a>
 &nbsp;
 <a href="https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_glass.json">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/DirectURL.png">
-    <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/DirectURL.png">
-    <img alt="Direct URL" src="images/buttons/LIGHT/DirectURL.png" height="55">
+    <source media="(prefers-color-scheme: dark)" srcset="public/images/buttons/DARK/DirectURL.png">
+    <source media="(prefers-color-scheme: light)" srcset="public/images/buttons/LIGHT/DirectURL.png">
+    <img alt="Direct URL" src="public/images/buttons/LIGHT/DirectURL.png" height="55">
   </picture>
 </a>
 
@@ -129,33 +129,33 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
 
 <a href="https://intradeus.github.io/http-protocol-redirector?r=altstore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext_glass.json">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Altstore.png">
-    <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Altstore.png">
-    <img alt="Add to AltStore" src="images/buttons/LIGHT/Altstore.png" height="55">
+    <source media="(prefers-color-scheme: dark)" srcset="public/images/buttons/DARK/Altstore.png">
+    <source media="(prefers-color-scheme: light)" srcset="public/images/buttons/LIGHT/Altstore.png">
+    <img alt="Add to AltStore" src="public/images/buttons/LIGHT/Altstore.png" height="55">
   </picture>
 </a>
 &nbsp;
 <a href="https://intradeus.github.io/http-protocol-redirector?r=feather://source/https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext_glass.json">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Feather.png">
-    <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Feather.png">
-    <img alt="Add to Feather" src="images/buttons/LIGHT/Feather.png" height="55">
+    <source media="(prefers-color-scheme: dark)" srcset="public/images/buttons/DARK/Feather.png">
+    <source media="(prefers-color-scheme: light)" srcset="public/images/buttons/LIGHT/Feather.png">
+    <img alt="Add to Feather" src="public/images/buttons/LIGHT/Feather.png" height="55">
   </picture>
 </a>
 &nbsp;
 <a href="https://intradeus.github.io/http-protocol-redirector?r=sidestore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext_glass.json">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Sidestore.png">
-    <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Sidestore.png">
-    <img alt="Add to SideStore" src="images/buttons/LIGHT/Sidestore.png" height="55">
+    <source media="(prefers-color-scheme: dark)" srcset="public/images/buttons/DARK/Sidestore.png">
+    <source media="(prefers-color-scheme: light)" srcset="public/images/buttons/LIGHT/Sidestore.png">
+    <img alt="Add to SideStore" src="public/images/buttons/LIGHT/Sidestore.png" height="55">
   </picture>
 </a>
 &nbsp;
 <a href="https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext_glass.json">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/DirectURL.png">
-    <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/DirectURL.png">
-    <img alt="Direct URL" src="images/buttons/LIGHT/DirectURL.png" height="55">
+    <source media="(prefers-color-scheme: dark)" srcset="public/images/buttons/DARK/DirectURL.png">
+    <source media="(prefers-color-scheme: light)" srcset="public/images/buttons/LIGHT/DirectURL.png">
+    <img alt="Direct URL" src="public/images/buttons/LIGHT/DirectURL.png" height="55">
   </picture>
 </a>
 
@@ -163,9 +163,9 @@ Before raising any issues, please check the [ImprovedCustomApi](https://github.c
 
 <a href="https://balackburn.github.io/Apollo">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/buttons/DARK/Website.png">
-    <source media="(prefers-color-scheme: light)" srcset="images/buttons/LIGHT/Website.png">
-    <img alt="Visit Website" src="images/buttons/LIGHT/Website.png" height="55">
+    <source media="(prefers-color-scheme: dark)" srcset="public/images/buttons/DARK/Website.png">
+    <source media="(prefers-color-scheme: light)" srcset="public/images/buttons/LIGHT/Website.png">
+    <img alt="Visit Website" src="public/images/buttons/LIGHT/Website.png" height="55">
   </picture>
 </a>
 
