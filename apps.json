@@ -30,6 +30,14 @@
       "versions": [
         {
           "version": "1.15.11",
+          "buildVersion": "2.3.0",
+          "date": "2026-04-10T02:48:31Z",
+          "localizedDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v2.3.0\"\n\nRelease Notes\n• Add option to hide NSFW posts in Recently Read (129)\r\n• Show inline NSFW badge on post titles in Recently Read\r\n• Use distinct placeholder thumbnails for self•posts vs link posts in Recently Read\r\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
+          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_2.3.0/Apollo-1.15.11_ImprovedCustomApi-2.3.0.ipa",
+          "size": 114794415
+        },
+        {
+          "version": "1.15.11",
           "buildVersion": "2.2.1",
           "date": "2026-03-26T02:37:49Z",
           "localizedDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v2.2.1\"\n\nRelease Notes\n• Block additional tracking and analytics URLs (124, thanks @Uranosphaerite!)\r\n• Liquid Glass: fix header flicker issue in comments (126)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
@@ -210,14 +218,25 @@
         }
       },
       "version": "1.15.11",
-      "buildVersion": "2.2.1",
-      "versionDate": "2026-03-26T02:37:49Z",
-      "versionDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v2.2.1\"\n\nRelease Notes\n• Block additional tracking and analytics URLs (124, thanks @Uranosphaerite!)\r\n• Liquid Glass: fix header flicker issue in comments (126)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
-      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_2.2.1/Apollo-1.15.11_ImprovedCustomApi-2.2.1.ipa",
-      "size": 114791684
+      "buildVersion": "2.3.0",
+      "versionDate": "2026-04-10T02:48:31Z",
+      "versionDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v2.3.0\"\n\nRelease Notes\n• Add option to hide NSFW posts in Recently Read (129)\r\n• Show inline NSFW badge on post titles in Recently Read\r\n• Use distinct placeholder thumbnails for self•posts vs link posts in Recently Read\r\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
+      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_2.3.0/Apollo-1.15.11_ImprovedCustomApi-2.3.0.ipa",
+      "size": 114794415
     }
   ],
   "news": [
+    {
+      "appID": "com.christianselig.Apollo",
+      "title": "1.15.11_2.3.0 - 10 Apr",
+      "identifier": "release-1.15.11_2.3.0",
+      "caption": "Update for ImprovedCustomApi now available!",
+      "date": "2026-04-10T02:48:31Z",
+      "tintColor": "#3F91FE",
+      "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.png",
+      "notify": true,
+      "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_2.3.0"
+    },
     {
       "appID": "com.christianselig.Apollo",
       "title": "1.15.11_2.2.1 - 26 Mar",
@@ -536,17 +555,6 @@
       "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.png",
       "notify": true,
       "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11-1.0.10"
-    },
-    {
-      "appID": "com.christianselig.Apollo",
-      "title": "1.15.11-1.0.9 - 30 Dec",
-      "identifier": "release-1.15.11-1.0.9",
-      "caption": "Update for ImprovedCustomApi now available!",
-      "date": "2023-12-30T08:52:04Z",
-      "tintColor": "#3F91FE",
-      "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.png",
-      "notify": true,
-      "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11-1.0.9"
     }
   ]
 }
