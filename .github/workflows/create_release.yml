@@ -310,6 +310,7 @@ jobs:
       - name: Update source files
         env:
           RELEASE_TAG: ${{ steps.get-release.outputs.RELEASE_TAG }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'

@@ -8,6 +8,7 @@ Specification: https://faq.altstore.io/developers/make-a-source
 """
 
 import json
+import os
 import re
 import sys
 from datetime import datetime
@@ -55,6 +56,11 @@ def fetch_github_releases(repo_url: str) -> List[Dict]:
         "Accept": "application/vnd.github+json",
         "User-Agent": "AltStore-Source-Generator"
     }
+
+    # Use GITHUB_TOKEN if available (avoids rate limiting in CI)
+    token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+    if token:
+        headers["Authorization"] = f"token {token}"
 
     print(f"Fetching releases from {repo_url}...")
     response = requests.get(api_url, headers=headers, timeout=30)
