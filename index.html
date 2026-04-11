@@ -1,23 +1,198 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="google-site-verification" content="pteA0I0cOIBT_azStutHoE1033vCluAlbT2VRQj_BGg" />
-    <title>Apollo for Reddit - Enhance Your Reddit Experience on iOS</title>
-    <meta
-      content="Apollo is a feature-rich Reddit client for iOS devices, offering a smooth and customizable browsing experience for iPhone and iPad users."
-      name="description"
-    />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta content="Apollo for Reddit - Enhance Your Reddit Experience on iOS" property="og:title" />
-    <meta
-      content="Apollo is a feature-rich Reddit client for iOS devices, offering a smooth and customizable browsing experience for iPhone and iPad users."
-      property="og:description"
-    />
-    <meta content="https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_0.webp" property="og:image" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="./src/main.jsx"></script>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apollo for Reddit - Enhance Your Reddit Experience on iOS</title>
+  <meta name="description" content="Apollo is a feature-rich Reddit client for iOS, offering a smooth and customizable browsing experience.">
+  <meta property="og:title" content="Apollo for Reddit">
+  <meta property="og:image" content="images/image_0.webp">
+  <link rel="icon" href="apollo_icons/icon_44.webp">
+</head>
+<body>
+
+  <!-- SPECTRA NOISE BACKGROUND -->
+  <canvas id="spectra-bg" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:0.3;"></canvas>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-icon-wrap">
+        <div class="hero-glow"></div>
+        <img class="hero-icon" id="app-icon" src="apollo_icons/icon_44.webp" alt="Apollo" width="140" height="140">
+      </div>
+      <div class="hero-content">
+        <h1 class="hero-title">Apollo for Reddit</h1>
+        <p class="hero-desc">The award-winning Reddit app !</p>
+        <div class="hero-actions">
+          <!-- Install dropdown -->
+          <div class="dropdown-wrap">
+            <button id="install-trigger" class="btn btn-primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14m-7-7h14"/></svg>
+              Install
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div id="install-dropdown" class="dropdown-menu" style="display:none;">
+              <div class="dropdown-group">
+                <button class="dropdown-group-title">Standard Source <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="dropdown-items">
+                  <a class="dropdown-item" href="https://intradeus.github.io/http-protocol-redirector?r=altstore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps.json" target="_blank" rel="noreferrer">AltStore</a>
+                  <a class="dropdown-item" href="https://intradeus.github.io/http-protocol-redirector?r=feather://source/https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps.json" target="_blank" rel="noreferrer">Feather</a>
+                  <a class="dropdown-item" href="https://intradeus.github.io/http-protocol-redirector?r=sidestore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps.json" target="_blank" rel="noreferrer">SideStore</a>
+                  <a class="dropdown-item" href="https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps.json" target="_blank" rel="noreferrer">Direct URL</a>
+                </div>
+              </div>
+              <div class="dropdown-group">
+                <button class="dropdown-group-title">No Extensions <span class="dropdown-tag">Free accounts</span> <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="dropdown-items">
+                  <a class="dropdown-item" href="https://intradeus.github.io/http-protocol-redirector?r=altstore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext.json" target="_blank" rel="noreferrer">AltStore</a>
+                  <a class="dropdown-item" href="https://intradeus.github.io/http-protocol-redirector?r=feather://source/https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext.json" target="_blank" rel="noreferrer">Feather</a>
+                  <a class="dropdown-item" href="https://intradeus.github.io/http-protocol-redirector?r=sidestore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext.json" target="_blank" rel="noreferrer">SideStore</a>
+                  <a class="dropdown-item" href="https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext.json" target="_blank" rel="noreferrer">Direct URL</a>
+                </div>
+              </div>
+              <div class="dropdown-group">
+                <button class="dropdown-group-title">Liquid Glass <span class="dropdown-tag">iOS 26+</span> <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="dropdown-items">
+                  <a class="dropdown-item" href="https://intradeus.github.io/http-protocol-redirector?r=altstore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_glass.json" target="_blank" rel="noreferrer">AltStore</a>
+                  <a class="dropdown-item" href="https://intradeus.github.io/http-protocol-redirector?r=feather://source/https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_glass.json" target="_blank" rel="noreferrer">Feather</a>
+                  <a class="dropdown-item" href="https://intradeus.github.io/http-protocol-redirector?r=sidestore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_glass.json" target="_blank" rel="noreferrer">SideStore</a>
+                  <a class="dropdown-item" href="https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_glass.json" target="_blank" rel="noreferrer">Direct URL</a>
+                </div>
+              </div>
+              <div class="dropdown-group">
+                <button class="dropdown-group-title">No Ext + Glass <span class="dropdown-tag">iOS 26+</span> <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="dropdown-items">
+                  <a class="dropdown-item" href="https://intradeus.github.io/http-protocol-redirector?r=altstore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext_glass.json" target="_blank" rel="noreferrer">AltStore</a>
+                  <a class="dropdown-item" href="https://intradeus.github.io/http-protocol-redirector?r=feather://source/https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext_glass.json" target="_blank" rel="noreferrer">Feather</a>
+                  <a class="dropdown-item" href="https://intradeus.github.io/http-protocol-redirector?r=sidestore://source?url=https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext_glass.json" target="_blank" rel="noreferrer">SideStore</a>
+                  <a class="dropdown-item" href="https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/apps_noext_glass.json" target="_blank" rel="noreferrer">Direct URL</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a href="https://github.com/Balackburn/Apollo" class="btn btn-ghost" target="_blank" rel="noreferrer">See on GitHub</a>
+          <!-- Download dropdown -->
+          <div class="dropdown-wrap">
+            <button id="download-trigger" class="btn btn-ghost">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download .ipa
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div id="download-dropdown" class="dropdown-menu" style="display:none;">
+              <a class="dropdown-item" href="https://github.com/Balackburn/Apollo/releases/latest/download/Apollo-1.15.11_ImprovedCustomApi-2.3.0.ipa" target="_blank" rel="noreferrer">
+                <span>Standard</span><span class="dropdown-size">109 MB</span>
+              </a>
+              <a class="dropdown-item" href="https://github.com/Balackburn/Apollo/releases/latest/download/NO-EXTENSIONS_Apollo-1.15.11_ImprovedCustomApi-2.3.0.ipa" target="_blank" rel="noreferrer">
+                <span>No Extensions</span><span class="dropdown-size">74.4 MB</span>
+              </a>
+              <a class="dropdown-item" href="https://github.com/Balackburn/Apollo/releases/latest/download/GLASS_Apollo-1.15.11_ImprovedCustomApi-2.3.0.ipa" target="_blank" rel="noreferrer">
+                <span>Liquid Glass</span><span class="dropdown-size">110 MB</span>
+              </a>
+              <a class="dropdown-item" href="https://github.com/Balackburn/Apollo/releases/latest/download/NO-EXTENSIONS_GLASS_Apollo-1.15.11_ImprovedCustomApi-2.3.0.ipa" target="_blank" rel="noreferrer">
+                <span>No Ext + Glass</span><span class="dropdown-size">74.5 MB</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SCREENSHOTS -->
+  <section class="carousel-section" id="screenshots">
+    <div class="carousel-header container"><h2>Screenshots</h2></div>
+    <div class="carousel-track-wrap">
+      <div class="carousel-track" id="carousel">
+        <div class="carousel-item" data-idx="0"><img src="images/image_1.webp" alt="Simply Superior" loading="lazy"></div>
+        <div class="carousel-item" data-idx="1"><img src="images/image_2.webp" alt="iOS Centric Design" loading="lazy"></div>
+        <div class="carousel-item" data-idx="2"><img src="images/image_3.webp" alt="Media Viewer" loading="lazy"></div>
+        <div class="carousel-item" data-idx="3"><img src="images/image_4.webp" alt="Custom API" loading="lazy"></div>
+        <div class="carousel-item" data-idx="4"><img src="images/image_5.webp" alt="Lock Screen Widgets" loading="lazy"></div>
+        <div class="carousel-item" data-idx="5"><img src="images/image_6.webp" alt="Comments" loading="lazy"></div>
+        <div class="carousel-item" data-idx="6"><img src="images/image_7.webp" alt="Customization" loading="lazy"></div>
+        <div class="carousel-item" data-idx="7"><img src="images/image_8.webp" alt="Notifications" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <button class="lightbox-nav lightbox-prev" aria-label="Previous">&lsaquo;</button>
+    <button class="lightbox-nav lightbox-next" aria-label="Next">&rsaquo;</button>
+    <img id="lightbox-img" src="" alt="Screenshot preview">
+  </div>
+
+  <!-- FEATURES — no cards, typographic rows -->
+  <section class="features" id="about">
+    <div class="features-inner">
+      <div class="features-top">
+        <div class="features-label">What makes it different</div>
+        <h2 class="features-heading">If Apple built a Reddit app.</h2>
+        <p class="features-sub">A beautiful and powerful Reddit client designed for fast navigation, customizability, and a seamless browsing experience on iOS.</p>
+      </div>
+      <div class="features-list">
+        <div class="feature-row">
+          <span class="feature-num">01</span>
+          <div class="feature-title">Native iOS Design</div>
+          <div class="feature-desc">Built with Apple's Human Interface Guidelines. Gesture navigation, haptic feedback, Dynamic Type, and dark mode feel right at home.</div>
+        </div>
+        <div class="feature-row">
+          <span class="feature-num">02</span>
+          <div class="feature-title">Media Viewer</div>
+          <div class="feature-desc">Super-charged inline viewer for Imgur, Gfycat, YouTube, Vimeo, and Streamable. GIF autoplay, video scrubbing, all native.</div>
+        </div>
+        <div class="feature-row">
+          <span class="feature-num">03</span>
+          <div class="feature-title">Gestures &amp; Customization</div>
+          <div class="feature-desc">Fully customizable swipe gestures, 156 app icons, Jump Bar for lightning-fast navigation, and a powerful Markdown editor.</div>
+        </div>
+        <div class="feature-row">
+          <span class="feature-num">04</span>
+          <div class="feature-title">Custom API Access</div>
+          <div class="feature-desc">Tweaked with ImprovedCustomApi by @JeffreyCA. Use your own Reddit API credentials for continued, uninterrupted access.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="quote-section">
+    <div class="quote-inner">
+      <span class="quote-mark">&ldquo;</span>
+      <p class="quote-text">Apollo may just be the best designed social feed app I've ever used.</p>
+      <cite class="quote-cite">MacStories</cite>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand-name">
+          <img src="apollo_icons/icon_44.webp" alt="Apollo" width="28" height="28">
+          Apollo
+        </div>
+        <p>Not affiliated with <a href="https://apolloapp.io" target="_blank" rel="noreferrer">Apollo</a> or <a href="https://christianselig.com/" target="_blank" rel="noreferrer">Christian Selig</a>. Thanks to <a href="https://github.com/JeffreyCA" target="_blank" rel="noreferrer">@JeffreyCA</a> for ImprovedCustomApi.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Install</div>
+        <a href="altstore://source/?url=https://balackburn.github.io/Apollo/apps.json">AltStore</a>
+        <a href="#">Feather</a>
+        <a href="#">SideStore</a>
+        <a href="https://github.com/Balackburn/Apollo/releases" target="_blank" rel="noreferrer">Direct .ipa</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Resources</div>
+        <a href="https://github.com/Balackburn/Apollo" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://github.com/Balackburn/Apollo/issues" target="_blank" rel="noreferrer">Issues</a>
+        <a href="https://github.com/JeffreyCA/Apollo-ImprovedCustomApi" target="_blank" rel="noreferrer">ImprovedCustomApi</a>
+      </div>
+    </div>
+    <div class="footer-watermark">APOLLO</div>
+  </footer>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
 </html>
