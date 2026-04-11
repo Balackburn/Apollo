@@ -3,6 +3,9 @@ import Lenis from 'lenis';
 import { animate, inView, stagger, hover, scroll, press } from 'motion';
 import { initSpectra } from './spectra.js';
 
+// ═══ BASE URL (for GitHub Pages /Apollo/ path) ═══
+const BASE = import.meta.env.BASE_URL || '/';
+
 // ═══ SPECTRA NOISE BACKGROUND ═══
 const spectraCanvas = document.getElementById('spectra-bg');
 if (spectraCanvas) {
@@ -30,13 +33,16 @@ if (spectraCanvas) {
 const TOTAL_ICONS = 156;
 const appIcon = document.getElementById('app-icon');
 if (appIcon) {
-  for (let i = 0; i < 5; i++) { const img = new Image(); img.src = `apollo_icons/icon_${Math.floor(Math.random() * TOTAL_ICONS) + 1}.webp`; }
+  for (let i = 0; i < 5; i++) { const img = new Image(); img.src = `${BASE}apollo_icons/icon_${Math.floor(Math.random() * TOTAL_ICONS) + 1}.webp`; }
 
+  let lastIdx = 44; // starting icon
   setInterval(() => {
-    const idx = Math.floor(Math.random() * TOTAL_ICONS) + 1;
+    let idx;
+    do { idx = Math.floor(Math.random() * TOTAL_ICONS) + 1; } while (idx === lastIdx);
+    lastIdx = idx;
     // Gentle blur — minimal, just enough to mask the swap
     animate(appIcon, { filter: 'blur(2px)' }, { duration: 0.2, easing: [0.4, 0, 1, 1] }).then(() => {
-      appIcon.src = `apollo_icons/icon_${idx}.webp`;
+      appIcon.src = `${BASE}apollo_icons/icon_${idx}.webp`;
       animate(appIcon, { filter: 'blur(0px)' }, { duration: 0.4, easing: [0, 0, 0.2, 1] });
     });
   }, 1200);
@@ -295,7 +301,7 @@ if (track) {
 // ═══ LIGHTBOX ═══
 const overlay = document.getElementById('lightbox');
 const lbImg = document.getElementById('lightbox-img');
-const shots = Array.from({ length: 8 }, (_, i) => `images/image_${i + 1}.webp`);
+const shots = Array.from({ length: 8 }, (_, i) => `${BASE}images/image_${i + 1}.webp`);
 let curIdx = 0, lbOpen = false;
 
 function openLB(idx) {
