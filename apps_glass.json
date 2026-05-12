@@ -30,6 +30,14 @@
       "versions": [
         {
           "version": "1.15.11",
+          "buildVersion": "2.9.0",
+          "date": "2026-05-12T08:44:52Z",
+          "localizedDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v2.9.0\"\n\nRelease Notes\n🎉 Inline Media Previews (aka inline images) is finally here and enabled by default! This enables Apollo to render images, GIFs, and video thumbnails inline within posts and comments. (125)\r\n\r\n• Configure in Settings > Custom API > Media > Inline Media Previews (on by default)\r\n• Supports most Reddit hosted videos (thumbnails) and images, animated GIFs (including GIFV), and Imgur images and albums\r\n• Thank you @icpryde for the collaboration and adding support for videos, Imgur albums, and thumbnail retrieval \r\n\r\n| Post | Comment | Video |\r\n|:••:|:••:|:••:|\r\n|  |  |  |\r\n\r\n| Imgur Album | GIF | Setting | \r\n|:••:|:••:|:••:|\r\n|  |  |  |\r\n\r\nOther Issues Fixed\r\n\r\n• Fix Apollo bug where viewing MP4•style GIFs / GIFVs on subsequent loops would randomly freeze\r\n• Fix rare crash issue caused by comment collapse hooks\r\n• Fix image uploads to upload at full•res (160)\r\n• Liquid Glass: fix tab bar icon and label tinting so it adapts to light/dark mode and to bright/dark content behind the glass material (thanks @icpryde!) (103)\r\n• Liquid Glass: fix subreddit title being misaligned to the left in the navigation bar (162)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
+          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_2.9.0/GLASS_Apollo-1.15.11_ImprovedCustomApi-2.9.0.ipa",
+          "size": 115052831
+        },
+        {
+          "version": "1.15.11",
           "buildVersion": "2.8.0",
           "date": "2026-05-09T08:00:30Z",
           "localizedDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v2.8.0\"\n\nRelease Notes\n• Support for uploading images directly to Reddit instead of Imgur (thanks @icpryde for the implementation!) (123)\r\n    • Configure in Settings > Custom API > Media > Image Upload Host\r\n    • Reddit image upload is experimental and does not currently support multi•image or video uploads\r\n    • It's normal to see an \"amazonaws.com\" URL after attaching an image • it is replaced after posting\r\n    • Right after posting, Apollo may briefly show a generic preview icon while Reddit finishes processing the image. Pull to refresh and the real thumbnail should appear\r\n\r\n| | | |\r\n|:••:|:••:|:••:|\r\n|  |  |  |\r\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
@@ -218,14 +226,25 @@
         }
       },
       "version": "1.15.11",
-      "buildVersion": "2.8.0",
-      "versionDate": "2026-05-09T08:00:30Z",
-      "versionDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v2.8.0\"\n\nRelease Notes\n• Support for uploading images directly to Reddit instead of Imgur (thanks @icpryde for the implementation!) (123)\r\n    • Configure in Settings > Custom API > Media > Image Upload Host\r\n    • Reddit image upload is experimental and does not currently support multi•image or video uploads\r\n    • It's normal to see an \"amazonaws.com\" URL after attaching an image • it is replaced after posting\r\n    • Right after posting, Apollo may briefly show a generic preview icon while Reddit finishes processing the image. Pull to refresh and the real thumbnail should appear\r\n\r\n| | | |\r\n|:••:|:••:|:••:|\r\n|  |  |  |\r\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
-      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_2.8.0/GLASS_Apollo-1.15.11_ImprovedCustomApi-2.8.0.ipa",
-      "size": 115008121
+      "buildVersion": "2.9.0",
+      "versionDate": "2026-05-12T08:44:52Z",
+      "versionDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v2.9.0\"\n\nRelease Notes\n🎉 Inline Media Previews (aka inline images) is finally here and enabled by default! This enables Apollo to render images, GIFs, and video thumbnails inline within posts and comments. (125)\r\n\r\n• Configure in Settings > Custom API > Media > Inline Media Previews (on by default)\r\n• Supports most Reddit hosted videos (thumbnails) and images, animated GIFs (including GIFV), and Imgur images and albums\r\n• Thank you @icpryde for the collaboration and adding support for videos, Imgur albums, and thumbnail retrieval \r\n\r\n| Post | Comment | Video |\r\n|:••:|:••:|:••:|\r\n|  |  |  |\r\n\r\n| Imgur Album | GIF | Setting | \r\n|:••:|:••:|:••:|\r\n|  |  |  |\r\n\r\nOther Issues Fixed\r\n\r\n• Fix Apollo bug where viewing MP4•style GIFs / GIFVs on subsequent loops would randomly freeze\r\n• Fix rare crash issue caused by comment collapse hooks\r\n• Fix image uploads to upload at full•res (160)\r\n• Liquid Glass: fix tab bar icon and label tinting so it adapts to light/dark mode and to bright/dark content behind the glass material (thanks @icpryde!) (103)\r\n• Liquid Glass: fix subreddit title being misaligned to the left in the navigation bar (162)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
+      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_2.9.0/GLASS_Apollo-1.15.11_ImprovedCustomApi-2.9.0.ipa",
+      "size": 115052831
     }
   ],
   "news": [
+    {
+      "appID": "com.christianselig.Apollo",
+      "title": "1.15.11_2.9.0 - 12 May",
+      "identifier": "release-1.15.11_2.9.0",
+      "caption": "Update for ImprovedCustomApi now available!",
+      "date": "2026-05-12T08:44:52Z",
+      "tintColor": "#3F91FE",
+      "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.png",
+      "notify": true,
+      "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_2.9.0"
+    },
     {
       "appID": "com.christianselig.Apollo",
       "title": "1.15.11_2.8.0 - 09 May",
