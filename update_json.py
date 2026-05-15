@@ -184,8 +184,8 @@ def create_version_entry(release: Dict, config: Dict, prefix: Optional[str] = No
         return None
 
     return {
-        "version": version,
-        "buildVersion": build_version,
+        "version": build_version,
+        "buildVersion": version,
         "date": release["published_at"],
         "localizedDescription": format_description(release.get("body", ""), config["app_name"]),
         "downloadURL": download_url,
@@ -273,8 +273,8 @@ def update_source_json(json_path: str, releases: List[Dict], config: Dict, prefi
         latest = releases[-1]  # Last in sorted list is newest
         version, build_version = extract_version_info(latest["tag_name"])
 
-        app["version"] = version
-        app["buildVersion"] = build_version
+        app["version"] = build_version
+        app["buildVersion"] = version
         app["versionDate"] = latest["published_at"]
         app["versionDescription"] = format_description(latest.get("body", ""), config["app_name"])
 
