@@ -202,6 +202,54 @@ jobs:
             echo "Duplicate LC_RPATH entry removed"
           fi
 
+          # --- Liquid Glass icon injection (mirrors patch.sh --liquid-glass) ---
+          LG_BASE="https://raw.githubusercontent.com/JeffreyCA/Apollo-ImprovedCustomApi/v${ICA_VERSION}/liquid-glass"
+          echo "Fetching Liquid Glass Assets.car from upstream v${ICA_VERSION}"
+          curl -fsSL "${LG_BASE}/prebuilt/Assets.car" -o "Payload/Apollo.app/Assets.car"
+
+          PLIST="Payload/Apollo.app/Info.plist"
+
+          plist_ensure_dict() {
+            /usr/libexec/PlistBuddy -c "Print :$1" "$PLIST" >/dev/null 2>&1 \
+              || /usr/libexec/PlistBuddy -c "Add :$1 dict" "$PLIST"
+          }
+          plist_set_string() {
+            /usr/libexec/PlistBuddy -c "Set :$1 $2" "$PLIST" 2>/dev/null \
+              || /usr/libexec/PlistBuddy -c "Add :$1 string $2" "$PLIST"
+          }
+
+          for k in \
+            "CFBundleIcons" \
+            "CFBundleIcons:CFBundlePrimaryIcon" \
+            "CFBundleIcons:CFBundleAlternateIcons" \
+            "CFBundleIcons~ipad" \
+            "CFBundleIcons~ipad:CFBundlePrimaryIcon" \
+            "CFBundleIcons~ipad:CFBundleAlternateIcons"
+          do
+            plist_ensure_dict "$k"
+          done
+
+          plist_set_string "CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconName" "AppIcon"
+          plist_set_string "CFBundleIcons~ipad:CFBundlePrimaryIcon:CFBundleIconName" "AppIcon"
+
+          /usr/libexec/PlistBuddy -c "Delete :CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles" "$PLIST" 2>/dev/null || true
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles array" "$PLIST"
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles: string AppIcon60x60" "$PLIST"
+
+          /usr/libexec/PlistBuddy -c "Delete :CFBundleIcons~ipad:CFBundlePrimaryIcon:CFBundleIconFiles" "$PLIST" 2>/dev/null || true
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons~ipad:CFBundlePrimaryIcon:CFBundleIconFiles array" "$PLIST"
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons~ipad:CFBundlePrimaryIcon:CFBundleIconFiles: string AppIcon60x60" "$PLIST"
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons~ipad:CFBundlePrimaryIcon:CFBundleIconFiles: string AppIcon76x76" "$PLIST"
+
+          # Alternate icons — keep in sync with upstream liquid-glass/icons.json
+          for icon in igerman00 jryng jryng-alt metalnakls; do
+            plist_ensure_dict "CFBundleIcons:CFBundleAlternateIcons:${icon}"
+            plist_ensure_dict "CFBundleIcons~ipad:CFBundleAlternateIcons:${icon}"
+            plist_set_string "CFBundleIcons:CFBundleAlternateIcons:${icon}:CFBundleIconName" "$icon"
+            plist_set_string "CFBundleIcons~ipad:CFBundleAlternateIcons:${icon}:CFBundleIconName" "$icon"
+          done
+          # --- end Liquid Glass icon injection ---
+
           echo "Fake Signing Apollo Executable!"
           ldid -S -M "Payload/Apollo.app/Apollo"
           echo "Zipping GLASS_${OUTPUT_NAME}.ipa"
@@ -244,6 +292,54 @@ jobs:
             install_name_tool -delete_rpath "@executable_path/Frameworks" "Payload/Apollo.app/Apollo"
             echo "Duplicate LC_RPATH entry removed"
           fi
+
+          # --- Liquid Glass icon injection (mirrors patch.sh --liquid-glass) ---
+          LG_BASE="https://raw.githubusercontent.com/JeffreyCA/Apollo-ImprovedCustomApi/v${ICA_VERSION}/liquid-glass"
+          echo "Fetching Liquid Glass Assets.car from upstream v${ICA_VERSION}"
+          curl -fsSL "${LG_BASE}/prebuilt/Assets.car" -o "Payload/Apollo.app/Assets.car"
+
+          PLIST="Payload/Apollo.app/Info.plist"
+
+          plist_ensure_dict() {
+            /usr/libexec/PlistBuddy -c "Print :$1" "$PLIST" >/dev/null 2>&1 \
+              || /usr/libexec/PlistBuddy -c "Add :$1 dict" "$PLIST"
+          }
+          plist_set_string() {
+            /usr/libexec/PlistBuddy -c "Set :$1 $2" "$PLIST" 2>/dev/null \
+              || /usr/libexec/PlistBuddy -c "Add :$1 string $2" "$PLIST"
+          }
+
+          for k in \
+            "CFBundleIcons" \
+            "CFBundleIcons:CFBundlePrimaryIcon" \
+            "CFBundleIcons:CFBundleAlternateIcons" \
+            "CFBundleIcons~ipad" \
+            "CFBundleIcons~ipad:CFBundlePrimaryIcon" \
+            "CFBundleIcons~ipad:CFBundleAlternateIcons"
+          do
+            plist_ensure_dict "$k"
+          done
+
+          plist_set_string "CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconName" "AppIcon"
+          plist_set_string "CFBundleIcons~ipad:CFBundlePrimaryIcon:CFBundleIconName" "AppIcon"
+
+          /usr/libexec/PlistBuddy -c "Delete :CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles" "$PLIST" 2>/dev/null || true
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles array" "$PLIST"
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles: string AppIcon60x60" "$PLIST"
+
+          /usr/libexec/PlistBuddy -c "Delete :CFBundleIcons~ipad:CFBundlePrimaryIcon:CFBundleIconFiles" "$PLIST" 2>/dev/null || true
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons~ipad:CFBundlePrimaryIcon:CFBundleIconFiles array" "$PLIST"
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons~ipad:CFBundlePrimaryIcon:CFBundleIconFiles: string AppIcon60x60" "$PLIST"
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIcons~ipad:CFBundlePrimaryIcon:CFBundleIconFiles: string AppIcon76x76" "$PLIST"
+
+          # Alternate icons — keep in sync with upstream liquid-glass/icons.json
+          for icon in igerman00 jryng jryng-alt metalnakls; do
+            plist_ensure_dict "CFBundleIcons:CFBundleAlternateIcons:${icon}"
+            plist_ensure_dict "CFBundleIcons~ipad:CFBundleAlternateIcons:${icon}"
+            plist_set_string "CFBundleIcons:CFBundleAlternateIcons:${icon}:CFBundleIconName" "$icon"
+            plist_set_string "CFBundleIcons~ipad:CFBundleAlternateIcons:${icon}:CFBundleIconName" "$icon"
+          done
+          # --- end Liquid Glass icon injection ---
 
           echo "Fake Signing Apollo Executable!"
           ldid -S -M "Payload/Apollo.app/Apollo"
