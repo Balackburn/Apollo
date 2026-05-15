@@ -30,6 +30,14 @@
       "versions": [
         {
           "version": "1.15.11",
+          "buildVersion": "2.11.0",
+          "date": "2026-05-15T08:53:16Z",
+          "localizedDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v2.11.0\"\n\nRelease Notes\n Liquid Glass app icons\r\n\r\nApollo's native App Icon picker now ships with 4 community•designed Liquid Glass app icons that render with full Liquid Glass effects!\r\n• Requires re•patching your IPA using the updated [\"patch.sh\" script](https://github.com/JeffreyCA/Apollo•ImprovedCustomApi/blob/main/patch.sh) or Patch IPA GitHub Action, otherwise they won't show up in the app icon picker.\r\n• Huge thanks to @MrGcGamer and @jordanearle for figuring out the \".icon\" → \"Assets.car\" build flow, @DeltAndy123 for the asset•rebuild tooling and tint fixes, and to @iGerman00, @jryng, and @metalnakls for the icon designs!\r\n• To contribute your own Liquid Glass icons, see [instructions](https://github.com/JeffreyCA/Apollo•ImprovedCustomApi/tree/main/liquid•glassadding•a•new•icon).\r\n\r\nUser avatars\r\n\r\nNew Show User Profile Pictures toggle to display Reddit user avatars next to usernames in posts, comments, as well as in user profiles\r\n• Thanks @icpryde for implementing this feature!\r\n• Configure in Settings > Custom API > Media > Show User Profile Pictures\r\n\r\n| Liquid Glass App Icons | Avatars • Posts/Comments | Avatars • User Profile |\r\n|•••|•••|•••|\r\n|  |  |  |\r\n\r\nOther fixes\r\n\r\n• Preserve typed text when submitting Reddit•hosted image comments (thanks @icpryde!)\r\n• Remove duplicate Hide Next Parent Button setting; Apollo already provides this as Show Jump Button (thanks @icpryde!) (191)\r\n• Fix Pixel Pals receiving 3 food items on every launch (thanks @DeltAndy123!)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
+          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_2.11.0/NO-EXTENSIONS_Apollo-1.15.11_ImprovedCustomApi-2.11.0.ipa",
+          "size": 79553886
+        },
+        {
+          "version": "1.15.11",
           "buildVersion": "2.10.0",
           "date": "2026-05-13T19:59:20Z",
           "localizedDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v2.10.0\"\n\nRelease Notes\n• New Hide Next Parent Button toggle in Settings > Custom API > General to hide the floating button in the bottom•right of comments views (thanks @icpryde!)\r\n• Liquid Glass: Hide Bars on Scroll now uses native iOS 26 tab bar minimize behaviour so it collapses into the small pill on scroll•down and re•expands on scroll•up (thanks @icpryde!) (168)\r\n    \r\n \r\n• Fix Reddit•hosted image uploads in text posts failing with a \"BAD_URL\" error\r\n• Improve link•button hiding with inline media previews\r\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
@@ -259,14 +267,6 @@
           "localizedDescription": "Apollo for Reddit (with ImprovedCustomApi) Release Information\nApollo .IPA Version: \"1.15.11\"\nImprovedCustomApi .DEB Version: \"1.1.8\"\n\nRELEASE \"1.15.11\"•\"1.1.8\": (2024/12/08)\n• Updated ImprovedCustomApi from \"1.1.7b\" to \"1.1.8\"\n  • • Fix RedGIFs links loading without sound (48) • thank you @iCrazeiOS!\\r\\n\n\nKnown issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
           "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.1.8/NO-EXTENSIONS_Apollo-1.15.11_improvedcustomapi-1.1.8.ipa",
           "size": 71301824
-        },
-        {
-          "version": "1.15.11",
-          "buildVersion": "1.1.7",
-          "date": "2024-11-02T05:56:30Z",
-          "localizedDescription": "Apollo for Reddit (with ImprovedCustomApi) Release Information\r\nApollo .IPA Version: \"1.15.11\"\r\nImprovedCustomApi .DEB Version: \"1.1.7b\"\r\n\r\nRELEASE \"1.15.11\"•\"1.1.7b\": (2024/11/02)\r\n• Updated ImprovedCustomApi from \"1.1.7\" to \"1.1.7b\"\r\n  •  Add rootless package support to Theos build workflow (https://github.com/JeffreyCA/Apollo•ImprovedCustomApi/pull/46) • thanks @darkxdd\\r\\n\\r\\n(There are no functionality changes in this release)\r\n\r\nKnown issues\r\n• Apollo Ultra features may cause app to crash\r\n• Imgur multi•image upload\r\n• Uploads usually fail on the first attempt but subsequent retries should succeed\r\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
-          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_1.1.7b/NO-EXTENSIONS_Apollo-1.15.11_improvedcustomapi-1.1.7b.ipa",
-          "size": 71301366
         }
       ],
       "appPermissions": {
@@ -290,14 +290,25 @@
         }
       },
       "version": "1.15.11",
-      "buildVersion": "2.10.0",
-      "versionDate": "2026-05-13T19:59:20Z",
-      "versionDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v2.10.0\"\n\nRelease Notes\n• New Hide Next Parent Button toggle in Settings > Custom API > General to hide the floating button in the bottom•right of comments views (thanks @icpryde!)\r\n• Liquid Glass: Hide Bars on Scroll now uses native iOS 26 tab bar minimize behaviour so it collapses into the small pill on scroll•down and re•expands on scroll•up (thanks @icpryde!) (168)\r\n    \r\n \r\n• Fix Reddit•hosted image uploads in text posts failing with a \"BAD_URL\" error\r\n• Improve link•button hiding with inline media previews\r\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
-      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_2.10.0/NO-EXTENSIONS_Apollo-1.15.11_ImprovedCustomApi-2.10.0.ipa",
-      "size": 78188138
+      "buildVersion": "2.11.0",
+      "versionDate": "2026-05-15T08:53:16Z",
+      "versionDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v2.11.0\"\n\nRelease Notes\n Liquid Glass app icons\r\n\r\nApollo's native App Icon picker now ships with 4 community•designed Liquid Glass app icons that render with full Liquid Glass effects!\r\n• Requires re•patching your IPA using the updated [\"patch.sh\" script](https://github.com/JeffreyCA/Apollo•ImprovedCustomApi/blob/main/patch.sh) or Patch IPA GitHub Action, otherwise they won't show up in the app icon picker.\r\n• Huge thanks to @MrGcGamer and @jordanearle for figuring out the \".icon\" → \"Assets.car\" build flow, @DeltAndy123 for the asset•rebuild tooling and tint fixes, and to @iGerman00, @jryng, and @metalnakls for the icon designs!\r\n• To contribute your own Liquid Glass icons, see [instructions](https://github.com/JeffreyCA/Apollo•ImprovedCustomApi/tree/main/liquid•glassadding•a•new•icon).\r\n\r\nUser avatars\r\n\r\nNew Show User Profile Pictures toggle to display Reddit user avatars next to usernames in posts, comments, as well as in user profiles\r\n• Thanks @icpryde for implementing this feature!\r\n• Configure in Settings > Custom API > Media > Show User Profile Pictures\r\n\r\n| Liquid Glass App Icons | Avatars • Posts/Comments | Avatars • User Profile |\r\n|•••|•••|•••|\r\n|  |  |  |\r\n\r\nOther fixes\r\n\r\n• Preserve typed text when submitting Reddit•hosted image comments (thanks @icpryde!)\r\n• Remove duplicate Hide Next Parent Button setting; Apollo already provides this as Show Jump Button (thanks @icpryde!) (191)\r\n• Fix Pixel Pals receiving 3 food items on every launch (thanks @DeltAndy123!)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
+      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_2.11.0/NO-EXTENSIONS_Apollo-1.15.11_ImprovedCustomApi-2.11.0.ipa",
+      "size": 79553886
     }
   ],
   "news": [
+    {
+      "appID": "com.christianselig.Apollo",
+      "title": "1.15.11_2.11.0 - 15 May",
+      "identifier": "release-1.15.11_2.11.0",
+      "caption": "Update for ImprovedCustomApi now available!",
+      "date": "2026-05-15T08:53:16Z",
+      "tintColor": "#3F91FE",
+      "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.png",
+      "notify": true,
+      "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_2.11.0"
+    },
     {
       "appID": "com.christianselig.Apollo",
       "title": "1.15.11_2.10.0 - 13 May",
@@ -616,17 +627,6 @@
       "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.png",
       "notify": true,
       "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_1.1.8"
-    },
-    {
-      "appID": "com.christianselig.Apollo",
-      "title": "1.15.11_1.1.7b - 02 Nov",
-      "identifier": "release-1.15.11_1.1.7b",
-      "caption": "Update for ImprovedCustomApi now available!",
-      "date": "2024-11-02T05:56:30Z",
-      "tintColor": "#3F91FE",
-      "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.png",
-      "notify": true,
-      "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_1.1.7b"
     }
   ]
 }
