@@ -51,7 +51,7 @@ if (appIcon) {
 // ═══ FETCH LATEST RELEASE — update all download links dynamically ═══
 (async () => {
   try {
-    const res = await fetch('https://api.github.com/repos/Balackburn/Apollo/releases/latest');
+    const res = await fetch('https://api.github.com/repos/hllvc/Apollo/releases/latest');
     const data = await res.json();
     const assets = data.assets || [];
 

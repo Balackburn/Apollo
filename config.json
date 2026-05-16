@@ -1,5 +1,5 @@
 {
-  "repo_url": "Balackburn/Apollo",
+  "repo_url": "hllvc/Apollo",
   "json_file": "apps.json",
   "json_noext_file": "apps_noext.json",
   "json_glass_file": "apps_glass.json",
@@ -8,5 +8,5 @@
   "app_name": "Apollo",
   "caption": "Update for ImprovedCustomApi now available!",
   "tint_colour": "#3F91FE",
-  "image_url": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.png"
+  "image_url": "https://raw.githubusercontent.com/hllvc/Apollo/refs/heads/main/images/news/news_2.png"
 }
