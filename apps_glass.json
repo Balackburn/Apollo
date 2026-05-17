@@ -30,6 +30,14 @@
       "versions": [
         {
           "version": "1.15.11",
+          "buildVersion": "2.12.0",
+          "date": "2026-05-17T03:42:00Z",
+          "localizedDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v2.12.0b\"\n\nRelease Notes\n> [!NOTE]\r\n> \"v2.12.0\" was pulled due to an issue with loading user avatars\r\n\r\nNew Features\r\n\r\n• Reddit•hosted uploads: support multi•image and video uploads (thanks @icpryde!) (157, 158)\r\n  • Support adding optional post text to Media posts (175)\r\n• Add a long•press menu on profile usernames to copy the username to the clipboard (thanks @icpryde!) (183)\r\n• Refresh user profile pictures on pull•to•refresh and add a Clear Profile Picture Cache action under Settings > Custom API > Media (197)\r\n• New harunatsu Liquid Glass app icon (thanks @jordanearle and /u/harunatsu91202024!)\r\n  • Requires re•patching your IPA using the updated [patch.sh script](https://github.com/JeffreyCA/Apollo•ImprovedCustomApi/blob/main/patch.sh) or Patch IPA GitHub Action\r\n    \r\n• Liquid Glass: new Tab Bar Re•Expands When Idle toggle in Settings > Custom API > General that re•expands the tab bar after a deliberate upward scroll or a longer idle timeout (thanks @icpryde!) (196)\r\n    \r\n\r\n• New Thanks To screen under About section. Thank you to all the contributors who've helped make this tweak what it is ❤️\r\n\r\nFixes\r\n\r\n• Fix the Photo Post composer thumbnail strip so all selected images can be reviewed with reliable horizontal scrolling before submit (thanks @icpryde!)\r\n• Improve user avatar loading on multireddits\r\n\r\n| |  | \r\n|•••|•••|\r\n|  |  |\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
+          "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_2.12.0b/GLASS_Apollo-1.15.11_ImprovedCustomApi-2.12.0b.ipa",
+          "size": 115558910
+        },
+        {
+          "version": "1.15.11",
           "buildVersion": "2.11.0",
           "date": "2026-05-15T08:53:16Z",
           "localizedDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v2.11.0\"\n\nRelease Notes\n Liquid Glass app icons\r\n\r\nApollo's native App Icon picker now ships with 4 community•designed Liquid Glass app icons that render with full Liquid Glass effects!\r\n• Requires re•patching your IPA using the updated [\"patch.sh\" script](https://github.com/JeffreyCA/Apollo•ImprovedCustomApi/blob/main/patch.sh) or Patch IPA GitHub Action, otherwise they won't show up in the app icon picker.\r\n• Huge thanks to @MrGcGamer and @jordanearle for figuring out the \".icon\" → \"Assets.car\" build flow, @DeltAndy123 for the asset•rebuild tooling and tint fixes, and to @iGerman00, @jryng, and @metalnakls for the icon designs!\r\n• To contribute your own Liquid Glass icons, see [instructions](https://github.com/JeffreyCA/Apollo•ImprovedCustomApi/tree/main/liquid•glassadding•a•new•icon).\r\n\r\nUser avatars\r\n\r\nNew Show User Profile Pictures toggle to display Reddit user avatars next to usernames in posts, comments, as well as in user profiles\r\n• Thanks @icpryde for implementing this feature!\r\n• Configure in Settings > Custom API > Media > Show User Profile Pictures\r\n\r\n| Liquid Glass App Icons | Avatars • Posts/Comments | Avatars • User Profile |\r\n|•••|•••|•••|\r\n|  |  |  |\r\n\r\nOther fixes\r\n\r\n• Preserve typed text when submitting Reddit•hosted image comments (thanks @icpryde!)\r\n• Remove duplicate Hide Next Parent Button setting; Apollo already provides this as Show Jump Button (thanks @icpryde!) (191)\r\n• Fix Pixel Pals receiving 3 food items on every launch (thanks @DeltAndy123!)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
@@ -242,14 +250,25 @@
         }
       },
       "version": "1.15.11",
-      "buildVersion": "2.11.0",
-      "versionDate": "2026-05-15T08:53:16Z",
-      "versionDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v2.11.0\"\n\nRelease Notes\n Liquid Glass app icons\r\n\r\nApollo's native App Icon picker now ships with 4 community•designed Liquid Glass app icons that render with full Liquid Glass effects!\r\n• Requires re•patching your IPA using the updated [\"patch.sh\" script](https://github.com/JeffreyCA/Apollo•ImprovedCustomApi/blob/main/patch.sh) or Patch IPA GitHub Action, otherwise they won't show up in the app icon picker.\r\n• Huge thanks to @MrGcGamer and @jordanearle for figuring out the \".icon\" → \"Assets.car\" build flow, @DeltAndy123 for the asset•rebuild tooling and tint fixes, and to @iGerman00, @jryng, and @metalnakls for the icon designs!\r\n• To contribute your own Liquid Glass icons, see [instructions](https://github.com/JeffreyCA/Apollo•ImprovedCustomApi/tree/main/liquid•glassadding•a•new•icon).\r\n\r\nUser avatars\r\n\r\nNew Show User Profile Pictures toggle to display Reddit user avatars next to usernames in posts, comments, as well as in user profiles\r\n• Thanks @icpryde for implementing this feature!\r\n• Configure in Settings > Custom API > Media > Show User Profile Pictures\r\n\r\n| Liquid Glass App Icons | Avatars • Posts/Comments | Avatars • User Profile |\r\n|•••|•••|•••|\r\n|  |  |  |\r\n\r\nOther fixes\r\n\r\n• Preserve typed text when submitting Reddit•hosted image comments (thanks @icpryde!)\r\n• Remove duplicate Hide Next Parent Button setting; Apollo already provides this as Show Jump Button (thanks @icpryde!) (191)\r\n• Fix Pixel Pals receiving 3 food items on every launch (thanks @DeltAndy123!)\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
-      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_2.11.0/GLASS_Apollo-1.15.11_ImprovedCustomApi-2.11.0.ipa",
-      "size": 116424899
+      "buildVersion": "2.12.0",
+      "versionDate": "2026-05-17T03:42:00Z",
+      "versionDescription": "Apollo version: \"v1.15.11\"\nImprovedCustomApi version: \"v2.12.0b\"\n\nRelease Notes\n> [!NOTE]\r\n> \"v2.12.0\" was pulled due to an issue with loading user avatars\r\n\r\nNew Features\r\n\r\n• Reddit•hosted uploads: support multi•image and video uploads (thanks @icpryde!) (157, 158)\r\n  • Support adding optional post text to Media posts (175)\r\n• Add a long•press menu on profile usernames to copy the username to the clipboard (thanks @icpryde!) (183)\r\n• Refresh user profile pictures on pull•to•refresh and add a Clear Profile Picture Cache action under Settings > Custom API > Media (197)\r\n• New harunatsu Liquid Glass app icon (thanks @jordanearle and /u/harunatsu91202024!)\r\n  • Requires re•patching your IPA using the updated [patch.sh script](https://github.com/JeffreyCA/Apollo•ImprovedCustomApi/blob/main/patch.sh) or Patch IPA GitHub Action\r\n    \r\n• Liquid Glass: new Tab Bar Re•Expands When Idle toggle in Settings > Custom API > General that re•expands the tab bar after a deliberate upward scroll or a longer idle timeout (thanks @icpryde!) (196)\r\n    \r\n\r\n• New Thanks To screen under About section. Thank you to all the contributors who've helped make this tweak what it is ❤️\r\n\r\nFixes\r\n\r\n• Fix the Photo Post composer thumbnail strip so all selected images can be reviewed with reliable horizontal scrolling before submit (thanks @icpryde!)\r\n• Improve user avatar loading on multireddits\r\n\r\n| |  | \r\n|•••|•••|\r\n|  |  |\nKnown Issues\n• Apollo Ultra features may cause app to crash\n• Imgur multi•image upload\n• Uploads usually fail on the first attempt but subsequent retries should succeed\n• Share URLs in private messages and long•tapping them still open in the in•app browser",
+      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_2.12.0b/GLASS_Apollo-1.15.11_ImprovedCustomApi-2.12.0b.ipa",
+      "size": 115558910
     }
   ],
   "news": [
+    {
+      "appID": "com.christianselig.Apollo",
+      "title": "1.15.11_2.12.0b - 17 May",
+      "identifier": "release-1.15.11_2.12.0b",
+      "caption": "Update for ImprovedCustomApi now available!",
+      "date": "2026-05-17T03:42:00Z",
+      "tintColor": "#3F91FE",
+      "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.png",
+      "notify": true,
+      "url": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_2.12.0b"
+    },
     {
       "appID": "com.christianselig.Apollo",
       "title": "1.15.11_2.11.0 - 15 May",
