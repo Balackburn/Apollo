@@ -8,19 +8,19 @@
 
 # Apollo for Reddit with ImprovedCustomAPI
 
-This AltStore source provides pre-built releases of [Apollo App (Christian Selig)](https://apolloapp.io/) injected with [ImprovedCustomApi (JeffreyCA)](https://github.com/JeffreyCA/Apollo-ImprovedCustomApi).
+This AltStore source provides pre-built releases of [Apollo App (Christian Selig)](https://apolloapp.io/) injected with [Apollo-Reborn](https://github.com/Apollo-Reborn/Apollo-Reborn).
 
 It uses version `1.15.11` of the app and the latest release of the tweak.
 
-Before raising any issues, please check the [ImprovedCustomApi](https://github.com/JeffreyCA/Apollo-ImprovedCustomApi/issues) repo first - as this source only integrates it.
+Before raising any issues, please check the [Apollo-Reborn](https://github.com/Apollo-Reborn/Apollo-Reborn/issues) repo first - as this source only integrates it.
 
 ## Available Sources
 
 | Version | Best For | Features |
 |---------|----------|----------|
-| **Standard** | Most users | Apollo injected with ImprovedCustomApi |
-| **No Extensions** | Free Apple Developer accounts | Apollo injected with ImprovedCustomApi and removed extensions - Uses fewer App IDs (1 vs 7) |
-| **GLASS** | iOS 26+ users | Apollo injected with ImprovedCustomApi and Liquid Glass UI Patch (iOS 26+) |
+| **Standard** | Most users | Apollo injected with Apollo-Reborn |
+| **No Extensions** | Free Apple Developer accounts | Apollo injected with Apollo-Reborn and removed extensions - Uses fewer App IDs (1 vs 7) |
+| **GLASS** | iOS 26+ users | Apollo injected with Apollo-Reborn and Liquid Glass UI Patch (iOS 26+) |
 | **No Extensions + LIQUID GLASS** | iOS 26 + Free accounts | Combines both options |
 
 ## Standard Source
