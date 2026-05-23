@@ -157,6 +157,27 @@ jobs:
           echo "ICA_VERSION=$ICA_VERSION" >> "$GITHUB_OUTPUT"
           echo "OUTPUT_NAME=Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}" >> "$GITHUB_OUTPUT"
 
+      - name: Download ImprovedCustomApi source and patch Apollo IPA for Liquid Glass
+        env:
+          RELEASE_TAG: ${{ steps.get-release.outputs.RELEASE_TAG }}
+        run: |
+          curl -L \
+            "https://github.com/JeffreyCA/Apollo-ImprovedCustomApi/archive/refs/tags/${RELEASE_TAG}.zip" \
+            -o improvedcustomapi-source.zip
+
+          ditto -xk improvedcustomapi-source.zip .
+
+          VERSION="${RELEASE_TAG#v}"
+          SRC_DIR="Apollo-ImprovedCustomApi-${VERSION}"
+
+          cd "$SRC_DIR"
+          chmod +x patch.sh
+
+          ./patch.sh "${GITHUB_WORKSPACE}/Apollo.ipa" \
+            --liquid-glass \
+            --remove-code-signature \
+            -o "${GITHUB_WORKSPACE}/Apollo-LiquidGlass.ipa"
+
       - name: Setup build folders
         env:
             OUTPUT_NAME: ${{ steps.download-files.outputs.OUTPUT_NAME }}
@@ -204,6 +225,11 @@ jobs:
 
           echo "Fake Signing Apollo Executable!"
           ldid -S -M "Payload/Apollo.app/Apollo"
+
+          echo "Preparing Liquid Glass IPA"
+          rm -rf Payload
+          unzip -q "${GITHUB_WORKSPACE}/Apollo-LiquidGlass.ipa"
+
           echo "Zipping GLASS_${OUTPUT_NAME}.ipa"
           zip -6 -rq "GLASS_${OUTPUT_NAME}.ipa" "Payload" -x "*/.*"
 
