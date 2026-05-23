@@ -167,8 +167,9 @@ jobs:
 
           ditto -xk improvedcustomapi-source.zip .
 
-          VERSION="${RELEASE_TAG#v}"
-          SRC_DIR="Apollo-ImprovedCustomApi-${VERSION}"
+          SRC_DIR=$(find . -maxdepth 2 -name patch.sh -print -quit | xargs dirname)
+
+          echo "Using ImprovedCustomApi source directory: ${SRC_DIR}"
 
           cd "$SRC_DIR"
           chmod +x patch.sh
