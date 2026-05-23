@@ -330,6 +330,7 @@ jobs:
           echo "CATBOX_URL_NO_EXT_GLASS=${CATBOX_URL_NO_EXT_GLASS}" >> "$GITHUB_ENV"
 
       - name: Update source files
+        if: github.repository_owner == 'Balackburn'
         env:
           RELEASE_TAG: ${{ steps.get-release.outputs.RELEASE_TAG }}
           GITHUB_TOKEN: ${{ github.token }}
