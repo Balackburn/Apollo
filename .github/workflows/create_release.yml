@@ -116,7 +116,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          RESPONSE=$(curl -s -H "Authorization: token $GH_TOKEN" "${{ env.GITHUB_API_URL }}")
+          RESPONSE=$(curl -sL -H "Authorization: token $GH_TOKEN" "${{ env.GITHUB_API_URL }}")
           if [ -z "$RESPONSE" ]; then
             echo "Error: Failed to fetch release data!"
             exit 1
