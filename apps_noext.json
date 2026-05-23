@@ -1,7 +1,7 @@
 {
   "name": "Apollo for Reddit - No Extensions",
   "subtitle": "Apollo for Reddit unofficial AltStore source without extensions.",
-  "description": "This is an unofficial AltStore source for Apollo for Reddit tweaked with ImprovedCustomApi by @JeffreyCA.\n\nThis is the NO EXTENSIONS version - Apollo injected with ImprovedCustomApi and removed extensions. Uses fewer App IDs (1 vs 7) - ideal for free Apple Developer accounts.\n\nFor full details, check the GitHub repository:\nhttps://github.com/Balackburn/Apollo",
+  "description": "This is an unofficial AltStore source for Apollo for Reddit tweaked with Apollo-Reborn.\n\nThis is the NO EXTENSIONS version - Apollo injected with ImprovedCustomApi and removed extensions. Uses fewer App IDs (1 vs 7) - ideal for free Apple Developer accounts.\n\nFor full details, check the GitHub repository:\nhttps://github.com/Balackburn/Apollo",
   "iconURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_0.webp",
   "website": "https://balackburn.github.io/Apollo",
   "tintColor": "#4453f4",
