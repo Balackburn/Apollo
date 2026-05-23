@@ -6,7 +6,7 @@
 ![Release](https://img.shields.io/github/downloads/Balackburn/Apollo/total)
 ![GitHub issues](https://img.shields.io/github/issues-raw/Balackburn/Apollo)
 
-# Apollo for Reddit with ImprovedCustomAPI
+# Apollo for Reddit with Apollo-Reborn
 
 This AltStore source provides pre-built releases of [Apollo App (Christian Selig)](https://apolloapp.io/) injected with [Apollo-Reborn](https://github.com/Apollo-Reborn/Apollo-Reborn).
 
