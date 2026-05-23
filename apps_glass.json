@@ -1,7 +1,7 @@
 {
   "name": "Apollo for Reddit - GLASS",
   "subtitle": "Apollo for Reddit unofficial AltStore source with Liquid Glass UI.",
-  "description": "This is an unofficial AltStore source for Apollo for Reddit tweaked with ImprovedCustomApi by @JeffreyCA.\n\nThis is the GLASS version - Apollo injected with ImprovedCustomApi and Liquid Glass UI Patch (ios 26+).\n\nFor full details, check the GitHub repository:\nhttps://github.com/Balackburn/Apollo",
+  "description": "This is an unofficial AltStore source for Apollo for Reddit tweaked with Apollo-Reborn.\n\nThis is the GLASS version - Apollo injected with ImprovedCustomApi and Liquid Glass UI Patch (ios 26+).\n\nFor full details, check the GitHub repository:\nhttps://github.com/Balackburn/Apollo",
   "iconURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_0.webp",
   "website": "https://balackburn.github.io/Apollo",
   "tintColor": "#4453f4",
