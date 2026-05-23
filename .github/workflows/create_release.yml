@@ -13,7 +13,6 @@ on:
         type: boolean
         default: false
   schedule:
-    # Runs every 6 hours to check for new releases
     - cron: '0 */6 * * *'
 
 permissions:
@@ -43,30 +42,25 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          # Get the latest release tag from external repo
-          LATEST_TAG=$(curl -s -H "Authorization: token $GH_TOKEN" "${{ env.GITHUB_API_URL }}" | jq -r '.tag_name')
+          LATEST_TAG=$(curl -sL -H "Authorization: token $GH_TOKEN" "${{ env.GITHUB_API_URL }}" | jq -r '.tag_name')
           echo "Latest external release: $LATEST_TAG"
-          
-          # Get the latest release tag from this repo
-          CURRENT_TAG=$(curl -s -H "Authorization: token $GH_TOKEN" \
+
+          CURRENT_TAG=$(curl -sL -H "Authorization: token $GH_TOKEN" \
             "https://api.github.com/repos/${{ github.repository }}/releases/latest" \
             | jq -r '.tag_name // empty')
           echo "Current repo release: $CURRENT_TAG"
-          
-          # Extract version from current tag (format: v1.17.5_1.0.14)
+
           if [ -n "$CURRENT_TAG" ]; then
             CURRENT_ICA_VERSION=$(echo "$CURRENT_TAG" | sed -nE 's/.*_v?(.+)/\1/p')
           else
             CURRENT_ICA_VERSION=""
           fi
-          
-          # Extract version from latest tag
+
           LATEST_ICA_VERSION=$(echo "$LATEST_TAG" | sed -nE 's/v(.+)/\1/p')
-          
+
           echo "Current ICA version: $CURRENT_ICA_VERSION"
           echo "Latest ICA version: $LATEST_ICA_VERSION"
-          
-          # Check if we should build (new release detected or manual/workflow_call trigger)
+
           if [ "${{ github.event_name }}" != "schedule" ]; then
             echo "Manual or workflow_call trigger - building"
             echo "should_build=true" >> "$GITHUB_OUTPUT"
@@ -80,7 +74,7 @@ jobs:
             echo "No new release - skipping build"
             echo "should_build=false" >> "$GITHUB_OUTPUT"
           fi
-          
+
           echo "release_tag=$LATEST_TAG" >> "$GITHUB_OUTPUT"
 
   build-apollo-ipa:
@@ -124,7 +118,6 @@ jobs:
 
           RELEASE_TAG=$(jq -r '.tag_name' <<< "$RESPONSE")
           RELEASE_NOTES=$(jq -r '.body' <<< "$RESPONSE")
-
           DEB_URL=$(jq -r '.assets[] | select(.name | test("iphoneos-arm64_rootless.deb$")) | .browser_download_url' <<< "$RESPONSE")
 
           if [ -z "$DEB_URL" ] || [ "$DEB_URL" == "null" ]; then
@@ -154,7 +147,7 @@ jobs:
           ICA_VERSION=$(echo "$RELEASE_TAG" | sed -nE 's/v(.+)/\1/p')
 
           echo "APOLLO_VERSION=${APOLLO_VERSION}" >> "$GITHUB_OUTPUT"
-          echo "ICA_VERSION=$ICA_VERSION" >> "$GITHUB_OUTPUT"
+          echo "ICA_VERSION=${ICA_VERSION}" >> "$GITHUB_OUTPUT"
           echo "OUTPUT_NAME=Apollo-${APOLLO_VERSION}_ImprovedCustomApi-${ICA_VERSION}" >> "$GITHUB_OUTPUT"
 
       - name: Download ImprovedCustomApi source and patch Apollo IPA for Liquid Glass
@@ -168,7 +161,6 @@ jobs:
           ditto -xk improvedcustomapi-source.zip .
 
           SRC_DIR=$(find . -maxdepth 2 -name patch.sh -print -quit | xargs dirname)
-
           echo "Using ImprovedCustomApi source directory: ${SRC_DIR}"
 
           cd "$SRC_DIR"
@@ -181,101 +173,110 @@ jobs:
 
       - name: Setup build folders
         env:
-            OUTPUT_NAME: ${{ steps.download-files.outputs.OUTPUT_NAME }}
+          OUTPUT_NAME: ${{ steps.download-files.outputs.OUTPUT_NAME }}
         run: |
           mkdir -p "${OUTPUT_NAME}/Payload"
           mkdir -p "NO-EXTENSIONS_${OUTPUT_NAME}/Payload"
 
       - name: Build modified .ipa
         env:
-            OUTPUT_NAME: ${{ steps.download-files.outputs.OUTPUT_NAME }}
-            ICA_VERSION: ${{ steps.download-files.outputs.ICA_VERSION }}
+          OUTPUT_NAME: ${{ steps.download-files.outputs.OUTPUT_NAME }}
+          ICA_VERSION: ${{ steps.download-files.outputs.ICA_VERSION }}
         working-directory: ${{ steps.download-files.outputs.OUTPUT_NAME }}
         run: |
-          cyan -i "${GITHUB_WORKSPACE}/Apollo.ipa" -o "Payload/Apollo.app" -f "${GITHUB_WORKSPACE}/improvedcustomapi.deb" --fakesign
-          
-          # Update CFBundleVersion in Info.plist to match ICA version
-          echo "Updating CFBundleVersion to ${ICA_VERSION}"
-          # Check if key exists, add or set accordingly
-          if /usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "Payload/Apollo.app/Info.plist" 2>/dev/null; then
-            /usr/libexec/PlistBuddy -c "Set :CFBundleVersion ${ICA_VERSION}" "Payload/Apollo.app/Info.plist"
-          else
-            /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string ${ICA_VERSION}" "Payload/Apollo.app/Info.plist"
-          fi
-          
-          # Verify the change
-          BUILD_VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "Payload/Apollo.app/Info.plist")
-          echo "CFBundleVersion is now: ${BUILD_VERSION}"
-          
-          echo "Zipping ${OUTPUT_NAME}.ipa"
-          zip -6 -rq "${OUTPUT_NAME}.ipa" "Payload" -x "*/.*"
+          build_ipa() {
+            local input_ipa="$1"
+            local output_ipa="$2"
+            local cyan_extra_args="${3:-}"
 
-          echo "Updating build version in Apollo Executable!"
-          echo "Previous $(vtool -show-build Payload/Apollo.app/Apollo)"
-          vtool -set-build-version ios 15.0 19.0 -replace -output "Payload/Apollo.app/Apollo" "Payload/Apollo.app/Apollo"
-          echo "Updated $(vtool -show-build Payload/Apollo.app/Apollo)"
+            rm -rf Payload
+            mkdir -p Payload
 
-          echo "Checking for duplicate LC_RPATH entries..."
-          executable_path_count=$(otool -l "Payload/Apollo.app/Apollo" | grep -A 2 LC_RPATH | grep "@executable_path/Frameworks" | wc -l | tr -d ' ')
-          echo "Found $executable_path_count @executable_path/Frameworks LC_RPATH entries"
-          if [ "$executable_path_count" -gt 1 ]; then
-            echo "Removing duplicate @executable_path/Frameworks LC_RPATH entry..."
-            install_name_tool -delete_rpath "@executable_path/Frameworks" "Payload/Apollo.app/Apollo"
-            echo "Duplicate LC_RPATH entry removed"
-          fi
+            cyan -i "$input_ipa" -o "Payload/Apollo.app" -f "${GITHUB_WORKSPACE}/improvedcustomapi.deb" --fakesign $cyan_extra_args
 
-          echo "Fake Signing Apollo Executable!"
-          ldid -S -M "Payload/Apollo.app/Apollo"
+            echo "Updating CFBundleVersion to ${ICA_VERSION}"
+            if /usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "Payload/Apollo.app/Info.plist" 2>/dev/null; then
+              /usr/libexec/PlistBuddy -c "Set :CFBundleVersion ${ICA_VERSION}" "Payload/Apollo.app/Info.plist"
+            else
+              /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string ${ICA_VERSION}" "Payload/Apollo.app/Info.plist"
+            fi
 
-          echo "Preparing Liquid Glass IPA"
-          rm -rf Payload
-          unzip -q "${GITHUB_WORKSPACE}/Apollo-LiquidGlass.ipa"
+            BUILD_VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "Payload/Apollo.app/Info.plist")
+            echo "CFBundleVersion is now: ${BUILD_VERSION}"
 
-          echo "Zipping GLASS_${OUTPUT_NAME}.ipa"
-          zip -6 -rq "GLASS_${OUTPUT_NAME}.ipa" "Payload" -x "*/.*"
+            echo "Updating build version in Apollo Executable!"
+            echo "Previous $(vtool -show-build Payload/Apollo.app/Apollo)"
+            vtool -set-build-version ios 15.0 19.0 -replace -output "Payload/Apollo.app/Apollo" "Payload/Apollo.app/Apollo"
+            echo "Updated $(vtool -show-build Payload/Apollo.app/Apollo)"
+
+            echo "Checking for duplicate LC_RPATH entries..."
+            executable_path_count=$(otool -l "Payload/Apollo.app/Apollo" | grep -A 2 LC_RPATH | grep "@executable_path/Frameworks" | wc -l | tr -d ' ')
+            echo "Found $executable_path_count @executable_path/Frameworks LC_RPATH entries"
+            if [ "$executable_path_count" -gt 1 ]; then
+              echo "Removing duplicate @executable_path/Frameworks LC_RPATH entry..."
+              install_name_tool -delete_rpath "@executable_path/Frameworks" "Payload/Apollo.app/Apollo"
+              echo "Duplicate LC_RPATH entry removed"
+            fi
+
+            echo "Fake Signing Apollo Executable!"
+            ldid -S -M "Payload/Apollo.app/Apollo"
+
+            echo "Zipping ${output_ipa}"
+            zip -6 -rq "${output_ipa}" "Payload" -x "*/.*"
+          }
+
+          build_ipa "${GITHUB_WORKSPACE}/Apollo.ipa" "${OUTPUT_NAME}.ipa"
+          build_ipa "${GITHUB_WORKSPACE}/Apollo-LiquidGlass.ipa" "GLASS_${OUTPUT_NAME}.ipa"
 
       - name: Build no extension modified .ipa
         env:
-            OUTPUT_NAME: ${{ steps.download-files.outputs.OUTPUT_NAME }}
-            ICA_VERSION: ${{ steps.download-files.outputs.ICA_VERSION }}
+          OUTPUT_NAME: ${{ steps.download-files.outputs.OUTPUT_NAME }}
+          ICA_VERSION: ${{ steps.download-files.outputs.ICA_VERSION }}
         working-directory: NO-EXTENSIONS_${{ steps.download-files.outputs.OUTPUT_NAME }}
         run: |
-          cyan -i "${GITHUB_WORKSPACE}/Apollo.ipa" -o "Payload/Apollo.app" -f "${GITHUB_WORKSPACE}/improvedcustomapi.deb" --fakesign -e
-          
-          # Update CFBundleVersion in Info.plist to match ICA version
-          echo "Updating CFBundleVersion to ${ICA_VERSION}"
-          # Check if key exists, add or set accordingly
-          if /usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "Payload/Apollo.app/Info.plist" 2>/dev/null; then
-            /usr/libexec/PlistBuddy -c "Set :CFBundleVersion ${ICA_VERSION}" "Payload/Apollo.app/Info.plist"
-          else
-            /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string ${ICA_VERSION}" "Payload/Apollo.app/Info.plist"
-          fi
-          
-          # Verify the change
-          BUILD_VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "Payload/Apollo.app/Info.plist")
-          echo "CFBundleVersion is now: ${BUILD_VERSION}"
-          
-          echo "Zipping NO-EXTENSIONS_${OUTPUT_NAME}.ipa"
-          zip -6 -rq "NO-EXTENSIONS_${OUTPUT_NAME}.ipa" "Payload" -x "*/.*"
+          build_ipa() {
+            local input_ipa="$1"
+            local output_ipa="$2"
+            local cyan_extra_args="${3:-}"
 
-          echo "Updating build version in Apollo Executable!"
-          echo "Previous $(vtool -show-build Payload/Apollo.app/Apollo)"
-          vtool -set-build-version ios 15.0 19.0 -replace -output "Payload/Apollo.app/Apollo" "Payload/Apollo.app/Apollo"
-          echo "Updated $(vtool -show-build Payload/Apollo.app/Apollo)"
+            rm -rf Payload
+            mkdir -p Payload
 
-          echo "Checking for duplicate LC_RPATH entries..."
-          executable_path_count=$(otool -l "Payload/Apollo.app/Apollo" | grep -A 2 LC_RPATH | grep "@executable_path/Frameworks" | wc -l | tr -d ' ')
-          echo "Found $executable_path_count @executable_path/Frameworks LC_RPATH entries"
-          if [ "$executable_path_count" -gt 1 ]; then
-            echo "Removing duplicate @executable_path/Frameworks LC_RPATH entry..."
-            install_name_tool -delete_rpath "@executable_path/Frameworks" "Payload/Apollo.app/Apollo"
-            echo "Duplicate LC_RPATH entry removed"
-          fi
+            cyan -i "$input_ipa" -o "Payload/Apollo.app" -f "${GITHUB_WORKSPACE}/improvedcustomapi.deb" --fakesign $cyan_extra_args
 
-          echo "Fake Signing Apollo Executable!"
-          ldid -S -M "Payload/Apollo.app/Apollo"
-          echo "Zipping NO-EXTENSIONS_GLASS_${OUTPUT_NAME}.ipa"
-          zip -6 -rq "NO-EXTENSIONS_GLASS_${OUTPUT_NAME}.ipa" "Payload" -x "*/.*"
+            echo "Updating CFBundleVersion to ${ICA_VERSION}"
+            if /usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "Payload/Apollo.app/Info.plist" 2>/dev/null; then
+              /usr/libexec/PlistBuddy -c "Set :CFBundleVersion ${ICA_VERSION}" "Payload/Apollo.app/Info.plist"
+            else
+              /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string ${ICA_VERSION}" "Payload/Apollo.app/Info.plist"
+            fi
+
+            BUILD_VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "Payload/Apollo.app/Info.plist")
+            echo "CFBundleVersion is now: ${BUILD_VERSION}"
+
+            echo "Updating build version in Apollo Executable!"
+            echo "Previous $(vtool -show-build Payload/Apollo.app/Apollo)"
+            vtool -set-build-version ios 15.0 19.0 -replace -output "Payload/Apollo.app/Apollo" "Payload/Apollo.app/Apollo"
+            echo "Updated $(vtool -show-build Payload/Apollo.app/Apollo)"
+
+            echo "Checking for duplicate LC_RPATH entries..."
+            executable_path_count=$(otool -l "Payload/Apollo.app/Apollo" | grep -A 2 LC_RPATH | grep "@executable_path/Frameworks" | wc -l | tr -d ' ')
+            echo "Found $executable_path_count @executable_path/Frameworks LC_RPATH entries"
+            if [ "$executable_path_count" -gt 1 ]; then
+              echo "Removing duplicate @executable_path/Frameworks LC_RPATH entry..."
+              install_name_tool -delete_rpath "@executable_path/Frameworks" "Payload/Apollo.app/Apollo"
+              echo "Duplicate LC_RPATH entry removed"
+            fi
+
+            echo "Fake Signing Apollo Executable!"
+            ldid -S -M "Payload/Apollo.app/Apollo"
+
+            echo "Zipping ${output_ipa}"
+            zip -6 -rq "${output_ipa}" "Payload" -x "*/.*"
+          }
+
+          build_ipa "${GITHUB_WORKSPACE}/Apollo.ipa" "NO-EXTENSIONS_${OUTPUT_NAME}.ipa" "-e"
+          build_ipa "${GITHUB_WORKSPACE}/Apollo-LiquidGlass.ipa" "NO-EXTENSIONS_GLASS_${OUTPUT_NAME}.ipa" "-e"
 
       - name: Generate release notes
         env:
@@ -318,16 +319,10 @@ jobs:
         env:
           OUTPUT_NAME: ${{ steps.download-files.outputs.OUTPUT_NAME }}
         run: |
-          if [ -z "${APOLLO_VERSION}" ] || [ -z "${ICA_VERSION}" ]; then
-            echo "Error: Missing required information for uploading to Catbox!"
-            exit 1
-          fi
-
           CATBOX_URL=$(curl -F "fileToUpload=@${OUTPUT_NAME}/${OUTPUT_NAME}.ipa" https://catbox.moe/user/api.php)
           CATBOX_URL_GLASS=$(curl -F "fileToUpload=@${OUTPUT_NAME}/GLASS_${OUTPUT_NAME}.ipa" https://catbox.moe/user/api.php)
-
           CATBOX_URL_NO_EXT=$(curl -F "fileToUpload=@NO-EXTENSIONS_${OUTPUT_NAME}/NO-EXTENSIONS_${OUTPUT_NAME}.ipa" https://catbox.moe/user/api.php)
-          CATBOX_URL_NO_EXT_GLASS=$(curl -F "fileToUpload=@NO-EXTENSIONS_${OUTPUT_NAME}/NO-EXTENSIONS_GLASS_${OUTPUT_NAME}}.ipa" https://catbox.moe/user/api.php)
+          CATBOX_URL_NO_EXT_GLASS=$(curl -F "fileToUpload=@NO-EXTENSIONS_${OUTPUT_NAME}/NO-EXTENSIONS_GLASS_${OUTPUT_NAME}.ipa" https://catbox.moe/user/api.php)
 
           echo "CATBOX_URL=${CATBOX_URL}" >> "$GITHUB_ENV"
           echo "CATBOX_URL_GLASS=${CATBOX_URL_GLASS}" >> "$GITHUB_ENV"
@@ -348,17 +343,23 @@ jobs:
 
           python update_json.py
 
-          git add apps.json apps_noext.json apps_glass.json apps_noext_glass.json
+          for file in apps.json apps_noext.json apps_glass.json apps_noext_glass.json; do
+            if [ -f "$file" ]; then
+              git add "$file"
+            else
+              echo "Skipping missing file: $file"
+            fi
+          done
 
           if git diff --cached --quiet; then
             echo "No changes detected, skipping commit."
           else
             git commit -m "update source files for $RELEASE_TAG"
-            git push origin main || (git pull --rebase origin main && git push origin main)
+            git push origin "${GITHUB_REF_NAME}" || (git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "${GITHUB_REF_NAME}")
           fi
 
       - name: Job summary
         run: |
-          echo "### 📊 Workflow Summary" >> $GITHUB_STEP_SUMMARY
-          echo "✅ New release created: v${{ steps.download-files.outputs.APOLLO_VERSION }}-${{ steps.download-files.outputs.ICA_VERSION }}" >> $GITHUB_STEP_SUMMARY
-          echo "🔗 [View release](https://github.com/${{ github.repository }}/releases/tag/v${{ steps.download-files.outputs.APOLLO_VERSION }}_${{ steps.download-files.outputs.ICA_VERSION }})" >> $GITHUB_STEP_SUMMARY
+          echo "### Workflow Summary" >> "$GITHUB_STEP_SUMMARY"
+          echo "New release created: v${{ steps.download-files.outputs.APOLLO_VERSION }}-${{ steps.download-files.outputs.ICA_VERSION }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "View release: https://github.com/${{ github.repository }}/releases/tag/v${{ steps.download-files.outputs.APOLLO_VERSION }}_${{ steps.download-files.outputs.ICA_VERSION }}" >> "$GITHUB_STEP_SUMMARY"
