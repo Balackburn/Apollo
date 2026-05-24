@@ -1,7 +1,7 @@
 {
   "name": "Apollo for Reddit",
   "subtitle": "Apollo for Reddit unofficial Altstore source.",
-  "description": "This is an unofficial Altstore source for Apollo for Reddit tweaked with ImprovedCustomApi by @JeffreyCA.\n\nFor full details, check the GitHub repository:\nhttps://github.com/Balackburn/Apollo",
+  "description": "This is an unofficial Altstore source for Apollo for Reddit tweaked with Apollo-Reborn.\n\nFor full details, check the GitHub repository:\nhttps://github.com/Balackburn/Apollo",
   "iconURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/images/image_0.webp",
   "website": "https://balackburn.github.io/Apollo",
   "tintColor": "#4453f4",
