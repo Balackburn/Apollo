@@ -55,12 +55,17 @@ if (appIcon) {
     const data = await res.json();
     const assets = data.assets || [];
 
-    // Map download dropdown items by variant name
+    // Map download dropdown items by variant — match Apollo-Reborn asset names:
+    // Apollo-Reborn-<ver>[-NOEXTENSIONS | -GLASS | -GLASS-NOEXTENSIONS].ipa
+    const suffixOf = name => {
+      const m = /^Apollo-Reborn-\d+\.\d+\.\d+(?:-(GLASS-NOEXTENSIONS|NOEXTENSIONS|GLASS))?\.ipa$/.exec(name);
+      return m ? (m[1] || '') : null;
+    };
     const variants = {
-      'Standard': a => a.name.startsWith('Apollo') && !a.name.includes('NO-EXTENSIONS') && !a.name.includes('GLASS'),
-      'No Extensions': a => a.name.startsWith('NO-EXTENSIONS') && !a.name.includes('GLASS'),
-      'Liquid Glass': a => a.name.startsWith('GLASS_'),
-      'No Ext + Glass': a => a.name.startsWith('NO-EXTENSIONS_GLASS'),
+      'Standard': a => suffixOf(a.name) === '',
+      'No Extensions': a => suffixOf(a.name) === 'NOEXTENSIONS',
+      'Liquid Glass': a => suffixOf(a.name) === 'GLASS',
+      'No Ext + Glass': a => suffixOf(a.name) === 'GLASS-NOEXTENSIONS',
     };
 
     document.querySelectorAll('#download-dropdown .dropdown-item').forEach(item => {
@@ -100,6 +105,7 @@ setTimeout(() => {
   fadeIn('.hero-glow', 0.15);
   blurIn('.hero-title', 0.15);
   blurIn('.hero-desc', 0.3);
+  blurIn('.hero-note', 0.38);
   animate('.hero-actions', { opacity: [0.001, 1], y: [12, 0] }, { ...spring, delay: 0.45 });
 }, 60);
 

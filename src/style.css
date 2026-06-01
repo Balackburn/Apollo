@@ -113,6 +113,8 @@ img { display: block; max-width: 100%; height: auto; }
 }
 .hero-title { font: 700 clamp(36px,4.5vw,48px)/1.05 var(--f-geist); letter-spacing: -0.04em; margin-bottom: 10px; }
 .hero-desc { font: 400 17px/1.5 var(--f-geist); color: var(--text-50); margin-bottom: 28px; letter-spacing: -0.01em; }
+.hero-note { font: 400 13.5px/1.5 var(--f-geist); color: var(--text-50); margin: -14px 0 24px; max-width: 48ch; letter-spacing: -0.01em; }
+.hero-note a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
 /* ═══ CAROUSEL ═══ */
@@ -230,7 +232,7 @@ img { display: block; max-width: 100%; height: auto; }
 }
 /* ═══ PREVENT FLASH — hide animated elements before JS loads ═══ */
 /* Icon stays visible (cycling), everything else starts hidden */
-.hero-glow, .hero-title, .hero-desc, .hero-actions,
+.hero-glow, .hero-title, .hero-desc, .hero-note, .hero-actions,
 .carousel-header, .carousel-item,
 .features-label, .features-heading, .features-sub, .feature-row,
 .quote-mark, .quote-text, .quote-cite,

@@ -8,11 +8,14 @@
 
 # Apollo for Reddit with Apollo-Reborn
 
-This AltStore source provides pre-built releases of [Apollo App (Christian Selig)](https://apolloapp.io/) injected with [Apollo-Reborn](https://github.com/Apollo-Reborn/Apollo-Reborn).
+This AltStore source distributes [Apollo for Reddit (Christian Selig)](https://apolloapp.io/) powered by the [Apollo-Reborn](https://github.com/Apollo-Reborn/Apollo-Reborn) tweak.
 
-It uses version `1.15.11` of the app and the latest release of the tweak.
+> [!IMPORTANT]
+> **ImprovedCustomApi is now [Apollo-Reborn](https://github.com/Apollo-Reborn/Apollo-Reborn).** The tweak is now community-maintained under the Apollo-Reborn org, which builds the official Apollo IPAs and runs its **own website and sources at [apolloreborn.app](https://apolloreborn.app)** (separate from this one).
+>
+> **This source and repo will keep working for everyone already using it.** The IPAs published here are Apollo-Reborn's official builds, mirrored to this repo's own [releases](https://github.com/Balackburn/Apollo/releases) so existing AltStore / SideStore / Feather subscribers keep auto-updating without changing anything.
 
-Before raising any issues, please check the [Apollo-Reborn](https://github.com/Apollo-Reborn/Apollo-Reborn/issues) repo first - as this source only integrates it.
+The advertised version tracks the Apollo-Reborn tweak version. Before raising any issues, please check the [Apollo-Reborn](https://github.com/Apollo-Reborn/Apollo-Reborn/issues) repo first — as this source only distributes it.
 
 ## Available Sources
 
@@ -22,6 +25,10 @@ Before raising any issues, please check the [Apollo-Reborn](https://github.com/A
 | **No Extensions** | Free Apple Developer accounts | Apollo injected with Apollo-Reborn and removed extensions - Uses fewer App IDs (1 vs 7) |
 | **GLASS** | iOS 26+ users | Apollo injected with Apollo-Reborn and Liquid Glass UI Patch (iOS 26+) |
 | **No Extensions + LIQUID GLASS** | iOS 26 + Free accounts | Combines both options |
+
+> [!NOTE]
+> **Standard** and **No Extensions** keep Apollo's classic UIKit appearance, including the bottom-tab swipe-back gesture.
+> The **GLASS** variants opt into the iOS 26 Liquid Glass redesign and bundle the Liquid Glass alternate-icon catalog — pick these only on iOS 26+.
 
 ## Standard Source
 

@@ -1,0 +1,127 @@
+name: Mirror Apollo-Reborn release
+
+# Apollo-Reborn (formerly ImprovedCustomApi) builds and validates the four Apollo
+# IPA variants in-house. This workflow keeps Balackburn/Apollo's own releases up
+# to date by re-hosting Apollo-Reborn's official IPAs byte-for-byte, then
+# regenerates the AltStore source files so they point at this repo's release
+# assets. Existing subscribers keep auto-updating from the Balackburn source URLs.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mirror-release
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    if: github.repository_owner == 'Balackburn'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
+      - name: Resolve upstream and current release
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          UPSTREAM="$(jq -r '.mirrorRepo' config.json)"
+          UP_JSON="$(gh api "repos/${UPSTREAM}/releases/latest")"
+          UP_TAG="$(jq -r '.tag_name' <<< "$UP_JSON")"
+          UP_DATE="$(jq -r '.published_at' <<< "$UP_JSON")"
+          UP_NAME="$(jq -r '.name' <<< "$UP_JSON")"
+          CUR_TAG="$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${UP_TAG}" --jq '.tag_name' 2>/dev/null || echo '')"
+
+          echo "Upstream: ${UPSTREAM} @ ${UP_TAG} (${UP_DATE})"
+          echo "Already mirrored: ${CUR_TAG:-<none>}"
+
+          {
+            echo "upstream=${UPSTREAM}"
+            echo "up_tag=${UP_TAG}"
+            echo "up_date=${UP_DATE}"
+            echo "up_name=${UP_NAME}"
+          } >> "$GITHUB_OUTPUT"
+
+          if [ "$CUR_TAG" = "$UP_TAG" ]; then
+            echo "fresh=false" >> "$GITHUB_OUTPUT"
+            echo "Release ${UP_TAG} already mirrored — nothing to do."
+          else
+            echo "fresh=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Download Apollo-Reborn assets
+        if: steps.check.outputs.fresh == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p dist_mirror
+          gh release download "${{ steps.check.outputs.up_tag }}" \
+            --repo "${{ steps.check.outputs.upstream }}" \
+            --dir dist_mirror \
+            --pattern '*.ipa' --pattern '*.deb'
+          ls -la dist_mirror
+
+      - name: Build release manifest and notes
+        if: steps.check.outputs.fresh == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${{ steps.check.outputs.upstream }}/releases/tags/${{ steps.check.outputs.up_tag }}" \
+            --jq '.body' > ar_notes.md
+
+          python3 scripts/build_manifest.py \
+            --tag "${{ steps.check.outputs.up_tag }}" \
+            --repo "${GITHUB_REPOSITORY}" \
+            --upstream "${{ steps.check.outputs.upstream }}" \
+            --dir dist_mirror \
+            --date "${{ steps.check.outputs.up_date }}" \
+            --notes ar_notes.md \
+            --out release-manifest.json
+
+          {
+            echo "Mirrored from [Apollo-Reborn ${{ steps.check.outputs.up_tag }}](https://github.com/${{ steps.check.outputs.upstream }}/releases/tag/${{ steps.check.outputs.up_tag }})."
+            echo ""
+            echo "These IPAs are the **official Apollo-Reborn builds**, re-hosted here so this long-standing AltStore source keeps working for existing users. Apollo-Reborn also runs its own website and sources at https://apolloreborn.app"
+            echo ""
+            echo "---"
+            echo ""
+            cat ar_notes.md
+          } > RELEASE_BODY.md
+
+      - name: Regenerate AltStore sources
+        if: steps.check.outputs.fresh == 'true'
+        run: python3 update_json.py
+
+      - name: Publish Balackburn release
+        if: steps.check.outputs.fresh == 'true'
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ steps.check.outputs.up_tag }}
+          name: ${{ steps.check.outputs.up_name }}
+          body_path: RELEASE_BODY.md
+          files: dist_mirror/*
+
+      - name: Commit updated sources
+        if: steps.check.outputs.fresh == 'true'
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add release-manifest.json apps.json apps_noext.json apps_glass.json apps_noext_glass.json
+          if git diff --cached --quiet; then
+            echo "No source changes."
+          else
+            git commit -m "Mirror Apollo-Reborn ${{ steps.check.outputs.up_tag }}"
+            git push origin "HEAD:${GITHUB_REF_NAME}" \
+              || (git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}")
+          fi
