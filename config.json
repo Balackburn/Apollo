@@ -1,12 +1,74 @@
 {
-  "repo_url": "Balackburn/Apollo",
-  "json_file": "apps.json",
-  "json_noext_file": "apps_noext.json",
-  "json_glass_file": "apps_glass.json",
-  "json_noext_glass_file": "apps_noext_glass.json",
-  "app_id": "com.christianselig.Apollo",
-  "app_name": "Apollo",
-  "caption": "Update for ImprovedCustomApi now available!",
-  "tint_colour": "#3F91FE",
-  "image_url": "https://raw.githubusercontent.com/Balackburn/Apollo/refs/heads/main/images/news/news_2.png"
+  "repo": "Balackburn/Apollo",
+  "mirrorRepo": "Apollo-Reborn/Apollo-Reborn",
+  "manifest": "release-manifest.json",
+  "source": {
+    "name": "Apollo for Reddit",
+    "subtitle": "Apollo for Reddit unofficial AltStore source.",
+    "description": "This is an unofficial AltStore source for Apollo for Reddit, powered by the Apollo-Reborn tweak (formerly ImprovedCustomApi).\n\nThe IPAs are the official pre-built Apollo-Reborn releases, re-hosted here so this long-standing source keeps working for everyone already using it.\n\nApollo-Reborn also runs its own official website and sources at https://apolloreborn.app\n\nFor full details, check the GitHub repository:\nhttps://github.com/Balackburn/Apollo",
+    "iconURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/public/images/image_0.webp",
+    "headerURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/public/images/header/altstore_header.png",
+    "website": "https://balackburn.github.io/Apollo",
+    "tintColor": "#4453f4"
+  },
+  "app": {
+    "name": "Apollo for Reddit",
+    "bundleIdentifier": "com.christianselig.Apollo",
+    "developerName": "Christian Selig (& Apollo-Reborn contributors)",
+    "subtitle": "The award-winning Reddit app",
+    "category": "social",
+    "tintColor": "#4453f4",
+    "iconURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/public/images/image_0.webp",
+    "screenshots": [
+      "https://raw.githubusercontent.com/Balackburn/Apollo/main/public/images/image_1.webp",
+      "https://raw.githubusercontent.com/Balackburn/Apollo/main/public/images/image_2.webp",
+      "https://raw.githubusercontent.com/Balackburn/Apollo/main/public/images/image_3.webp",
+      "https://raw.githubusercontent.com/Balackburn/Apollo/main/public/images/image_4.webp",
+      "https://raw.githubusercontent.com/Balackburn/Apollo/main/public/images/image_5.webp",
+      "https://raw.githubusercontent.com/Balackburn/Apollo/main/public/images/image_6.webp",
+      "https://raw.githubusercontent.com/Balackburn/Apollo/main/public/images/image_7.webp",
+      "https://raw.githubusercontent.com/Balackburn/Apollo/main/public/images/image_8.webp"
+    ],
+    "localizedDescription": "Apollo is an app for Reddit built for customizability, smoothness, gestures, and taking advantage of everything iOS has to offer. Apollo is a beautiful Reddit app built for fast navigation with an incredibly powerful set of features. Thanks to features like the Jump Bar, fully customizable gestures, and a super-charged Media Viewer, browsing Reddit has never been this amazing. It's created specifically with iOS design guidelines in mind, so it fits right at home on your device, and with input from thousands of Redditors helping sculpt and perfect it over several years before launching:\n\n• Jump Bar, for super-fast hopping between subreddits\n• Super-charged Media Viewer for an amazing experience viewing images, GIFs, videos, albums, and more from a variety of sources.\n• Tabbed interface for easy navigating\n• Incredibly powerful Markdown composer for writing comments and posts\n• Full inline Imgur uploading, both images and albums\n• Large or compact posts depending on your preference\n• Dark mode (can be automatic)\n• Fully customizable gestures\n• Safari View Controller for browsing articles and links\n• Inline previews of media in comments\n• 3D Touch support\n• Beautifully organized Inbox\n• Filtering and blocking\n• Face ID / Touch ID / Passcode lock\n• Moderator features\n• Tons of settings to tweak\n• GIF scrubbing to go backward and forward in time\n• Multiple accounts\n• Powerful search\n• Full Markdown rendering\n• Unobtrusive Volume Indicator\n\nAs well as much, much more and it's constantly evolving. If you have anything you'd specifically like to see, come to the ApolloApp subreddit and we'd love to hear it! Apollo is an unofficial app, and side effects may include an incredible browsing experience.",
+    "appPermissions": {
+      "entitlements": [
+        "com.apple.security.application-groups",
+        "com.apple.developer.associated-domains",
+        "com.apple.developer.group-session",
+        "com.apple.developer.icloud-container-identifiers",
+        "com.apple.developer.ubiquity-kvstore-identifier",
+        "keychain-access-groups",
+        "aps-environment",
+        "com.apple.developer.weatherkit"
+      ],
+      "privacy": {
+        "NSCameraUsageDescription": "Used to take photos to upload for sharing.",
+        "NSPhotoLibraryUsageDescription": "Used to save media or to select images to upload for sharing.",
+        "NSPhotoLibraryAddUsageDescription": "Save media to photo library.",
+        "NSMotionUsageDescription": "Detect rotations in Media Viewer and offer corresponding options.",
+        "NSLocationWhenInUseUsageDescription": "Checked once to calculate sunset/sunrise times for the location.",
+        "NSFaceIDUsageDescription": "Unlock Apollo when re-opening in order to prevent unauthorized access."
+      }
+    }
+  },
+  "news": {
+    "caption": "New Apollo-Reborn update available!",
+    "tintColor": "#4453f4",
+    "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/public/images/news/news_2.png"
+  },
+  "migrationNews": {
+    "identifier": "news-apollo-reborn-migration",
+    "title": "ImprovedCustomApi is now Apollo-Reborn",
+    "caption": "The tweak that powers this source — formerly ImprovedCustomApi — is now the community-maintained Apollo-Reborn. This source and repo will keep working for everyone already using it. Apollo-Reborn also runs its own official website and sources at apolloreborn.app.",
+    "date": "2026-05-29T00:00:00Z",
+    "tintColor": "#4453f4",
+    "imageURL": "https://raw.githubusercontent.com/Balackburn/Apollo/main/public/images/news/news_2.png",
+    "url": "https://apolloreborn.app"
+  },
+  "variants": [
+    { "output": "apps.json",             "key": "standard",          "label": null },
+    { "output": "apps_noext.json",        "key": "noExtensions",      "label": "No Extensions" },
+    { "output": "apps_glass.json",        "key": "glass",             "label": "Liquid Glass" },
+    { "output": "apps_noext_glass.json",  "key": "noExtensionsGlass", "label": "No Extensions + Liquid Glass" }
+  ]
 }
