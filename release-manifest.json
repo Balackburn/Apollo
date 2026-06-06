@@ -1,31 +1,31 @@
 {
-  "tag": "v1.15.11_3.1.0",
-  "version": "3.1.0",
-  "buildVersion": "287",
-  "date": "2026-06-05T05:31:58Z",
-  "mirroredFrom": "https://github.com/Apollo-Reborn/Apollo-Reborn/releases/tag/v1.15.11_3.1.0",
-  "releaseURL": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_3.1.0",
-  "notes": "> [!CAUTION]\n> **June 4, 2026** - We're aware of reports that Reddit has started revoking some users' API keys. Please see https://github.com/Apollo-Reborn/Apollo-Reborn/issues/367 for the latest discussion and workarounds.\n\n### Features\n\n- Support **any custom redirect URI** for the Reddit API without patching the app's Info.plist, so custom URI schemes authenticate without the \"address is invalid\" error (also removes the need for LiveContainer users to patch manually) (#368: @DeltAndy123)\n- Add **Show Deleted Comments** option in *Settings > Apollo Reborn Options > General** to restore deleted or removed comments inline from archived copies when available (#300: @nunoo)\n- Add a **Color Flairs** option in **Settings > Apollo Reborn Options > General** to color post and user flairs using Reddit's flair colors (#360: @icpryde)\n- Add **GLASS Icons** and **No Extensions + GLASS Icons** distribution variants that bundle the Liquid Glass icon catalog without opting into the iOS 26 UI runtime (#317: @nackerr)\n- Add new **Glitched** (@bajader) and **Modern** / **Modern Alt** (@paulo1manso) Liquid Glass app icons (#353: @bajader, @paulo1manso)\n- **Restore logged-in accounts** when restoring a settings backup, so reinstalling no longer requires re-authenticating each Reddit account (#331: @nickclyde)\n- Add a **Subreddit List Enhancements** toggle in **Settings > Apollo Reborn Options > Subreddits** to fall back to Apollo's native list, working around misaligned rows and a broken index scrubber on some devices (#355: @JeffreyCA)\n- Render comments with **two or more link previews** as compact cards instead of stacking full hero cards (#344: @icpryde)\n- Show **feed thumbnails for text posts** that embed images but produce no native thumbnail, in both Large and Compact modes (#351: @icpryde)\n- Fade and disable the comment **image/GIF buttons** when a subreddit doesn't allow that media type, instead of failing only at submit time (#356: @icpryde)\n- Add a separate **Autoplay Inline GIFs** setting in **Settings > Apollo Reborn Options > Media** to control inline GIF autoplay independently of Apollo's native Autoplay GIFs/Videos setting (#365: @JeffreyCA)\n- Ship an Apollo-Reborn **userscript** and an **\"Open in Apollo\" Shortcut** recipe as app-independent ways to open Reddit links in Apollo from any browser, handy for the no-extensions variant (#307: @nickclyde)\n\n### Fixes\n\n- Fix the bundled **\"Open in Apollo\" Safari extension**, which stopped opening links on sideloaded builds — its default \"Automatic\" mode redirected through `openinapollo.com`, whose auto-open only works for the App Store build. It now redirects straight to `apollo://` and handles `/s/` share links (#307: @nickclyde)\n- Fix the bundled **\"Open in Apollo\" share-sheet action** so it opens Reddit links in Apollo from **any** browser (Chrome, Firefox, Edge, Brave…), not just Safari, replacing a deprecated call that iOS 18+ refused to run. On iOS 26 the extension only launches if your installer sets the appex main-binary flag — **AltStore/SideStore** do, **Sideloadly/Feather** don't, where the Shortcut remains a signer-independent fallback (#307: @nickclyde)\n- Fix **Recently Read** showing no posts after a Reddit API change (#341: @JeffreyCA)\n- Fix inline **Reddit GIFs in comments** staying frozen instead of autoplaying until collapsed/expanded or refreshed (#349: @icpryde)\n- Fix inline **GIFs not autoplaying on cellular** when Autoplay GIFs/Videos is set to Always (#347: @JeffreyCA)\n- Fix the inline **video play button** missing on post-body Reddit videos and a clipped AirPlay icon (#350: @icpryde)\n- Fix laggy **subreddit header** scrolling and incorrect handling on non-subreddit feeds (#339: @JeffreyCA)\n- Fix **Share as Image** not opening under the iOS 26 native action menu (#335: @icpryde)\n- Fix the **Rich Link Previews – Body** setting having no effect and following the Comments setting instead (#329: @nickclyde)\n- Fix a crash in the banned-profile hook (#326: @JeffreyCA)\n- Fix a crash when navigating into comments from a dangling host pointer in inline image cleanup (#362: @JeffreyCA)\n\n### Screenshots\n\n<table>\n  <tr>\n    <td align=\"center\" width=\"33%\">\n      <img width=\"240\" src=\"https://github.com/user-attachments/assets/40f697ad-bf85-485e-8fc1-dacdd5e716fd\" /><br>\n      <b>#360</b> · Color Flairs\n    </td>\n    <td align=\"center\" width=\"33%\">\n      <img width=\"240\" src=\"https://github.com/user-attachments/assets/ce7357c5-1104-48d3-8454-cc01bd4d18ef\" /><br>\n      <b>#344</b> · Compact multi-link comments\n    </td>\n    <td align=\"center\" width=\"33%\">\n      <img width=\"240\" src=\"https://github.com/user-attachments/assets/88fbaad1-9d47-4eb5-a515-88de36271fbc\" /><br>\n      <b>#355</b> · Subreddit List Enhancements\n    </td>\n  </tr>\n  <tr>\n    <td align=\"center\" width=\"33%\">\n      <img width=\"240\" src=\"https://github.com/user-attachments/assets/ef6c233f-449b-4458-9a96-9ab752f2cd9b\" /><br>\n      <b>#356</b> · Fade comment image/GIF buttons\n    </td>\n    <td align=\"center\" width=\"33%\">\n      <img width=\"240\" src=\"https://github.com/user-attachments/assets/c5fdd1bc-ce18-45e5-baa8-cc2a6af11dfc\" /><br>\n      <b>#351</b> · Feed thumbnails for text posts\n    </td>\n    <td align=\"center\" width=\"33%\">\n      <img width=\"240\" src=\"https://github.com/user-attachments/assets/c47e86d7-411a-4abe-86fa-dc0c7e5b5bca\" /><br>\n      <b>#349</b> · Inline Reddit GIFs autoplay\n    </td>\n  </tr>\n  <tr>\n    <td align=\"center\" width=\"33%\">\n      <img width=\"240\" src=\"https://github.com/user-attachments/assets/be3e435e-1346-4c88-8be0-a18b1af95eb8\" /><br>\n      <b>#350</b> · Inline video play button\n    </td>\n    <td align=\"center\" width=\"33%\">\n      <img width=\"240\" src=\"https://github.com/user-attachments/assets/3ea8b406-2520-4e3b-8ad1-872233257818\" /><br>\n      <b>#353</b> · New \"Glitched\" Liquid Glass icon\n    </td>\n    <td align=\"center\" width=\"33%\">\n      <img width=\"240\" src=\"https://github.com/user-attachments/assets/4259c98c-aa6f-4a02-9e72-d905d4686a3c\" /><br>\n      <b>#335</b> · Share as Image fix\n    </td>\n  </tr>\n</table>\n\n\n> [!NOTE]\n> AltStore, SideStore, Feather sources can be found at https://apolloreborn.app/#download\n\n\n",
+  "tag": "v1.15.11_3.1.1",
+  "version": "3.1.1",
+  "buildVersion": "288",
+  "date": "2026-06-06T18:44:32Z",
+  "mirroredFrom": "https://github.com/Apollo-Reborn/Apollo-Reborn/releases/tag/v1.15.11_3.1.1",
+  "releaseURL": "https://github.com/Balackburn/Apollo/releases/tag/v1.15.11_3.1.1",
+  "notes": "> [!NOTE]\n> We're aware of reports that Reddit has started revoking some users' API keys. Please see [our new updated instructions](https://github.com/Apollo-Reborn/Apollo-Reborn#dont-have-an-api-key) for workarounds.\n>\n> AltStore, SideStore, Feather sources can be found at https://apolloreborn.app/#download\n\n- Fix a **crash when sharing a post to Messages or Mail** from the share sheet — the system compose controller was misidentified as an Apollo composer, leaving GIF-toolbar injection timers that dereferenced the dismissed share UI and crashed (#378: @nickclyde)\n- Fix **Reddit login on iOS 15** by automatically falling back to Old Reddit, and add an Old Reddit button to the auth view for users who need to switch manually (#377: @DeltAndy123)\n- Fix **video controls** overlay rendering, including the AirPlay button getting clipped or misaligned (#383: @JeffreyCA)\n- Fix **flair alignment** so post and user flairs no longer sit too low or clip their text (#389: @JeffreyCA)\n- Fix **Color Flairs** reverting to grey or the wrong shade after returning to Apollo from the background (#391: @icpryde)\n",
   "variants": {
     "noExtensionsGlass": {
-      "assetName": "Apollo-Reborn-3.1.0-GLASS-NOEXTENSIONS.ipa",
-      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_3.1.0/Apollo-Reborn-3.1.0-GLASS-NOEXTENSIONS.ipa",
-      "size": 102347489
+      "assetName": "Apollo-Reborn-3.1.1-GLASS-NOEXTENSIONS.ipa",
+      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_3.1.1/Apollo-Reborn-3.1.1-GLASS-NOEXTENSIONS.ipa",
+      "size": 102353234
     },
     "glass": {
-      "assetName": "Apollo-Reborn-3.1.0-GLASS.ipa",
-      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_3.1.0/Apollo-Reborn-3.1.0-GLASS.ipa",
-      "size": 139226959
+      "assetName": "Apollo-Reborn-3.1.1-GLASS.ipa",
+      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_3.1.1/Apollo-Reborn-3.1.1-GLASS.ipa",
+      "size": 139232703
     },
     "noExtensions": {
-      "assetName": "Apollo-Reborn-3.1.0-NOEXTENSIONS.ipa",
-      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_3.1.0/Apollo-Reborn-3.1.0-NOEXTENSIONS.ipa",
-      "size": 79225506
+      "assetName": "Apollo-Reborn-3.1.1-NOEXTENSIONS.ipa",
+      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_3.1.1/Apollo-Reborn-3.1.1-NOEXTENSIONS.ipa",
+      "size": 79231250
     },
     "standard": {
-      "assetName": "Apollo-Reborn-3.1.0.ipa",
-      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_3.1.0/Apollo-Reborn-3.1.0.ipa",
-      "size": 116104976
+      "assetName": "Apollo-Reborn-3.1.1.ipa",
+      "downloadURL": "https://github.com/Balackburn/Apollo/releases/download/v1.15.11_3.1.1/Apollo-Reborn-3.1.1.ipa",
+      "size": 116110719
     }
   }
 }
