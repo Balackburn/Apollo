@@ -17,6 +17,34 @@ This AltStore source distributes [Apollo for Reddit (Christian Selig)](https://a
 
 The advertised version tracks the Apollo-Reborn tweak version. Before raising any issues, please check the [Apollo-Reborn](https://github.com/Apollo-Reborn/Apollo-Reborn/issues) repo first — as this source only distributes it.
 
+## Getting a Reddit API Key
+
+> [!WARNING]
+> **Reddit no longer approves new API keys.** Applying through [reddit.com/prefs/apps](https://www.reddit.com/prefs/apps) or the legacy Data API programme will almost always be denied, and Reddit has been running ban waves revoking existing keys that are recognisably tied to Apollo. Don't waste time on the official application forms — use the method below instead.
+
+Since new keys can't be created, the current approach is to reuse the client ID from an accessibility-approved Reddit app:
+
+1. Install [Dystopia for Reddit](https://apps.apple.com/us/app/dystopia-for-reddit/id1430599061) (iOS) or [RedReader](https://play.google.com/store/apps/details?id=org.quantumbadger.redreader) (Android).
+2. Log in to it once with your Reddit account.
+3. Reddit will send you an authorization email — copy the **App ID** from it.
+4. In Apollo's **Custom API** settings, enter:
+
+   | Field | Value |
+   |-------|-------|
+   | **Reddit API Key** | The App ID from the email |
+   | **Redirect URI** | `dystopia://response` (Dystopia) or `redreader://rr_oauth_redir` (RedReader) |
+
+The full walkthrough, including the correct User Agent strings, is kept up to date in the [Apollo-Reborn README](https://github.com/Apollo-Reborn/Apollo-Reborn#readme).
+
+### Already have an old key?
+
+- The key must be an **installed app** type — old **script** or **web app** keys will not let you log in.
+- Keys whose settings don't mention Apollo have tended to survive the ban waves. Rename your app to something generic, change the redirect URI away from `apollo://reddit-oauth` to a personal scheme, and set a User Agent in Reddit's format (`ios:<your.bundle.id>:v1.0 (by /u/<your_username>)`) — personalize the values rather than copying examples verbatim.
+
+### What about Imgur?
+
+Imgur no longer issues new API keys either. Recent Apollo-Reborn builds ship with working Imgur integration out of the box, so no separate Imgur key setup is needed — see the [Apollo-Reborn README](https://github.com/Apollo-Reborn/Apollo-Reborn#readme) for details.
+
 ## Available Sources
 
 | Version | Best For | Features |
